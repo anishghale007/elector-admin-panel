@@ -5,15 +5,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class EditPRCandidatePage extends StatelessWidget {
+class EditPRCandidatePage extends StatefulWidget {
   final FederalPR federalPR;
 
-  EditPRCandidatePage(this.federalPR);
+  const EditPRCandidatePage(this.federalPR, {super.key});
 
+  @override
+  State<EditPRCandidatePage> createState() => _EditPRCandidatePageState();
+}
+
+class _EditPRCandidatePageState extends State<EditPRCandidatePage> {
   final partyFullNameController = TextEditingController();
+
   final partyController = TextEditingController();
+
   final barColorController = TextEditingController();
+
   final partyInfoController = TextEditingController();
+
   final _form = GlobalKey<FormState>();
 
   @override
@@ -26,15 +35,15 @@ class EditPRCandidatePage extends StatelessWidget {
             body: SingleChildScrollView(
               child: Center(
                 child: Container(
-                  constraints: BoxConstraints(maxWidth: 800),
-                  padding: EdgeInsets.all(24),
+                  constraints: const BoxConstraints(maxWidth: 800),
+                  padding: const EdgeInsets.all(24),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
+                          SizedBox(
                             height: 100,
                             width: 300,
                             child: Padding(
@@ -47,7 +56,7 @@ class EditPRCandidatePage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Row(
@@ -59,10 +68,10 @@ class EditPRCandidatePage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Row(
+                      const Row(
                         children: [
                           Text(
                             "Please fill out the form",
@@ -73,12 +82,12 @@ class EditPRCandidatePage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       TextFormField(
                         controller: partyFullNameController
-                          ..text = federalPR.partyFull,
+                          ..text = widget.federalPR.partyFull,
                         validator: (val) {
                           if (val!.isEmpty) {
                             return 'Party Full Name is required';
@@ -91,12 +100,12 @@ class EditPRCandidatePage extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20))),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       TextFormField(
                         controller: partyController
-                          ..text = federalPR.partyName,
+                          ..text = widget.federalPR.partyName,
                         validator: (val) {
                           if (val!.isEmpty) {
                             return 'Party Short Name is required';
@@ -109,12 +118,12 @@ class EditPRCandidatePage extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20))),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       TextFormField(
                         controller: barColorController
-                          ..text = federalPR.barColor,
+                          ..text = widget.federalPR.barColor,
                         validator: (val) {
                           if (val!.isEmpty) {
                             return 'Bar Color is required';
@@ -130,14 +139,14 @@ class EditPRCandidatePage extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20))),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       SizedBox(
                         height: 200,
                         child: TextFormField(
                           controller: partyInfoController
-                            ..text = federalPR.partyInfo,
+                            ..text = widget.federalPR.partyInfo,
                           expands: true,
                           maxLines: null,
                           validator: (val) {
@@ -153,7 +162,7 @@ class EditPRCandidatePage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(20))),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       InkWell(
@@ -164,17 +173,21 @@ class EditPRCandidatePage extends StatelessWidget {
                             final response = await ref
                                 .read(federalProvider)
                                 .updatePR(
-                                partyName: partyController.text.toString(),
-                                partyFull: partyFullNameController.text.toString(),
-                                partyInfo: partyInfoController.text.toString(),
-                                barColor: barColorController.text.toString(),
-                                postId: federalPR.id,
-                            );
+                                  partyName: partyController.text.toString(),
+                                  partyFull:
+                                      partyFullNameController.text.toString(),
+                                  partyInfo:
+                                      partyInfoController.text.toString(),
+                                  barColor: barColorController.text.toString(),
+                                  postId: widget.federalPR.id,
+                                );
                             if (response == 'Success') {
-                              Navigator.of(context).pop();
+                              if (mounted) {
+                                Navigator.of(context).pop();
+                              }
                             } else {
                               Get.showSnackbar(GetSnackBar(
-                                duration: Duration(seconds: 5),
+                                duration: const Duration(seconds: 5),
                                 title: 'Some error occurred',
                                 message: response,
                               ));
@@ -183,13 +196,13 @@ class EditPRCandidatePage extends StatelessWidget {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color(0xFF3C19C0),
+                            color: const Color(0xFF3C19C0),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           alignment: Alignment.center,
                           width: double.maxFinite,
-                          padding: EdgeInsets.symmetric(vertical: 16),
-                          child: Text(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: const Text(
                             "Confirm Changes",
                             style: TextStyle(
                               color: Colors.white,
@@ -199,7 +212,7 @@ class EditPRCandidatePage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                     ],

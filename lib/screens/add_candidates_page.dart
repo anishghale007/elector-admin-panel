@@ -1,12 +1,14 @@
 import 'package:elector_admin_dashboard/constants.dart';
-import 'package:elector_admin_dashboard/screens/federal%20election/add_federalFPTP_candidates.dart';
-import 'package:elector_admin_dashboard/screens/federal%20election/add_federalPR_parties.dart';
+import 'package:elector_admin_dashboard/screens/federal%20election/add_federal_fptp_candidates.dart';
+import 'package:elector_admin_dashboard/screens/federal%20election/add_federal_pr_parties.dart';
 import 'package:elector_admin_dashboard/screens/provincial%20election/add_provincialFPTP_candidates.dart';
 import 'package:elector_admin_dashboard/screens/provincial%20election/add_provincialPR_parties.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddCandidatesPage extends StatelessWidget {
+  const AddCandidatesPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,8 +16,8 @@ class AddCandidatesPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 80),
-            Padding(
+            const SizedBox(height: 80),
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Text(
                 'Federal Election',
@@ -29,7 +31,7 @@ class AddCandidatesPage extends StatelessWidget {
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        Get.to(() => AddFederalFPTPCandidates());
+                        Get.to(() => const AddFederalFPTPCandidates());
                       },
                       child: Container(
                         height: 100,
@@ -37,7 +39,7 @@ class AddCandidatesPage extends StatelessWidget {
                           color: secondaryColor,
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        child: Column(
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
@@ -53,11 +55,11 @@ class AddCandidatesPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        Get.to(() => AddFederalPRParties());
+                        Get.to(() => const AddFederalPRParties());
                       },
                       child: Container(
                         height: 100,
@@ -65,7 +67,7 @@ class AddCandidatesPage extends StatelessWidget {
                           color: secondaryColor,
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        child: Column(
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
@@ -84,8 +86,8 @@ class AddCandidatesPage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 40),
-            Padding(
+            const SizedBox(height: 40),
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Text(
                 'Provincial Election',
@@ -99,7 +101,7 @@ class AddCandidatesPage extends StatelessWidget {
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        Get.to(() => AddProvincialFPTPCandidates());
+                        Get.to(() => const AddProvincialFPTPCandidates());
                       },
                       child: Container(
                         height: 100,
@@ -107,7 +109,7 @@ class AddCandidatesPage extends StatelessWidget {
                           color: secondaryColor,
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        child: Column(
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
@@ -123,7 +125,7 @@ class AddCandidatesPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Expanded(
                     child: InkWell(
                       onTap: () {
@@ -135,7 +137,7 @@ class AddCandidatesPage extends StatelessWidget {
                           color: secondaryColor,
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        child: Column(
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(

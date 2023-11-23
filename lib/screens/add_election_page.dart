@@ -1,6 +1,6 @@
 import 'package:elector_admin_dashboard/constants.dart';
 import 'package:elector_admin_dashboard/controllers/ongoingElection_provider.dart';
-import 'package:elector_admin_dashboard/controllers/upcomingElection_provider.dart';
+import 'package:elector_admin_dashboard/controllers/upcoming_election_provider.dart';
 import 'package:elector_admin_dashboard/screens/ongoing%20election/add_ongoingElection_page.dart';
 import 'package:elector_admin_dashboard/screens/upcoming%20election/add_upcomingElection_page.dart';
 import 'package:elector_admin_dashboard/screens/ongoing%20election/edit_ongoingElection_page.dart';
@@ -12,7 +12,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
-class AddElectionPage extends StatelessWidget {
+class AddElectionPage extends StatefulWidget {
+  const AddElectionPage({super.key});
+
+  @override
+  State<AddElectionPage> createState() => _AddElectionPageState();
+}
+
+class _AddElectionPageState extends State<AddElectionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,18 +33,18 @@ class AddElectionPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 40),
-                  Center(
+                  const SizedBox(height: 40),
+                  const Center(
                     child: Text(
                       'Add Election Page',
                       style: kHeadingTextStyle,
                     ),
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Ongoing Election',
                         style: kSubHeadingTextStyle,
                       ),
@@ -50,9 +57,9 @@ class AddElectionPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Container(
-                    constraints: BoxConstraints(
+                    constraints: const BoxConstraints(
                       maxHeight: double.infinity,
                     ),
                     decoration: BoxDecoration(
@@ -61,12 +68,12 @@ class AddElectionPage extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         OngoingElectionHeader(),
                         ongoingElectionStream.when(
                           data: (data) {
                             return data.isEmpty
-                                ? Column(
+                                ? const Column(
                                     children: [
                                       SizedBox(height: 20),
                                       Center(
@@ -81,7 +88,7 @@ class AddElectionPage extends StatelessWidget {
                                     itemBuilder: (context, index) {
                                       final dat = data[index];
                                       return Container(
-                                        constraints: BoxConstraints(
+                                        constraints: const BoxConstraints(
                                           maxHeight: double.infinity,
                                         ),
                                         decoration: BoxDecoration(
@@ -115,33 +122,33 @@ class AddElectionPage extends StatelessWidget {
                                                     children: [
                                                       Text(
                                                         dat.electionType,
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 18,
                                                           fontWeight:
                                                               FontWeight.bold,
                                                         ),
                                                       ),
-                                                      Spacer(),
+                                                      const Spacer(),
                                                       Text(
                                                         dat.candidates,
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 18,
                                                         ),
                                                       ),
-                                                      Spacer(),
-                                                      Text(dat.startDate +
-                                                          ' at ' +
-                                                          dat.startTime),
-                                                      Spacer(),
-                                                      Text(dat.endDate +
-                                                          ' at ' +
-                                                          dat.endTime),
-                                                      Spacer(),
+                                                      const Spacer(),
+                                                      Text(
+                                                          '${dat.startDate} at ${dat.startTime}'),
+                                                      const Spacer(),
+                                                      Text(
+                                                          '${dat.endDate} at ${dat.endTime}'),
+                                                      const Spacer(),
                                                       dat.canVote == false
-                                                          ? Text('Stopped')
-                                                          : Text('Started'),
+                                                          ? const Text(
+                                                              'Stopped')
+                                                          : const Text(
+                                                              'Started'),
                                                       Switch(
                                                         value: dat.canVote,
                                                         activeColor:
@@ -176,14 +183,14 @@ class AddElectionPage extends StatelessWidget {
                                                           }
                                                         },
                                                       ),
-                                                      Spacer(),
+                                                      const Spacer(),
                                                       IconButton(
                                                         onPressed: () {
                                                           Get.defaultDialog(
                                                             title:
                                                                 'Customize your post',
-                                                            content:
-                                                                Text('Actions'),
+                                                            content: const Text(
+                                                                'Actions'),
                                                             actions: [
                                                               IconButton(
                                                                 onPressed: () {
@@ -191,7 +198,7 @@ class AddElectionPage extends StatelessWidget {
                                                                       EditOngoingElectionPage(
                                                                           dat));
                                                                 },
-                                                                icon: Icon(
+                                                                icon: const Icon(
                                                                     Icons.edit),
                                                               ),
                                                               IconButton(
@@ -203,17 +210,20 @@ class AddElectionPage extends StatelessWidget {
                                                                       .removeOngoingElection(
                                                                           postId:
                                                                               dat.id);
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pop();
+                                                                  if (mounted) {
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop();
+                                                                  }
                                                                 },
-                                                                icon: Icon(Icons
-                                                                    .delete),
+                                                                icon: const Icon(
+                                                                    Icons
+                                                                        .delete),
                                                               ),
                                                             ],
                                                           );
                                                         },
-                                                        icon: Icon(
+                                                        icon: const Icon(
                                                             Icons.more_vert),
                                                       ),
                                                     ],
@@ -228,7 +238,7 @@ class AddElectionPage extends StatelessWidget {
                                   );
                           },
                           error: (err, stack) => Text('$err'),
-                          loading: () => Center(
+                          loading: () => const Center(
                             child: CircularProgressIndicator(
                               color: Colors.white,
                             ),
@@ -237,11 +247,11 @@ class AddElectionPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 80),
+                  const SizedBox(height: 80),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Upcoming Election',
                         style: kSubHeadingTextStyle,
                       ),
@@ -253,9 +263,9 @@ class AddElectionPage extends StatelessWidget {
                           color: Colors.blue),
                     ],
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Container(
-                    constraints: BoxConstraints(
+                    constraints: const BoxConstraints(
                       maxHeight: double.infinity,
                     ),
                     decoration: BoxDecoration(
@@ -264,12 +274,12 @@ class AddElectionPage extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         UpcomingElectionHeader(),
                         upcomingElectionStream.when(
                           data: (data) {
                             return data.isEmpty
-                                ? Center(
+                                ? const Center(
                                     child: Text('No upcoming election atm'),
                                   )
                                 : ListView.builder(
@@ -278,7 +288,7 @@ class AddElectionPage extends StatelessWidget {
                                     itemBuilder: (context, index) {
                                       final dat = data[index];
                                       return Container(
-                                        constraints: BoxConstraints(
+                                        constraints: const BoxConstraints(
                                           maxHeight: double.infinity,
                                         ),
                                         decoration: BoxDecoration(
@@ -312,23 +322,22 @@ class AddElectionPage extends StatelessWidget {
                                                     children: [
                                                       Text(
                                                         dat.electionType,
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 18,
                                                           fontWeight:
                                                               FontWeight.bold,
                                                         ),
                                                       ),
-                                                      Text(dat.startDate +
-                                                          ' at ' +
-                                                          dat.startTime),
+                                                      Text(
+                                                          '${dat.startDate} at ${dat.startTime}'),
                                                       IconButton(
                                                         onPressed: () {
                                                           Get.defaultDialog(
                                                             title:
                                                                 'Customize your post',
-                                                            content:
-                                                                Text('Actions'),
+                                                            content: const Text(
+                                                                'Actions'),
                                                             actions: [
                                                               IconButton(
                                                                 onPressed: () {
@@ -336,7 +345,7 @@ class AddElectionPage extends StatelessWidget {
                                                                       EditUpcomingElectionPage(
                                                                           dat));
                                                                 },
-                                                                icon: Icon(
+                                                                icon: const Icon(
                                                                     Icons.edit),
                                                               ),
                                                               IconButton(
@@ -348,17 +357,20 @@ class AddElectionPage extends StatelessWidget {
                                                                       .removeUpcomingElection(
                                                                           postId:
                                                                               dat.id);
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pop();
+                                                                  if (mounted) {
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop();
+                                                                  }
                                                                 },
-                                                                icon: Icon(Icons
-                                                                    .delete),
+                                                                icon: const Icon(
+                                                                    Icons
+                                                                        .delete),
                                                               ),
                                                             ],
                                                           );
                                                         },
-                                                        icon: Icon(
+                                                        icon: const Icon(
                                                             Icons.more_vert),
                                                       ),
                                                     ],
@@ -373,7 +385,7 @@ class AddElectionPage extends StatelessWidget {
                                   );
                           },
                           error: (err, stack) => Text('$err'),
-                          loading: () => Center(
+                          loading: () => const Center(
                             child: CircularProgressIndicator(
                               color: Colors.white,
                             ),
@@ -382,7 +394,7 @@ class AddElectionPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                 ],
               ),
             ),

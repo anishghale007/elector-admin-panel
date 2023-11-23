@@ -3,6 +3,8 @@ import 'package:elector_admin_dashboard/constants.dart';
 import 'package:flutter/material.dart';
 
 class UsersPage extends StatefulWidget {
+  const UsersPage({super.key});
+
   @override
   State<UsersPage> createState() => _UsersPageState();
 }
@@ -19,13 +21,13 @@ class _UsersPageState extends State<UsersPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Users',
                 style: kSubHeadingTextStyle,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   prefixIcon: Icon(
                     Icons.search,
                     color: secondaryColor,
@@ -38,9 +40,9 @@ class _UsersPageState extends State<UsersPage> {
                   });
                 },
               ),
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
               Container(
-                constraints: BoxConstraints(
+                constraints: const BoxConstraints(
                   maxHeight: double.infinity,
                 ),
                 decoration: BoxDecoration(
@@ -49,8 +51,8 @@ class _UsersPageState extends State<UsersPage> {
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: 20),
-                    Row(
+                    const SizedBox(height: 20),
+                    const Row(
                       children: [
                         SizedBox(width: 225),
                         Text(
@@ -106,7 +108,7 @@ class _UsersPageState extends State<UsersPage> {
                         builder: (context, snapshots) {
                           return (snapshots.connectionState ==
                                   ConnectionState.waiting)
-                              ? Center(
+                              ? const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.white,
                                   ),
@@ -134,8 +136,7 @@ class _UsersPageState extends State<UsersPage> {
                                                 horizontal: 20),
                                             child: Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceAround,
+                                                  MainAxisAlignment.spaceAround,
                                               children: [
                                                 CircleAvatar(
                                                   backgroundImage: NetworkImage(
@@ -143,35 +144,35 @@ class _UsersPageState extends State<UsersPage> {
                                                 ),
                                                 Text(
                                                   data['Full Name'],
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 18,
                                                   ),
                                                 ),
                                                 Text(
                                                   data['Voter ID'],
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 18,
                                                   ),
                                                 ),
                                                 Text(
                                                   data['email'],
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 18,
                                                   ),
                                                 ),
                                                 Text(
                                                   data['District'],
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 18,
                                                   ),
                                                 ),
                                                 Text(
                                                   data['Province'],
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 18,
                                                   ),
@@ -210,43 +211,43 @@ class _UsersPageState extends State<UsersPage> {
                                                 ),
                                                 Text(
                                                   data['Full Name'],
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 18,
                                                   ),
                                                 ),
                                                 Text(
                                                   data['Voter ID'],
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 18,
                                                   ),
                                                 ),
                                                 Text(
                                                   data['email'],
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 18,
                                                   ),
                                                 ),
                                                 Text(
                                                   data['District'],
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 18,
                                                   ),
                                                 ),
                                                 Text(
                                                   data['Province'],
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 18,
                                                   ),
                                                 ),
                                                 IconButton(
                                                     onPressed: () {},
-                                                    icon:
-                                                        Icon(Icons.more_vert)),
+                                                    icon: const Icon(
+                                                        Icons.more_vert)),
                                               ],
                                             ),
                                           ),

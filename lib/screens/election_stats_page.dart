@@ -1,6 +1,6 @@
 import 'package:elector_admin_dashboard/constants.dart';
 import 'package:elector_admin_dashboard/controllers/ongoingElection_provider.dart';
-import 'package:elector_admin_dashboard/screens/federal%20election/federalFPTP_stats_page.dart';
+import 'package:elector_admin_dashboard/screens/federal%20election/federal_fptp_stats_page.dart';
 import 'package:elector_admin_dashboard/screens/federal%20election/federalPR_stats_page.dart';
 import 'package:elector_admin_dashboard/screens/provincial%20election/provincialFPTP_stats_page.dart';
 import 'package:flutter/material.dart';
@@ -8,18 +8,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
 class ElectionStatsPage extends StatelessWidget {
+  const ElectionStatsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Consumer(builder: (context, ref, child) {
           final totalVoteStream = ref.watch(ongoingTotalVotesProvider);
-          final provincialTotalVoteStream = ref.watch(ongoingProvincialTotalVotesProvider);
+          final provincialTotalVoteStream =
+              ref.watch(ongoingProvincialTotalVotesProvider);
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 80),
-              Padding(
+              const SizedBox(height: 80),
+              const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 40),
                 child: Text(
                   'Federal Election',
@@ -27,7 +30,8 @@ class ElectionStatsPage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                 child: Row(
                   children: [
                     Expanded(
@@ -42,7 +46,7 @@ class ElectionStatsPage extends StatelessWidget {
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   'Total Candidates',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -50,10 +54,10 @@ class ElectionStatsPage extends StatelessWidget {
                                     color: Colors.white,
                                   ),
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Text(
                                   data.candidates.toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 35,
                                     fontWeight: FontWeight.bold,
@@ -63,7 +67,7 @@ class ElectionStatsPage extends StatelessWidget {
                             );
                           },
                           error: (err, stack) => Text('$err'),
-                          loading: () => Center(
+                          loading: () => const Center(
                             child: CircularProgressIndicator(
                               color: Colors.white,
                             ),
@@ -71,7 +75,7 @@ class ElectionStatsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: 25),
+                    const SizedBox(width: 25),
                     Expanded(
                       child: Container(
                         height: 130,
@@ -84,7 +88,7 @@ class ElectionStatsPage extends StatelessWidget {
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   'Total Votes Registered',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -92,10 +96,10 @@ class ElectionStatsPage extends StatelessWidget {
                                     color: Colors.white,
                                   ),
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Text(
                                   data.totalVote.toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 35,
                                     fontWeight: FontWeight.bold,
@@ -105,7 +109,7 @@ class ElectionStatsPage extends StatelessWidget {
                             );
                           },
                           error: (err, stack) => Text('$err'),
-                          loading: () => Center(
+                          loading: () => const Center(
                             child: CircularProgressIndicator(
                               color: Colors.white,
                             ),
@@ -113,7 +117,7 @@ class ElectionStatsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: 25),
+                    const SizedBox(width: 25),
                     Expanded(
                       child: Container(
                         height: 130,
@@ -126,7 +130,7 @@ class ElectionStatsPage extends StatelessWidget {
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   'Election Status',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -134,18 +138,18 @@ class ElectionStatsPage extends StatelessWidget {
                                     color: Colors.white,
                                   ),
                                 ),
-                                SizedBox(height: 10),
-                                if(data.canVote == false)
-                                Text(
-                                 'Ended',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 35,
-                                    fontWeight: FontWeight.bold,
+                                const SizedBox(height: 10),
+                                if (data.canVote == false)
+                                  const Text(
+                                    'Ended',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 35,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                                if(data.canVote == true)
-                                  Text(
+                                if (data.canVote == true)
+                                  const Text(
                                     'Ongoing',
                                     style: TextStyle(
                                       color: Colors.white,
@@ -157,7 +161,7 @@ class ElectionStatsPage extends StatelessWidget {
                             );
                           },
                           error: (err, stack) => Text('$err'),
-                          loading: () => Center(
+                          loading: () => const Center(
                             child: CircularProgressIndicator(
                               color: Colors.white,
                             ),
@@ -176,7 +180,7 @@ class ElectionStatsPage extends StatelessWidget {
                     Expanded(
                       child: InkWell(
                         onTap: () {
-                          Get.to(() => FederalFPTPStatsPage());
+                          Get.to(() => const FederalFPTPStatsPage());
                         },
                         child: Card(
                           color: secondaryColor,
@@ -192,14 +196,14 @@ class ElectionStatsPage extends StatelessWidget {
                             ),
                             child: Container(
                               height: 100,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 border: Border(
                                     left: BorderSide(
                                   color: Colors.green,
                                   width: 15,
                                 )),
                               ),
-                              child: Column(
+                              child: const Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
@@ -217,11 +221,11 @@ class ElectionStatsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     Expanded(
                       child: InkWell(
                         onTap: () {
-                          Get.to(() => FederalPRStatsPage());
+                          Get.to(() => const FederalPRStatsPage());
                         },
                         child: Card(
                           color: secondaryColor,
@@ -237,14 +241,14 @@ class ElectionStatsPage extends StatelessWidget {
                             ),
                             child: Container(
                               height: 100,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 border: Border(
                                     left: BorderSide(
                                   color: Colors.red,
                                   width: 15,
                                 )),
                               ),
-                              child: Column(
+                              child: const Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
@@ -265,8 +269,8 @@ class ElectionStatsPage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 40),
-              Padding(
+              const SizedBox(height: 40),
+              const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 40),
                 child: Text(
                   'Provincial Election',
@@ -274,7 +278,8 @@ class ElectionStatsPage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                 child: Row(
                   children: [
                     Expanded(
@@ -289,7 +294,7 @@ class ElectionStatsPage extends StatelessWidget {
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   'Total Candidates',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -297,10 +302,10 @@ class ElectionStatsPage extends StatelessWidget {
                                     color: Colors.white,
                                   ),
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Text(
                                   data.candidates.toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 35,
                                     fontWeight: FontWeight.bold,
@@ -310,7 +315,7 @@ class ElectionStatsPage extends StatelessWidget {
                             );
                           },
                           error: (err, stack) => Text('$err'),
-                          loading: () => Center(
+                          loading: () => const Center(
                             child: CircularProgressIndicator(
                               color: Colors.white,
                             ),
@@ -318,7 +323,7 @@ class ElectionStatsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: 25),
+                    const SizedBox(width: 25),
                     Expanded(
                       child: Container(
                         height: 130,
@@ -331,7 +336,7 @@ class ElectionStatsPage extends StatelessWidget {
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   'Total Votes Registered',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -339,10 +344,10 @@ class ElectionStatsPage extends StatelessWidget {
                                     color: Colors.white,
                                   ),
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Text(
                                   data.totalVote.toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 35,
                                     fontWeight: FontWeight.bold,
@@ -352,7 +357,7 @@ class ElectionStatsPage extends StatelessWidget {
                             );
                           },
                           error: (err, stack) => Text('$err'),
-                          loading: () => Center(
+                          loading: () => const Center(
                             child: CircularProgressIndicator(
                               color: Colors.white,
                             ),
@@ -360,7 +365,7 @@ class ElectionStatsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: 25),
+                    const SizedBox(width: 25),
                     Expanded(
                       child: Container(
                         height: 130,
@@ -373,7 +378,7 @@ class ElectionStatsPage extends StatelessWidget {
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   'Election Status',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -381,9 +386,9 @@ class ElectionStatsPage extends StatelessWidget {
                                     color: Colors.white,
                                   ),
                                 ),
-                                SizedBox(height: 10),
-                                if(data.canVote == false)
-                                  Text(
+                                const SizedBox(height: 10),
+                                if (data.canVote == false)
+                                  const Text(
                                     'Ended',
                                     style: TextStyle(
                                       color: Colors.white,
@@ -391,8 +396,8 @@ class ElectionStatsPage extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                if(data.canVote == true)
-                                  Text(
+                                if (data.canVote == true)
+                                  const Text(
                                     'Ongoing',
                                     style: TextStyle(
                                       color: Colors.white,
@@ -404,7 +409,7 @@ class ElectionStatsPage extends StatelessWidget {
                             );
                           },
                           error: (err, stack) => Text('$err'),
-                          loading: () => Center(
+                          loading: () => const Center(
                             child: CircularProgressIndicator(
                               color: Colors.white,
                             ),
@@ -423,7 +428,7 @@ class ElectionStatsPage extends StatelessWidget {
                     Expanded(
                       child: InkWell(
                         onTap: () {
-                          Get.to(() => ProvincialFPTPStatsPage());
+                          Get.to(() => const ProvincialFPTPStatsPage());
                         },
                         child: Card(
                           color: secondaryColor,
@@ -439,14 +444,14 @@ class ElectionStatsPage extends StatelessWidget {
                             ),
                             child: Container(
                               height: 100,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 border: Border(
                                     left: BorderSide(
                                   color: Colors.green,
                                   width: 15,
                                 )),
                               ),
-                              child: Column(
+                              child: const Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
@@ -464,11 +469,11 @@ class ElectionStatsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     Expanded(
                       child: InkWell(
                         onTap: () {
-                          Get.to(() => ProvincialFPTPStatsPage());
+                          Get.to(() => const ProvincialFPTPStatsPage());
                         },
                         child: Card(
                           color: secondaryColor,
@@ -484,14 +489,14 @@ class ElectionStatsPage extends StatelessWidget {
                             ),
                             child: Container(
                               height: 100,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 border: Border(
                                     left: BorderSide(
                                   color: Colors.red,
                                   width: 15,
                                 )),
                               ),
-                              child: Column(
+                              child: const Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(

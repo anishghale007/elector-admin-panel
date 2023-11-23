@@ -9,6 +9,8 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:get/get.dart';
 
 class DashboardPage extends StatefulWidget {
+  const DashboardPage({super.key});
+
   @override
   State<DashboardPage> createState() => _DashboardPageState();
 }
@@ -29,7 +31,7 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   final FederalFPTPStatsController federalFPTPStatsController =
-  Get.put(FederalFPTPStatsController());
+      Get.put(FederalFPTPStatsController());
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class _DashboardPageState extends State<DashboardPage> {
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: Column(
               children: [
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 Row(
                   children: [
                     Expanded(
@@ -64,17 +66,17 @@ class _DashboardPageState extends State<DashboardPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Total Users',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
                                       count.toString(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 35,
                                           fontWeight: FontWeight.bold),
@@ -83,7 +85,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -93,7 +95,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 25),
+                    const SizedBox(width: 25),
                     Expanded(
                       child: Container(
                         height: 130,
@@ -118,17 +120,17 @@ class _DashboardPageState extends State<DashboardPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Total Registered Voter ID',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
                                       value.toString(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 35,
                                           fontWeight: FontWeight.bold),
@@ -137,7 +139,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -147,7 +149,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 25),
+                    const SizedBox(width: 25),
                     Expanded(
                       child: Container(
                         height: 130,
@@ -167,17 +169,17 @@ class _DashboardPageState extends State<DashboardPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Ongoing Election',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
                                       count.toString(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 35,
                                           fontWeight: FontWeight.bold),
@@ -186,7 +188,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -198,7 +200,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 Row(
                   children: [
                     Expanded(
@@ -213,17 +215,17 @@ class _DashboardPageState extends State<DashboardPage> {
                             federalFPTPStream.when(
                               data: (data) {
                                 return Container(
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: secondaryColor,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(10)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
                                   ),
                                   child: SizedBox(
                                     width: double.maxFinite,
                                     child: DataTable(
                                       columnSpacing: 10,
-                                      dataRowHeight: 80,
-                                      columns: [
+                                      dataRowMaxHeight: 80,
+                                      columns: const [
                                         DataColumn(
                                           label: Text(
                                             'Profile Picture',
@@ -260,9 +262,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                             ),
                                             DataCell(
                                               Text(dat.candidateName),
-                                              onTap: () {
-                                                print(dat.candidateName);
-                                              },
+                                              onTap: () {},
                                             ),
                                             DataCell(
                                               Text(dat.partyName),
@@ -275,7 +275,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 );
                               },
                               error: (err, stack) => Text('$err'),
-                              loading: () => Center(
+                              loading: () => const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -285,7 +285,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 30),
+                    const SizedBox(width: 30),
                     Expanded(
                       child: Container(
                         height: 500,
@@ -295,17 +295,17 @@ class _DashboardPageState extends State<DashboardPage> {
                         child: federalPRStream.when(
                           data: (data) {
                             return Container(
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: secondaryColor,
                                 borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
+                                    BorderRadius.all(Radius.circular(10)),
                               ),
                               child: SizedBox(
                                 width: double.maxFinite,
                                 child: DataTable(
                                   columnSpacing: 10,
-                                  dataRowHeight: 80,
-                                  columns: [
+                                  dataRowMaxHeight: 80,
+                                  columns: const [
                                     DataColumn(
                                       label: Text(
                                         'Party Picture',
@@ -354,7 +354,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             );
                           },
                           error: (err, stack) => Text('$err'),
-                          loading: () => Center(
+                          loading: () => const Center(
                             child: CircularProgressIndicator(
                               color: Colors.white,
                             ),
@@ -362,10 +362,10 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 50),
+                    const SizedBox(height: 50),
                   ],
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 FutureBuilder(
                   future: federalFPTPStatsController.stats.value,
                   builder: (BuildContext context,
@@ -377,7 +377,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           child: Container(
                             height: 300,
                             width: 1000,
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: CustomBarChart(
                               federalFPTPStats: snapshot.data!,
                             ),
@@ -387,7 +387,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}');
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.red,
                         ),
@@ -395,7 +395,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     }
                   },
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
               ],
             ),
           );
@@ -428,10 +428,10 @@ class CustomBarChart extends StatelessWidget {
     return charts.BarChart(
       series,
       animate: true,
-      animationDuration: Duration(seconds: 3),
+      animationDuration: const Duration(seconds: 3),
       behaviors: [
-        new charts.DatumLegend(
-          entryTextStyle: charts.TextStyleSpec(
+        charts.DatumLegend(
+          entryTextStyle: const charts.TextStyleSpec(
               color: charts.MaterialPalette.black, fontSize: 12),
         ),
       ],

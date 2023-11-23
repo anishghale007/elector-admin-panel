@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elector_admin_dashboard/constants.dart';
-import 'package:elector_admin_dashboard/screens/federal%20election/federalFPTP_candidates.dart';
+import 'package:elector_admin_dashboard/screens/federal%20election/federal_fptp_candidates.dart';
 import 'package:elector_admin_dashboard/screens/federal%20election/federalPR_candidates.dart';
 import 'package:elector_admin_dashboard/screens/provincial%20election/provincialFPTP_candidates.dart';
 import 'package:elector_admin_dashboard/screens/provincial%20election/provincialPR_candidates.dart';
@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CandidatesPage extends StatelessWidget {
+  const CandidatesPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,8 +17,8 @@ class CandidatesPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 80),
-            Padding(
+            const SizedBox(height: 80),
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Text(
                 'Federal Election',
@@ -30,7 +32,7 @@ class CandidatesPage extends StatelessWidget {
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        Get.to(() => FederalFPTPCandidates());
+                        Get.to(() => const FederalFPTPCandidates());
                       },
                       child: Container(
                         height: 130,
@@ -50,17 +52,17 @@ class CandidatesPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'First-Past-The-Post (FPTP) Voting',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
-                                      'Total Candidates: ' + count.toString(),
-                                      style: TextStyle(
+                                      'Total Candidates: $count',
+                                      style: const TextStyle(
                                           color: Colors.blueGrey,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -69,7 +71,7 @@ class CandidatesPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -80,11 +82,11 @@ class CandidatesPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        Get.to(() => FederalPRCandidates());
+                        Get.to(() => const FederalPRCandidates());
                       },
                       child: Container(
                         height: 130,
@@ -104,17 +106,17 @@ class CandidatesPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Proportional Represenation (PR) Voting',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
-                                      'Total Candidates: ' + count.toString(),
-                                      style: TextStyle(
+                                      'Total Candidates: $count',
+                                      style: const TextStyle(
                                           color: Colors.blueGrey,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -123,7 +125,7 @@ class CandidatesPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -137,8 +139,8 @@ class CandidatesPage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 40),
-            Padding(
+            const SizedBox(height: 40),
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Text(
                 'Provincial Election',
@@ -157,7 +159,7 @@ class CandidatesPage extends StatelessWidget {
                         color: Colors.redAccent,
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      child: Column(
+                      child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -174,7 +176,7 @@ class CandidatesPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Expanded(
                     flex: 2,
                     child: InkWell(
@@ -201,17 +203,17 @@ class CandidatesPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'FPTP Voting',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
-                                      'Total Candidates: ' + count.toString(),
-                                      style: TextStyle(
+                                      'Total Candidates: $count',
+                                      style: const TextStyle(
                                           color: Colors.blueGrey,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -220,7 +222,7 @@ class CandidatesPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -231,12 +233,12 @@ class CandidatesPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Expanded(
                     flex: 2,
                     child: InkWell(
                       onTap: () {
-                        Get.to(() => ProvincialPRCandidates(
+                        Get.to(() => const ProvincialPRCandidates(
                               province: "Province 1",
                             ));
                       },
@@ -258,17 +260,17 @@ class CandidatesPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'PR Voting',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
-                                      'Total Candidates: ' + count.toString(),
-                                      style: TextStyle(
+                                      'Total Candidates: $count',
+                                      style: const TextStyle(
                                           color: Colors.blueGrey,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -277,7 +279,7 @@ class CandidatesPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -303,7 +305,7 @@ class CandidatesPage extends StatelessWidget {
                         color: Colors.blueAccent,
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      child: Column(
+                      child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -320,7 +322,7 @@ class CandidatesPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Expanded(
                     flex: 2,
                     child: InkWell(
@@ -346,17 +348,17 @@ class CandidatesPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'FPTP Voting',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
-                                      'Total Candidates: ' + count.toString(),
-                                      style: TextStyle(
+                                      'Total Candidates: $count',
+                                      style: const TextStyle(
                                           color: Colors.blueGrey,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -365,7 +367,7 @@ class CandidatesPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -376,13 +378,13 @@ class CandidatesPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Expanded(
                     flex: 2,
                     child: InkWell(
                       onTap: () {
-                        Get.to(
-                            () => ProvincialPRCandidates(province: "Madhesh"));
+                        Get.to(() =>
+                            const ProvincialPRCandidates(province: "Madhesh"));
                       },
                       child: Container(
                         height: 130,
@@ -402,17 +404,17 @@ class CandidatesPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'PR Voting',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
-                                      'Total Candidates: ' + count.toString(),
-                                      style: TextStyle(
+                                      'Total Candidates: $count',
+                                      style: const TextStyle(
                                           color: Colors.blueGrey,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -421,7 +423,7 @@ class CandidatesPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -447,7 +449,7 @@ class CandidatesPage extends StatelessWidget {
                         color: Colors.lightBlueAccent,
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      child: Column(
+                      child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -464,7 +466,7 @@ class CandidatesPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Expanded(
                     flex: 2,
                     child: InkWell(
@@ -490,17 +492,17 @@ class CandidatesPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'FPTP Voting',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
-                                      'Total Candidates: ' + count.toString(),
-                                      style: TextStyle(
+                                      'Total Candidates: $count',
+                                      style: const TextStyle(
                                           color: Colors.blueGrey,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -509,7 +511,7 @@ class CandidatesPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -520,13 +522,13 @@ class CandidatesPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Expanded(
                     flex: 2,
                     child: InkWell(
                       onTap: () {
-                        Get.to(
-                            () => ProvincialPRCandidates(province: "Bagmati"));
+                        Get.to(() =>
+                            const ProvincialPRCandidates(province: "Bagmati"));
                       },
                       child: Container(
                         height: 130,
@@ -546,17 +548,17 @@ class CandidatesPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'PR Voting',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
-                                      'Total Candidates: ' + count.toString(),
-                                      style: TextStyle(
+                                      'Total Candidates: $count',
+                                      style: const TextStyle(
                                           color: Colors.blueGrey,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -565,7 +567,7 @@ class CandidatesPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -591,7 +593,7 @@ class CandidatesPage extends StatelessWidget {
                         color: Colors.deepPurpleAccent,
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      child: Column(
+                      child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -608,7 +610,7 @@ class CandidatesPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Expanded(
                     flex: 2,
                     child: InkWell(
@@ -634,17 +636,17 @@ class CandidatesPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'FPTP Voting',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
-                                      'Total Candidates: ' + count.toString(),
-                                      style: TextStyle(
+                                      'Total Candidates: $count',
+                                      style: const TextStyle(
                                           color: Colors.blueGrey,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -653,7 +655,7 @@ class CandidatesPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -664,13 +666,13 @@ class CandidatesPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Expanded(
                     flex: 2,
                     child: InkWell(
                       onTap: () {
-                        Get.to(
-                            () => ProvincialPRCandidates(province: "Gandaki"));
+                        Get.to(() =>
+                            const ProvincialPRCandidates(province: "Gandaki"));
                       },
                       child: Container(
                         height: 130,
@@ -690,17 +692,17 @@ class CandidatesPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'PR Voting',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
-                                      'Total Candidates: ' + count.toString(),
-                                      style: TextStyle(
+                                      'Total Candidates: $count',
+                                      style: const TextStyle(
                                           color: Colors.blueGrey,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -709,7 +711,7 @@ class CandidatesPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -735,7 +737,7 @@ class CandidatesPage extends StatelessWidget {
                         color: Colors.pinkAccent,
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      child: Column(
+                      child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -752,7 +754,7 @@ class CandidatesPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Expanded(
                     flex: 2,
                     child: InkWell(
@@ -778,17 +780,17 @@ class CandidatesPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'FPTP Voting',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
-                                      'Total Candidates: ' + count.toString(),
-                                      style: TextStyle(
+                                      'Total Candidates: $count',
+                                      style: const TextStyle(
                                           color: Colors.blueGrey,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -797,7 +799,7 @@ class CandidatesPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -808,13 +810,13 @@ class CandidatesPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Expanded(
                     flex: 2,
                     child: InkWell(
                       onTap: () {
-                        Get.to(
-                            () => ProvincialPRCandidates(province: "Lumbini"));
+                        Get.to(() =>
+                            const ProvincialPRCandidates(province: "Lumbini"));
                       },
                       child: Container(
                         height: 130,
@@ -834,17 +836,17 @@ class CandidatesPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'PR Voting',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
-                                      'Total Candidates: ' + count.toString(),
-                                      style: TextStyle(
+                                      'Total Candidates: $count',
+                                      style: const TextStyle(
                                           color: Colors.blueGrey,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -853,7 +855,7 @@ class CandidatesPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -879,7 +881,7 @@ class CandidatesPage extends StatelessWidget {
                         color: Colors.indigoAccent,
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      child: Column(
+                      child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -896,7 +898,7 @@ class CandidatesPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Expanded(
                     flex: 2,
                     child: InkWell(
@@ -922,17 +924,17 @@ class CandidatesPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'FPTP Voting',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
-                                      'Total Candidates: ' + count.toString(),
-                                      style: TextStyle(
+                                      'Total Candidates: $count',
+                                      style: const TextStyle(
                                           color: Colors.blueGrey,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -941,7 +943,7 @@ class CandidatesPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -952,13 +954,13 @@ class CandidatesPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Expanded(
                     flex: 2,
                     child: InkWell(
                       onTap: () {
-                        Get.to(
-                            () => ProvincialPRCandidates(province: "Karnali"));
+                        Get.to(() =>
+                            const ProvincialPRCandidates(province: "Karnali"));
                       },
                       child: Container(
                         height: 130,
@@ -978,17 +980,17 @@ class CandidatesPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'PR Voting',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
-                                      'Total Candidates: ' + count.toString(),
-                                      style: TextStyle(
+                                      'Total Candidates: $count',
+                                      style: const TextStyle(
                                           color: Colors.blueGrey,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -997,7 +999,7 @@ class CandidatesPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -1023,7 +1025,7 @@ class CandidatesPage extends StatelessWidget {
                         color: Colors.deepOrangeAccent,
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      child: Column(
+                      child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -1040,7 +1042,7 @@ class CandidatesPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Expanded(
                     flex: 2,
                     child: InkWell(
@@ -1066,17 +1068,17 @@ class CandidatesPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'FPTP Voting',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
-                                      'Total Candidates: ' + count.toString(),
-                                      style: TextStyle(
+                                      'Total Candidates: $count',
+                                      style: const TextStyle(
                                           color: Colors.blueGrey,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -1085,7 +1087,7 @@ class CandidatesPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -1096,13 +1098,13 @@ class CandidatesPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Expanded(
                     flex: 2,
                     child: InkWell(
                       onTap: () {
-                        Get.to(() =>
-                            ProvincialPRCandidates(province: "Sudurpashchim"));
+                        Get.to(() => const ProvincialPRCandidates(
+                            province: "Sudurpashchim"));
                       },
                       child: Container(
                         height: 130,
@@ -1122,17 +1124,17 @@ class CandidatesPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'PR Voting',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
-                                      'Total Candidates: ' + count.toString(),
-                                      style: TextStyle(
+                                      'Total Candidates: $count',
+                                      style: const TextStyle(
                                           color: Colors.blueGrey,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -1141,7 +1143,7 @@ class CandidatesPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -1155,7 +1157,7 @@ class CandidatesPage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
           ],
         ),
       ),

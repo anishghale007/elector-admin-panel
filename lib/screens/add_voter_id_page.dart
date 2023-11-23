@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elector_admin_dashboard/constants.dart';
-import 'package:elector_admin_dashboard/screens/voter%20id/add_voterID_form.dart';
-import 'package:elector_admin_dashboard/screens/voter%20id/remove_voterID_form.dart';
+import 'package:elector_admin_dashboard/screens/voter%20id/add_voter_id_form.dart';
+import 'package:elector_admin_dashboard/screens/voter%20id/remove_voter_id_form.dart';
 import 'package:elector_admin_dashboard/widgets/custom_button.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddVoterIDPage extends StatelessWidget {
+  const AddVoterIDPage({super.key});
+
   Future<DocumentSnapshot<Map<String, dynamic>>> getData() async {
     var firestore = FirebaseFirestore.instance
         .collection('electoral roll')
@@ -24,37 +25,37 @@ class AddVoterIDPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 40),
           child: Column(
             children: [
-              SizedBox(height: 80),
+              const SizedBox(height: 80),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     'Electoral Roll (Vote List)',
                     style: kSubHeadingTextStyle,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   CustomButton(
                       text: 'Add Voter ID',
                       onPress: () {
-                        Get.to(() => AddVoterIDForm());
+                        Get.to(() => const AddVoterIDForm());
                       },
                       color: Colors.blue),
-                  SizedBox(width: 15),
+                  const SizedBox(width: 15),
                   CustomButton(
                       text: 'Remove Voter ID',
                       onPress: () {
-                        Get.to(() => RemoveVoterIDForm());
+                        Get.to(() => const RemoveVoterIDForm());
                       },
                       color: Colors.red),
                 ],
               ),
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               Row(
                 children: [
                   Expanded(
                     flex: 3,
                     child: Container(
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
                         maxHeight: double.infinity,
                       ),
                       decoration: BoxDecoration(
@@ -62,8 +63,8 @@ class AddVoterIDPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20)),
                       child: Column(
                         children: [
-                          SizedBox(height: 25),
-                          Text(
+                          const SizedBox(height: 25),
+                          const Text(
                             'Voter ID',
                             style: TextStyle(
                               color: Colors.white,
@@ -82,9 +83,18 @@ class AddVoterIDPage extends StatelessWidget {
                                 var value = output!['Voter ID'];
                                 return Column(
                                   children: [
-                                    SizedBox(height: 30),
-                                    for (value in output!['Voter ID'])
+                                    const SizedBox(height: 30),
+                                    for (value in output['Voter ID'])
                                       Container(
+                                        width: double.infinity,
+                                        decoration: const BoxDecoration(
+                                          border: Border(
+                                            bottom: BorderSide(
+                                                width: 0.5, color: Colors.grey),
+                                            top: BorderSide(
+                                                width: 0.5, color: Colors.grey),
+                                          ),
+                                        ),
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 25, vertical: 10),
@@ -94,28 +104,19 @@ class AddVoterIDPage extends StatelessWidget {
                                             children: [
                                               Text(
                                                 value.toString(),
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontSize: 19,
                                                 ),
                                               ),
                                             ],
                                           ),
                                         ),
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          border: Border(
-                                            bottom: BorderSide(
-                                                width: 0.5, color: Colors.grey),
-                                            top: BorderSide(
-                                                width: 0.5, color: Colors.grey),
-                                          ),
-                                        ),
                                       ),
-                                    SizedBox(height: 20),
+                                    const SizedBox(height: 20),
                                   ],
                                 );
                               } else {
-                                return Center(
+                                return const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.white,
                                   ),
@@ -127,7 +128,7 @@ class AddVoterIDPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 30),
+                  const SizedBox(width: 30),
                   Expanded(
                     flex: 2,
                     child: Container(
@@ -140,8 +141,8 @@ class AddVoterIDPage extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(height: 25),
-                            Text(
+                            const SizedBox(height: 25),
+                            const Text(
                               'Total Registered Voter ID',
                               style: TextStyle(
                                 color: Colors.white,
@@ -149,7 +150,8 @@ class AddVoterIDPage extends StatelessWidget {
                                 fontSize: 20,
                               ),
                             ),
-                            StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                            StreamBuilder<
+                                DocumentSnapshot<Map<String, dynamic>>>(
                               stream: FirebaseFirestore.instance
                                   .collection('electoral roll')
                                   .doc('electoralRoll')
@@ -160,11 +162,11 @@ class AddVoterIDPage extends StatelessWidget {
                                   var value = output!['totalVoterID'];
                                   return Column(
                                     children: [
-                                      SizedBox(height: 25),
+                                      const SizedBox(height: 25),
                                       Text(
                                         value.toString(),
                                         textAlign: TextAlign.left,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 30,
@@ -173,7 +175,7 @@ class AddVoterIDPage extends StatelessWidget {
                                     ],
                                   );
                                 } else {
-                                  return Center(
+                                  return const Center(
                                     child: CircularProgressIndicator(
                                       color: Colors.white,
                                     ),

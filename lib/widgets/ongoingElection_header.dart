@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class OngoingElectionHeader extends StatelessWidget {
+  const OngoingElectionHeader({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       children: [
         SizedBox(width: 50),
         Text(

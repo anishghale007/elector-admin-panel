@@ -1,4 +1,3 @@
-import 'package:elector_admin_dashboard/controllers/federal_provider.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/bagmati_provider.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/gandaki_provider.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/karnali_provider.dart';
@@ -6,7 +5,6 @@ import 'package:elector_admin_dashboard/controllers/provincial%20controller/lumb
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/madhesh_provider.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/province1_provider.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/sudurpaschim_provider.dart';
-import 'package:elector_admin_dashboard/models/federal_election.dart';
 import 'package:elector_admin_dashboard/models/provincial_election.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,7 +15,7 @@ class EditProvincialPRPage extends StatelessWidget {
   final ProvincialPR provincialPR;
   final String province;
 
-  EditProvincialPRPage(this.provincialPR, this.province);
+  EditProvincialPRPage(this.provincialPR, this.province, {super.key});
 
   final partyController = TextEditingController();
   final barColorController = TextEditingController();
@@ -34,15 +32,15 @@ class EditProvincialPRPage extends StatelessWidget {
             body: SingleChildScrollView(
               child: Center(
                 child: Container(
-                  constraints: BoxConstraints(maxWidth: 800),
-                  padding: EdgeInsets.all(24),
+                  constraints: const BoxConstraints(maxWidth: 800),
+                  padding: const EdgeInsets.all(24),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
+                          SizedBox(
                             height: 100,
                             width: 300,
                             child: Padding(
@@ -55,7 +53,7 @@ class EditProvincialPRPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Row(
@@ -67,10 +65,10 @@ class EditProvincialPRPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Row(
+                      const Row(
                         children: [
                           Text(
                             "Please fill out the form",
@@ -81,7 +79,7 @@ class EditProvincialPRPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       TextFormField(
@@ -99,7 +97,7 @@ class EditProvincialPRPage extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20))),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       TextFormField(
@@ -120,7 +118,7 @@ class EditProvincialPRPage extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20))),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       SizedBox(
@@ -143,7 +141,7 @@ class EditProvincialPRPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(20))),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       InkWell(
@@ -166,7 +164,7 @@ class EditProvincialPRPage extends StatelessWidget {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
@@ -186,7 +184,7 @@ class EditProvincialPRPage extends StatelessWidget {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
@@ -206,7 +204,7 @@ class EditProvincialPRPage extends StatelessWidget {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
@@ -226,7 +224,7 @@ class EditProvincialPRPage extends StatelessWidget {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
@@ -246,7 +244,7 @@ class EditProvincialPRPage extends StatelessWidget {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
@@ -266,7 +264,7 @@ class EditProvincialPRPage extends StatelessWidget {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
@@ -286,7 +284,7 @@ class EditProvincialPRPage extends StatelessWidget {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
@@ -296,13 +294,13 @@ class EditProvincialPRPage extends StatelessWidget {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color(0xFF3C19C0),
+                            color: const Color(0xFF3C19C0),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           alignment: Alignment.center,
                           width: double.maxFinite,
-                          padding: EdgeInsets.symmetric(vertical: 16),
-                          child: Text(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: const Text(
                             "Confirm Changes",
                             style: TextStyle(
                               color: Colors.white,
@@ -312,7 +310,7 @@ class EditProvincialPRPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                     ],

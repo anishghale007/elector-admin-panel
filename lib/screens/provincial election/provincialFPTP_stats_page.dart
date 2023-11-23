@@ -5,7 +5,7 @@ import 'package:elector_admin_dashboard/controllers/provincial%20controller/bagm
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/bagmati_provider.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/gandakiFPTP_stats_controller.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/gandaki_provider.dart';
-import 'package:elector_admin_dashboard/controllers/provincial%20controller/karnaliFPTP_stats_controller.dart';
+import 'package:elector_admin_dashboard/controllers/provincial%20controller/karnali_fptp_stats_controller.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/karnali_provider.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/lumbiniFPTP_stats_controller.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/lumbini_provider.dart';
@@ -55,7 +55,6 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
   }
 
   String count() {
-    print(voterTurnout);
     voterTurnout = int.parse(totalVotes!) / int.parse(totalUsers!) * 100;
     voteTurnOut = voterTurnout!.toStringAsFixed(2);
     return voteTurnOut;
@@ -70,11 +69,11 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
   final MadheshFPTPStatsController madheshFPTPStatsController =
       Get.put(MadheshFPTPStatsController());
   final LumbiniFPTPStatsController lumbiniFPTPStatsController =
-  Get.put(LumbiniFPTPStatsController());
+      Get.put(LumbiniFPTPStatsController());
   final KarnaliFPTPStatsController karnaliFPTPStatsController =
-  Get.put(KarnaliFPTPStatsController());
+      Get.put(KarnaliFPTPStatsController());
   final SudurpaschimFPTPStatsController sudurpaschimFPTPStatsController =
-  Get.put(SudurpaschimFPTPStatsController());
+      Get.put(SudurpaschimFPTPStatsController());
 
   @override
   Widget build(BuildContext context) {
@@ -86,24 +85,26 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
         final madheshSortedStream = ref.watch(madheshFptpSortedProvider);
         final lumbiniSortedStream = ref.watch(lumbiniFptpSortedProvider);
         final karnaliSortedStream = ref.watch(karnaliFptpSortedProvider);
-        final sudurpaschimSortedStream = ref.watch(sudurpaschimFptpSortedProvider);
+        final sudurpaschimSortedStream =
+            ref.watch(sudurpaschimFptpSortedProvider);
         final totalVoteStream = ref.watch(ongoingProvincialTotalVotesProvider);
         return SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 50),
-              Center(
+              const SizedBox(height: 50),
+              const Center(
                 child: Text(
                   'Please select the province that you wish to see the stats of',
                   style: kSubHeadingTextStyle,
                 ),
               ),
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               Center(
                 child: Container(
                   width: 400,
                   height: 58,
-                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: DropdownButtonFormField(
                       value: _selectedProvince.isNotEmpty
                           ? _selectedProvince
@@ -112,37 +113,38 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                         if (value == null) {
                           return 'Gender is required';
                         }
+                        return null;
                       },
-                      hint: Text(
+                      hint: const Text(
                         "Select",
                       ),
                       decoration: InputDecoration(
                         fillColor: secondaryColor,
                         filled: true,
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(color: secondaryColor),
+                          borderSide: const BorderSide(color: secondaryColor),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Colors.transparent),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent),
                         ),
                       ),
                       items: province.map((String gender) {
                         return DropdownMenuItem(
-                          child: Text(gender),
                           value: gender,
+                          child: Text(gender),
                         );
                       }).toList(),
                       onChanged: (newValue) {
                         setState(() {
                           _selectedProvince = "$newValue";
-                          print(_selectedProvince);
                         });
                       }),
                 ),
               ),
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               /*
               PROVINCE NO 1
               */
@@ -158,7 +160,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           child: Container(
                             height: 300,
                             width: 1000,
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: CustomBarChart(
                               fptpStats: snapshot.data!,
                             ),
@@ -168,7 +170,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}');
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.red,
                         ),
@@ -176,7 +178,8 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     }
                   },
                 ),
-              if (_selectedProvince == "Province No.1") SizedBox(height: 40),
+              if (_selectedProvince == "Province No.1")
+                const SizedBox(height: 40),
               if (_selectedProvince == "Province No.1")
                 FutureBuilder(
                   future: province1FPTPStatsController.stats.value,
@@ -189,7 +192,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           child: Container(
                             height: 300,
                             width: 600,
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: CustomPieChart(
                               fptpStats: snapshot.data!,
                             ),
@@ -199,7 +202,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}');
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.red,
                         ),
@@ -207,7 +210,8 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     }
                   },
                 ),
-              if (_selectedProvince == "Province No.1") SizedBox(height: 40),
+              if (_selectedProvince == "Province No.1")
+                const SizedBox(height: 40),
               if (_selectedProvince == "Province No.1")
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -226,7 +230,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                               return Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Total Vote Counts',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -234,10 +238,10 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
                                     data.totalVote.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -247,7 +251,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                               );
                             },
                             error: (err, stack) => Text('$err'),
-                            loading: () => Center(
+                            loading: () => const Center(
                               child: CircularProgressIndicator(
                                 color: Colors.white,
                               ),
@@ -255,7 +259,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: Container(
                           height: 100,
@@ -274,17 +278,17 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(
+                                      const Text(
                                         'Total Users',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      SizedBox(height: 10),
+                                      const SizedBox(height: 10),
                                       Text(
                                         count.toString(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
@@ -293,7 +297,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                   ),
                                 );
                               } else {
-                                return Center(
+                                return const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.white,
                                   ),
@@ -303,11 +307,11 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: GestureDetector(
                           onTap: () async {
-                            final vote = await count();
+                            final vote = count();
                             setState(() {
                               voteTurnOut = vote;
                             });
@@ -324,17 +328,17 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Voter Turnout',
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
-                                    voteTurnOut + ' %',
-                                    style: TextStyle(
+                                    '$voteTurnOut %',
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
@@ -348,11 +352,11 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     ],
                   ),
                 ),
-              if (_selectedProvince == "Province No.1") SizedBox(height: 40),
               if (_selectedProvince == "Province No.1")
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                const SizedBox(height: 40),
+              if (_selectedProvince == "Province No.1")
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   child: Align(
                     alignment: Alignment.bottomLeft,
                     child: Text(
@@ -364,24 +368,24 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     ),
                   ),
                 ),
-              if (_selectedProvince == "Province No.1") SizedBox(height: 40),
+              if (_selectedProvince == "Province No.1")
+                const SizedBox(height: 40),
               if (_selectedProvince == "Province No.1")
                 province1SortedStream.when(
                   data: (data) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: secondaryColor,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: SizedBox(
                           width: double.maxFinite,
                           child: DataTable(
                             columnSpacing: 10,
-                            dataRowHeight: 80,
-                            columns: [
+                            dataRowMaxHeight: 80,
+                            columns: const [
                               DataColumn(
                                 label: Text(
                                   'Profile Picture',
@@ -435,13 +439,14 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     );
                   },
                   error: (err, stack) => Text('$err'),
-                  loading: () => Center(
+                  loading: () => const Center(
                     child: CircularProgressIndicator(
                       color: Colors.white,
                     ),
                   ),
                 ),
-              if (_selectedProvince == "Province No.1") SizedBox(height: 40),
+              if (_selectedProvince == "Province No.1")
+                const SizedBox(height: 40),
               /*
               MADHESH
               */
@@ -457,7 +462,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           child: Container(
                             height: 300,
                             width: 1000,
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: CustomBarChart(
                               fptpStats: snapshot.data!,
                             ),
@@ -467,7 +472,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}');
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.red,
                         ),
@@ -475,7 +480,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     }
                   },
                 ),
-              if (_selectedProvince == "Madhesh") SizedBox(height: 40),
+              if (_selectedProvince == "Madhesh") const SizedBox(height: 40),
               if (_selectedProvince == "Madhesh")
                 FutureBuilder(
                   future: madheshFPTPStatsController.stats.value,
@@ -488,7 +493,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           child: Container(
                             height: 300,
                             width: 600,
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: CustomPieChart(
                               fptpStats: snapshot.data!,
                             ),
@@ -498,7 +503,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}');
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.red,
                         ),
@@ -506,7 +511,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     }
                   },
                 ),
-              if (_selectedProvince == "Madhesh") SizedBox(height: 40),
+              if (_selectedProvince == "Madhesh") const SizedBox(height: 40),
               if (_selectedProvince == "Madhesh")
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -525,7 +530,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                               return Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Total Vote Counts',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -533,10 +538,10 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
                                     data.totalVote.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -546,7 +551,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                               );
                             },
                             error: (err, stack) => Text('$err'),
-                            loading: () => Center(
+                            loading: () => const Center(
                               child: CircularProgressIndicator(
                                 color: Colors.white,
                               ),
@@ -554,7 +559,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: Container(
                           height: 100,
@@ -573,17 +578,17 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(
+                                      const Text(
                                         'Total Users',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      SizedBox(height: 10),
+                                      const SizedBox(height: 10),
                                       Text(
                                         count.toString(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
@@ -592,7 +597,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                   ),
                                 );
                               } else {
-                                return Center(
+                                return const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.white,
                                   ),
@@ -602,11 +607,11 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: GestureDetector(
                           onTap: () async {
-                            final vote = await count();
+                            final vote = count();
                             setState(() {
                               voteTurnOut = vote;
                             });
@@ -623,17 +628,17 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Voter Turnout',
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
-                                    voteTurnOut + ' %',
-                                    style: TextStyle(
+                                    '$voteTurnOut %',
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
@@ -647,11 +652,10 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     ],
                   ),
                 ),
-              if (_selectedProvince == "Madhesh") SizedBox(height: 40),
+              if (_selectedProvince == "Madhesh") const SizedBox(height: 40),
               if (_selectedProvince == "Madhesh")
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   child: Align(
                     alignment: Alignment.bottomLeft,
                     child: Text(
@@ -663,24 +667,23 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     ),
                   ),
                 ),
-              if (_selectedProvince == "Madhesh") SizedBox(height: 40),
+              if (_selectedProvince == "Madhesh") const SizedBox(height: 40),
               if (_selectedProvince == "Madhesh")
                 madheshSortedStream.when(
                   data: (data) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: secondaryColor,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: SizedBox(
                           width: double.maxFinite,
                           child: DataTable(
                             columnSpacing: 10,
-                            dataRowHeight: 80,
-                            columns: [
+                            dataRowMaxHeight: 80,
+                            columns: const [
                               DataColumn(
                                 label: Text(
                                   'Profile Picture',
@@ -734,13 +737,13 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     );
                   },
                   error: (err, stack) => Text('$err'),
-                  loading: () => Center(
+                  loading: () => const Center(
                     child: CircularProgressIndicator(
                       color: Colors.white,
                     ),
                   ),
                 ),
-              if (_selectedProvince == "Madhesh") SizedBox(height: 40),
+              if (_selectedProvince == "Madhesh") const SizedBox(height: 40),
               /*
                   BAGMATI
                   */
@@ -756,7 +759,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           child: Container(
                             height: 300,
                             width: 1000,
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: CustomBarChart(
                               fptpStats: snapshot.data!,
                             ),
@@ -766,7 +769,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}');
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.red,
                         ),
@@ -774,7 +777,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     }
                   },
                 ),
-              if (_selectedProvince == "Bagmati") SizedBox(height: 40),
+              if (_selectedProvince == "Bagmati") const SizedBox(height: 40),
               if (_selectedProvince == "Bagmati")
                 FutureBuilder(
                   future: bagmatiFPTPStatsController.stats.value,
@@ -787,7 +790,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           child: Container(
                             height: 300,
                             width: 600,
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: CustomPieChart(
                               fptpStats: snapshot.data!,
                             ),
@@ -797,7 +800,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}');
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.red,
                         ),
@@ -805,7 +808,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     }
                   },
                 ),
-              if (_selectedProvince == "Bagmati") SizedBox(height: 40),
+              if (_selectedProvince == "Bagmati") const SizedBox(height: 40),
               if (_selectedProvince == "Bagmati")
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -824,7 +827,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                               return Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Total Vote Counts',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -832,10 +835,10 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
                                     data.totalVote.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -845,7 +848,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                               );
                             },
                             error: (err, stack) => Text('$err'),
-                            loading: () => Center(
+                            loading: () => const Center(
                               child: CircularProgressIndicator(
                                 color: Colors.white,
                               ),
@@ -853,7 +856,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: Container(
                           height: 100,
@@ -872,17 +875,17 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(
+                                      const Text(
                                         'Total Users',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      SizedBox(height: 10),
+                                      const SizedBox(height: 10),
                                       Text(
                                         count.toString(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
@@ -891,7 +894,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                   ),
                                 );
                               } else {
-                                return Center(
+                                return const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.white,
                                   ),
@@ -901,11 +904,11 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: GestureDetector(
                           onTap: () async {
-                            final vote = await count();
+                            final vote = count();
                             setState(() {
                               voteTurnOut = vote;
                             });
@@ -922,17 +925,17 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Voter Turnout',
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
-                                    voteTurnOut + ' %',
-                                    style: TextStyle(
+                                    '$voteTurnOut %',
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
@@ -946,11 +949,10 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     ],
                   ),
                 ),
-              if (_selectedProvince == "Bagmati") SizedBox(height: 40),
+              if (_selectedProvince == "Bagmati") const SizedBox(height: 40),
               if (_selectedProvince == "Bagmati")
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   child: Align(
                     alignment: Alignment.bottomLeft,
                     child: Text(
@@ -962,24 +964,23 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     ),
                   ),
                 ),
-              if (_selectedProvince == "Bagmati") SizedBox(height: 40),
+              if (_selectedProvince == "Bagmati") const SizedBox(height: 40),
               if (_selectedProvince == "Bagmati")
                 bagmatiSortedStream.when(
                   data: (data) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: secondaryColor,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: SizedBox(
                           width: double.maxFinite,
                           child: DataTable(
                             columnSpacing: 10,
-                            dataRowHeight: 80,
-                            columns: [
+                            dataRowMaxHeight: 80,
+                            columns: const [
                               DataColumn(
                                 label: Text(
                                   'Profile Picture',
@@ -1033,13 +1034,13 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     );
                   },
                   error: (err, stack) => Text('$err'),
-                  loading: () => Center(
+                  loading: () => const Center(
                     child: CircularProgressIndicator(
                       color: Colors.white,
                     ),
                   ),
                 ),
-              if (_selectedProvince == "Bagmati") SizedBox(height: 40),
+              if (_selectedProvince == "Bagmati") const SizedBox(height: 40),
               /*
              GANDAKI
              */
@@ -1055,7 +1056,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           child: Container(
                             height: 300,
                             width: 1000,
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: CustomBarChart(
                               fptpStats: snapshot.data!,
                             ),
@@ -1065,7 +1066,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}');
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.red,
                         ),
@@ -1073,7 +1074,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     }
                   },
                 ),
-              if (_selectedProvince == "Gandaki") SizedBox(height: 40),
+              if (_selectedProvince == "Gandaki") const SizedBox(height: 40),
               if (_selectedProvince == "Gandaki")
                 FutureBuilder(
                   future: gandakiFPTPStatsController.stats.value,
@@ -1086,7 +1087,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           child: Container(
                             height: 300,
                             width: 600,
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: CustomPieChart(
                               fptpStats: snapshot.data!,
                             ),
@@ -1096,7 +1097,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}');
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.red,
                         ),
@@ -1104,7 +1105,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     }
                   },
                 ),
-              if (_selectedProvince == "Gandaki") SizedBox(height: 40),
+              if (_selectedProvince == "Gandaki") const SizedBox(height: 40),
               if (_selectedProvince == "Gandaki")
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -1123,7 +1124,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                               return Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Total Vote Counts',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -1131,10 +1132,10 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
                                     data.totalVote.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -1144,7 +1145,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                               );
                             },
                             error: (err, stack) => Text('$err'),
-                            loading: () => Center(
+                            loading: () => const Center(
                               child: CircularProgressIndicator(
                                 color: Colors.white,
                               ),
@@ -1152,7 +1153,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: Container(
                           height: 100,
@@ -1171,17 +1172,17 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(
+                                      const Text(
                                         'Total Users',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      SizedBox(height: 10),
+                                      const SizedBox(height: 10),
                                       Text(
                                         count.toString(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
@@ -1190,7 +1191,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                   ),
                                 );
                               } else {
-                                return Center(
+                                return const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.white,
                                   ),
@@ -1200,11 +1201,11 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: GestureDetector(
                           onTap: () async {
-                            final vote = await count();
+                            final vote = count();
                             setState(() {
                               voteTurnOut = vote;
                             });
@@ -1221,17 +1222,17 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Voter Turnout',
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
-                                    voteTurnOut + ' %',
-                                    style: TextStyle(
+                                    '$voteTurnOut %',
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
@@ -1245,11 +1246,10 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     ],
                   ),
                 ),
-              if (_selectedProvince == "Gandaki") SizedBox(height: 40),
+              if (_selectedProvince == "Gandaki") const SizedBox(height: 40),
               if (_selectedProvince == "Gandaki")
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   child: Align(
                     alignment: Alignment.bottomLeft,
                     child: Text(
@@ -1261,24 +1261,23 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     ),
                   ),
                 ),
-              if (_selectedProvince == "Gandaki") SizedBox(height: 40),
+              if (_selectedProvince == "Gandaki") const SizedBox(height: 40),
               if (_selectedProvince == "Gandaki")
                 gandakiSortedStream.when(
                   data: (data) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: secondaryColor,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: SizedBox(
                           width: double.maxFinite,
                           child: DataTable(
                             columnSpacing: 10,
-                            dataRowHeight: 80,
-                            columns: [
+                            dataRowMaxHeight: 80,
+                            columns: const [
                               DataColumn(
                                 label: Text(
                                   'Profile Picture',
@@ -1332,13 +1331,13 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     );
                   },
                   error: (err, stack) => Text('$err'),
-                  loading: () => Center(
+                  loading: () => const Center(
                     child: CircularProgressIndicator(
                       color: Colors.white,
                     ),
                   ),
                 ),
-              if (_selectedProvince == "Gandaki") SizedBox(height: 40),
+              if (_selectedProvince == "Gandaki") const SizedBox(height: 40),
               /*
                 LUMBINI
                 * */
@@ -1354,7 +1353,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           child: Container(
                             height: 300,
                             width: 1000,
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: CustomBarChart(
                               fptpStats: snapshot.data!,
                             ),
@@ -1364,7 +1363,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}');
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.red,
                         ),
@@ -1372,7 +1371,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     }
                   },
                 ),
-              if (_selectedProvince == "Lumbini") SizedBox(height: 40),
+              if (_selectedProvince == "Lumbini") const SizedBox(height: 40),
               if (_selectedProvince == "Lumbini")
                 FutureBuilder(
                   future: lumbiniFPTPStatsController.stats.value,
@@ -1385,7 +1384,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           child: Container(
                             height: 300,
                             width: 600,
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: CustomPieChart(
                               fptpStats: snapshot.data!,
                             ),
@@ -1395,7 +1394,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}');
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.red,
                         ),
@@ -1403,7 +1402,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     }
                   },
                 ),
-              if (_selectedProvince == "Lumbini") SizedBox(height: 40),
+              if (_selectedProvince == "Lumbini") const SizedBox(height: 40),
               if (_selectedProvince == "Lumbini")
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -1422,7 +1421,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                               return Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Total Vote Counts',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -1430,10 +1429,10 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
                                     data.totalVote.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -1443,7 +1442,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                               );
                             },
                             error: (err, stack) => Text('$err'),
-                            loading: () => Center(
+                            loading: () => const Center(
                               child: CircularProgressIndicator(
                                 color: Colors.white,
                               ),
@@ -1451,7 +1450,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: Container(
                           height: 100,
@@ -1470,17 +1469,17 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(
+                                      const Text(
                                         'Total Users',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      SizedBox(height: 10),
+                                      const SizedBox(height: 10),
                                       Text(
                                         count.toString(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
@@ -1489,7 +1488,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                   ),
                                 );
                               } else {
-                                return Center(
+                                return const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.white,
                                   ),
@@ -1499,11 +1498,11 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: GestureDetector(
                           onTap: () async {
-                            final vote = await count();
+                            final vote = count();
                             setState(() {
                               voteTurnOut = vote;
                             });
@@ -1516,21 +1515,21 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                             ),
                             child: Padding(
                               padding:
-                              const EdgeInsets.symmetric(horizontal: 30),
+                                  const EdgeInsets.symmetric(horizontal: 30),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Voter Turnout',
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
-                                    voteTurnOut + ' %',
-                                    style: TextStyle(
+                                    '$voteTurnOut %',
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
@@ -1544,11 +1543,10 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     ],
                   ),
                 ),
-              if (_selectedProvince == "Lumbini") SizedBox(height: 40),
+              if (_selectedProvince == "Lumbini") const SizedBox(height: 40),
               if (_selectedProvince == "Lumbini")
-                Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   child: Align(
                     alignment: Alignment.bottomLeft,
                     child: Text(
@@ -1560,24 +1558,23 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     ),
                   ),
                 ),
-              if (_selectedProvince == "Lumbini") SizedBox(height: 40),
+              if (_selectedProvince == "Lumbini") const SizedBox(height: 40),
               if (_selectedProvince == "Lumbini")
                 lumbiniSortedStream.when(
                   data: (data) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: secondaryColor,
-                          borderRadius:
-                          const BorderRadius.all(Radius.circular(10)),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: SizedBox(
                           width: double.maxFinite,
                           child: DataTable(
                             columnSpacing: 10,
-                            dataRowHeight: 80,
-                            columns: [
+                            dataRowMaxHeight: 80,
+                            columns: const [
                               DataColumn(
                                 label: Text(
                                   'Profile Picture',
@@ -1610,7 +1607,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                   DataCell(
                                     CircleAvatar(
                                       backgroundImage:
-                                      NetworkImage(dat.imageUrl),
+                                          NetworkImage(dat.imageUrl),
                                     ),
                                   ),
                                   DataCell(
@@ -1631,47 +1628,47 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     );
                   },
                   error: (err, stack) => Text('$err'),
-                  loading: () => Center(
+                  loading: () => const Center(
                     child: CircularProgressIndicator(
                       color: Colors.white,
                     ),
                   ),
                 ),
-              if (_selectedProvince == "Lumbini") SizedBox(height: 40),
-                /*
+              if (_selectedProvince == "Lumbini") const SizedBox(height: 40),
+              /*
                 * KARNALI
                 * */
-                if (_selectedProvince == "Karnali")
-                    FutureBuilder(
-                      future: karnaliFPTPStatsController.stats.value,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<List<ProvincialFPTPStats>> snapshot) {
-                        if (snapshot.hasData) {
-                          return SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Expanded(
-                              child: Container(
-                                height: 300,
-                                width: 1000,
-                                padding: EdgeInsets.all(10),
-                                child: CustomBarChart(
-                                  fptpStats: snapshot.data!,
-                                ),
-                              ),
+              if (_selectedProvince == "Karnali")
+                FutureBuilder(
+                  future: karnaliFPTPStatsController.stats.value,
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<ProvincialFPTPStats>> snapshot) {
+                    if (snapshot.hasData) {
+                      return SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Expanded(
+                          child: Container(
+                            height: 300,
+                            width: 1000,
+                            padding: const EdgeInsets.all(10),
+                            child: CustomBarChart(
+                              fptpStats: snapshot.data!,
                             ),
-                          );
-                        } else if (snapshot.hasError) {
-                          return Text('${snapshot.error}');
-                        } else {
-                          return Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.red,
-                            ),
-                          );
-                        }
-                      },
-                    ),
-              if (_selectedProvince == "Karnali") SizedBox(height: 40),
+                          ),
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.red,
+                        ),
+                      );
+                    }
+                  },
+                ),
+              if (_selectedProvince == "Karnali") const SizedBox(height: 40),
               if (_selectedProvince == "Karnali")
                 FutureBuilder(
                   future: karnaliFPTPStatsController.stats.value,
@@ -1684,7 +1681,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           child: Container(
                             height: 300,
                             width: 600,
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: CustomPieChart(
                               fptpStats: snapshot.data!,
                             ),
@@ -1694,7 +1691,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}');
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.red,
                         ),
@@ -1702,7 +1699,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     }
                   },
                 ),
-              if (_selectedProvince == "Karnali") SizedBox(height: 40),
+              if (_selectedProvince == "Karnali") const SizedBox(height: 40),
               if (_selectedProvince == "Karnali")
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -1721,7 +1718,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                               return Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Total Vote Counts',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -1729,10 +1726,10 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
                                     data.totalVote.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -1742,7 +1739,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                               );
                             },
                             error: (err, stack) => Text('$err'),
-                            loading: () => Center(
+                            loading: () => const Center(
                               child: CircularProgressIndicator(
                                 color: Colors.white,
                               ),
@@ -1750,7 +1747,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: Container(
                           height: 100,
@@ -1769,17 +1766,17 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(
+                                      const Text(
                                         'Total Users',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      SizedBox(height: 10),
+                                      const SizedBox(height: 10),
                                       Text(
                                         count.toString(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
@@ -1788,7 +1785,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                   ),
                                 );
                               } else {
-                                return Center(
+                                return const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.white,
                                   ),
@@ -1798,11 +1795,11 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: GestureDetector(
                           onTap: () async {
-                            final vote = await count();
+                            final vote = count();
                             setState(() {
                               voteTurnOut = vote;
                             });
@@ -1815,21 +1812,21 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                             ),
                             child: Padding(
                               padding:
-                              const EdgeInsets.symmetric(horizontal: 30),
+                                  const EdgeInsets.symmetric(horizontal: 30),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Voter Turnout',
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
-                                    voteTurnOut + ' %',
-                                    style: TextStyle(
+                                    '$voteTurnOut %',
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
@@ -1843,11 +1840,10 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     ],
                   ),
                 ),
-              if (_selectedProvince == "Karnali") SizedBox(height: 40),
+              if (_selectedProvince == "Karnali") const SizedBox(height: 40),
               if (_selectedProvince == "Karnali")
-                Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   child: Align(
                     alignment: Alignment.bottomLeft,
                     child: Text(
@@ -1859,24 +1855,23 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     ),
                   ),
                 ),
-              if (_selectedProvince == "Karnali") SizedBox(height: 40),
+              if (_selectedProvince == "Karnali") const SizedBox(height: 40),
               if (_selectedProvince == "Karnali")
                 karnaliSortedStream.when(
                   data: (data) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: secondaryColor,
-                          borderRadius:
-                          const BorderRadius.all(Radius.circular(10)),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: SizedBox(
                           width: double.maxFinite,
                           child: DataTable(
                             columnSpacing: 10,
-                            dataRowHeight: 80,
-                            columns: [
+                            dataRowMaxHeight: 80,
+                            columns: const [
                               DataColumn(
                                 label: Text(
                                   'Profile Picture',
@@ -1909,7 +1904,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                   DataCell(
                                     CircleAvatar(
                                       backgroundImage:
-                                      NetworkImage(dat.imageUrl),
+                                          NetworkImage(dat.imageUrl),
                                     ),
                                   ),
                                   DataCell(
@@ -1930,47 +1925,48 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     );
                   },
                   error: (err, stack) => Text('$err'),
-                  loading: () => Center(
+                  loading: () => const Center(
                     child: CircularProgressIndicator(
                       color: Colors.white,
                     ),
                   ),
                 ),
-              if (_selectedProvince == "Karnali") SizedBox(height: 40),
-                  /*
+              if (_selectedProvince == "Karnali") const SizedBox(height: 40),
+              /*
                   * SUDURPASCHIM
                   * */
-                  if (_selectedProvince == "Sudurpaschim")
-                      FutureBuilder(
-                        future: sudurpaschimFPTPStatsController.stats.value,
-                        builder: (BuildContext context,
-                            AsyncSnapshot<List<ProvincialFPTPStats>> snapshot) {
-                          if (snapshot.hasData) {
-                            return SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Expanded(
-                                child: Container(
-                                  height: 300,
-                                  width: 1000,
-                                  padding: EdgeInsets.all(10),
-                                  child: CustomBarChart(
-                                    fptpStats: snapshot.data!,
-                                  ),
-                                ),
-                              ),
-                            );
-                          } else if (snapshot.hasError) {
-                            return Text('${snapshot.error}');
-                          } else {
-                            return Center(
-                              child: CircularProgressIndicator(
-                                color: Colors.red,
-                              ),
-                            );
-                          }
-                        },
-                      ),
-              if (_selectedProvince == "Sudurpaschim") SizedBox(height: 40),
+              if (_selectedProvince == "Sudurpaschim")
+                FutureBuilder(
+                  future: sudurpaschimFPTPStatsController.stats.value,
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<ProvincialFPTPStats>> snapshot) {
+                    if (snapshot.hasData) {
+                      return SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Expanded(
+                          child: Container(
+                            height: 300,
+                            width: 1000,
+                            padding: const EdgeInsets.all(10),
+                            child: CustomBarChart(
+                              fptpStats: snapshot.data!,
+                            ),
+                          ),
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.red,
+                        ),
+                      );
+                    }
+                  },
+                ),
+              if (_selectedProvince == "Sudurpaschim")
+                const SizedBox(height: 40),
               if (_selectedProvince == "Sudurpaschim")
                 FutureBuilder(
                   future: sudurpaschimFPTPStatsController.stats.value,
@@ -1983,7 +1979,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           child: Container(
                             height: 300,
                             width: 600,
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: CustomPieChart(
                               fptpStats: snapshot.data!,
                             ),
@@ -1993,7 +1989,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}');
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.red,
                         ),
@@ -2001,7 +1997,8 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     }
                   },
                 ),
-              if (_selectedProvince == "Sudurpaschim") SizedBox(height: 40),
+              if (_selectedProvince == "Sudurpaschim")
+                const SizedBox(height: 40),
               if (_selectedProvince == "Sudurpaschim")
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -2020,7 +2017,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                               return Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Total Vote Counts',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -2028,10 +2025,10 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
                                     data.totalVote.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -2041,7 +2038,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                               );
                             },
                             error: (err, stack) => Text('$err'),
-                            loading: () => Center(
+                            loading: () => const Center(
                               child: CircularProgressIndicator(
                                 color: Colors.white,
                               ),
@@ -2049,7 +2046,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: Container(
                           height: 100,
@@ -2068,17 +2065,17 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(
+                                      const Text(
                                         'Total Users',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      SizedBox(height: 10),
+                                      const SizedBox(height: 10),
                                       Text(
                                         count.toString(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
@@ -2087,7 +2084,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                   ),
                                 );
                               } else {
-                                return Center(
+                                return const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.white,
                                   ),
@@ -2097,11 +2094,11 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: GestureDetector(
                           onTap: () async {
-                            final vote = await count();
+                            final vote = count();
                             setState(() {
                               voteTurnOut = vote;
                             });
@@ -2114,21 +2111,21 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                             ),
                             child: Padding(
                               padding:
-                              const EdgeInsets.symmetric(horizontal: 30),
+                                  const EdgeInsets.symmetric(horizontal: 30),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Voter Turnout',
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
-                                    voteTurnOut + ' %',
-                                    style: TextStyle(
+                                    '$voteTurnOut %',
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
@@ -2142,11 +2139,11 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     ],
                   ),
                 ),
-              if (_selectedProvince == "Sudurpaschim") SizedBox(height: 40),
               if (_selectedProvince == "Sudurpaschim")
-                Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                const SizedBox(height: 40),
+              if (_selectedProvince == "Sudurpaschim")
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   child: Align(
                     alignment: Alignment.bottomLeft,
                     child: Text(
@@ -2158,24 +2155,24 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     ),
                   ),
                 ),
-              if (_selectedProvince == "Sudurpaschim") SizedBox(height: 40),
+              if (_selectedProvince == "Sudurpaschim")
+                const SizedBox(height: 40),
               if (_selectedProvince == "Sudurpaschim")
                 sudurpaschimSortedStream.when(
                   data: (data) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: secondaryColor,
-                          borderRadius:
-                          const BorderRadius.all(Radius.circular(10)),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: SizedBox(
                           width: double.maxFinite,
                           child: DataTable(
                             columnSpacing: 10,
-                            dataRowHeight: 80,
-                            columns: [
+                            dataRowMaxHeight: 80,
+                            columns: const [
                               DataColumn(
                                 label: Text(
                                   'Profile Picture',
@@ -2208,7 +2205,7 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                                   DataCell(
                                     CircleAvatar(
                                       backgroundImage:
-                                      NetworkImage(dat.imageUrl),
+                                          NetworkImage(dat.imageUrl),
                                     ),
                                   ),
                                   DataCell(
@@ -2229,13 +2226,14 @@ class _ProvincialFPTPStatsPageState extends State<ProvincialFPTPStatsPage> {
                     );
                   },
                   error: (err, stack) => Text('$err'),
-                  loading: () => Center(
+                  loading: () => const Center(
                     child: CircularProgressIndicator(
                       color: Colors.white,
                     ),
                   ),
                 ),
-              if (_selectedProvince == "Sudurpaschim") SizedBox(height: 40),
+              if (_selectedProvince == "Sudurpaschim")
+                const SizedBox(height: 40),
             ],
           ),
         );
@@ -2267,10 +2265,10 @@ class CustomBarChart extends StatelessWidget {
     return charts.BarChart(
       series,
       animate: true,
-      animationDuration: Duration(seconds: 3),
+      animationDuration: const Duration(seconds: 3),
       behaviors: [
-        new charts.DatumLegend(
-          entryTextStyle: charts.TextStyleSpec(
+        charts.DatumLegend(
+          entryTextStyle: const charts.TextStyleSpec(
               color: charts.MaterialPalette.black, fontSize: 12),
         ),
       ],
@@ -2301,10 +2299,10 @@ class CustomPieChart extends StatelessWidget {
     return charts.PieChart<String>(
       series,
       animate: true,
-      animationDuration: Duration(seconds: 3),
+      animationDuration: const Duration(seconds: 3),
       behaviors: [
-        new charts.DatumLegend(
-          entryTextStyle: charts.TextStyleSpec(
+        charts.DatumLegend(
+          entryTextStyle: const charts.TextStyleSpec(
               color: charts.MaterialPalette.black, fontSize: 12),
         ),
       ],

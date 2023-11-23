@@ -1,14 +1,12 @@
-import 'dart:html';
-import 'package:elector_admin_dashboard/constants.dart';
-import 'package:elector_admin_dashboard/controllers/federal_provider.dart';
 import 'package:elector_admin_dashboard/controllers/voterID_provider.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddVoterIDForm extends StatefulWidget {
+  const AddVoterIDForm({super.key});
+
   @override
   State<AddVoterIDForm> createState() => _AddVoterIDFormState();
 }
@@ -28,15 +26,15 @@ class _AddVoterIDFormState extends State<AddVoterIDForm> {
             body: SingleChildScrollView(
               child: Center(
                 child: Container(
-                  constraints: BoxConstraints(maxWidth: 800),
-                  padding: EdgeInsets.all(24),
+                  constraints: const BoxConstraints(maxWidth: 800),
+                  padding: const EdgeInsets.all(24),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
+                          SizedBox(
                             height: 100,
                             width: 300,
                             child: Padding(
@@ -49,7 +47,7 @@ class _AddVoterIDFormState extends State<AddVoterIDForm> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Row(
@@ -61,10 +59,10 @@ class _AddVoterIDFormState extends State<AddVoterIDForm> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Row(
+                      const Row(
                         children: [
                           Text(
                             "Please fill out the form",
@@ -75,7 +73,7 @@ class _AddVoterIDFormState extends State<AddVoterIDForm> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       TextFormField(
@@ -95,7 +93,7 @@ class _AddVoterIDFormState extends State<AddVoterIDForm> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20))),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 35,
                       ),
                       InkWell(
@@ -108,25 +106,27 @@ class _AddVoterIDFormState extends State<AddVoterIDForm> {
                                 .addVoterID(
                                     voterId: voterIDController.text.toString());
                             if (response == 'Success') {
-                              Navigator.of(context).pop();
+                              if (mounted) {
+                                Navigator.of(context).pop();
+                              }
                             } else if (response == 'Voter ID already exists') {
                               Get.dialog(AlertDialog(
-                                title:
-                                    Text('The Voter ID is already registered'),
-                                content: Text(
+                                title: const Text(
+                                    'The Voter ID is already registered'),
+                                content: const Text(
                                     'Please enter a new Voter ID that has not been registered yet.'),
                                 actions: [
                                   TextButton(
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
-                                    child: Text('Close'),
+                                    child: const Text('Close'),
                                   ),
                                 ],
                               ));
                             } else {
                               Get.showSnackbar(GetSnackBar(
-                                duration: Duration(seconds: 5),
+                                duration: const Duration(seconds: 5),
                                 title: 'Some error occurred',
                                 message: response,
                               ));
@@ -135,13 +135,13 @@ class _AddVoterIDFormState extends State<AddVoterIDForm> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color(0xFF3C19C0),
+                            color: const Color(0xFF3C19C0),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           alignment: Alignment.center,
                           width: double.maxFinite,
-                          padding: EdgeInsets.symmetric(vertical: 16),
-                          child: Text(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: const Text(
                             "Add Voter ID",
                             style: TextStyle(
                               color: Colors.white,
@@ -151,7 +151,7 @@ class _AddVoterIDFormState extends State<AddVoterIDForm> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                     ],

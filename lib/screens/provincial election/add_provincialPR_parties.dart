@@ -1,6 +1,5 @@
 import 'dart:html';
 import 'package:elector_admin_dashboard/constants.dart';
-import 'package:elector_admin_dashboard/controllers/federal_provider.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/gandaki_provider.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/karnali_provider.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/lumbini_provider.dart';
@@ -57,7 +56,6 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
         String downloadUrl = await snapshot.ref.getDownloadURL();
         setState(() {
           partyUrl = downloadUrl;
-          print(partyUrl);
         });
       });
     });
@@ -73,8 +71,8 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
             body: SingleChildScrollView(
               child: Center(
                 child: Container(
-                  constraints: BoxConstraints(maxWidth: 800),
-                  padding: EdgeInsets.all(24),
+                  constraints: const BoxConstraints(maxWidth: 800),
+                  padding: const EdgeInsets.all(24),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -94,7 +92,7 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Row(
@@ -106,10 +104,10 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Row(
+                      const Row(
                         children: [
                           Text(
                             "Please fill out the form",
@@ -120,7 +118,7 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       DropdownButtonFormField(
@@ -131,35 +129,35 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
                             if (value == null) {
                               return 'Please select a province';
                             }
+                            return null;
                           },
-                          hint: Text(
+                          hint: const Text(
                             "Select Province",
                           ),
                           decoration: InputDecoration(
                             fillColor: bgColor,
                             filled: true,
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
+                              borderSide: const BorderSide(color: Colors.grey),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: Colors.grey),
+                              borderSide: const BorderSide(color: Colors.grey),
                             ),
                           ),
                           items: province.map((String election) {
                             return DropdownMenuItem(
-                              child: Text(election),
                               value: election,
+                              child: Text(election),
                             );
                           }).toList(),
                           onChanged: (newValue) {
                             setState(() {
                               _selectedProvince = "$newValue";
-                              print(_selectedProvince);
                             });
                           }),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       TextFormField(
                         controller: partyController,
                         validator: (val) {
@@ -177,7 +175,7 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20))),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       TextFormField(
@@ -197,7 +195,7 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20))),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       SizedBox(
@@ -219,15 +217,15 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
                                   borderRadius: BorderRadius.circular(20))),
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Text(
+                      const SizedBox(height: 20),
+                      const Text(
                         "Political Party Picture",
                         style: TextStyle(
                           color: Color(0xFFA4A6B3),
                           fontWeight: FontWeight.normal,
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       InkWell(
                         onTap: () {
                           uploadPartyImage();
@@ -241,7 +239,7 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
                             border: Border.all(color: Colors.grey, width: 1),
                           ),
                           child: partyUrl == null
-                              ? Column(
+                              ? const Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
@@ -267,7 +265,7 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
                                 ),
                         ),
                       ),
-                      SizedBox(height: 40),
+                      const SizedBox(height: 40),
                       InkWell(
                         onTap: () async {
                           _form.currentState!.save();
@@ -288,7 +286,7 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
@@ -309,7 +307,7 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
@@ -330,7 +328,7 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
@@ -351,7 +349,7 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
@@ -372,7 +370,7 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
@@ -393,7 +391,7 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
@@ -414,7 +412,7 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
@@ -424,13 +422,13 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color(0xFF3C19C0),
+                            color: const Color(0xFF3C19C0),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           alignment: Alignment.center,
                           width: double.maxFinite,
-                          padding: EdgeInsets.symmetric(vertical: 16),
-                          child: Text(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: const Text(
                             "Add Party",
                             style: TextStyle(
                               color: Colors.white,
@@ -440,7 +438,7 @@ class _AddProvincialPRPartiesState extends State<AddProvincialPRParties> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                     ],

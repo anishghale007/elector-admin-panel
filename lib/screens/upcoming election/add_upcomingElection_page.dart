@@ -1,5 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:elector_admin_dashboard/constants.dart';
-import 'package:elector_admin_dashboard/controllers/upcomingElection_provider.dart';
+import 'package:elector_admin_dashboard/controllers/upcoming_election_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
@@ -8,6 +10,8 @@ import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class AddUpcomingElectionPage extends StatefulWidget {
+  const AddUpcomingElectionPage({super.key});
+
   @override
   State<AddUpcomingElectionPage> createState() =>
       _AddUpcomingElectionPageState();
@@ -83,24 +87,19 @@ class _AddUpcomingElectionPageState extends State<AddUpcomingElectionPage> {
       if (args.value is PickerDateRange) {
         _range = '${DateFormat('dd/MM/yyyy').format(args.value.startDate)} -'
             ' ${DateFormat('dd/MM/yyyy').format(args.value.endDate ?? args.value.startDate)}';
-        print('Range:' + _range);
       } else if (args.value is DateTime) {
         firstDate = args.value;
         _selectedDate = DateFormat("MMM d, yyyy").format(firstDate);
-        print('Selected Date:' + _selectedDate);
       } else if (args.value is List<DateTime>) {
         _dateCount = args.value.length.toString();
-        print('Date Count:' + _dateCount);
       } else {
         _rangeCount = args.value.length.toString();
-        print('Range Count:' + _rangeCount);
       }
     });
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     startTimeController.text = "";
   }
@@ -115,15 +114,15 @@ class _AddUpcomingElectionPageState extends State<AddUpcomingElectionPage> {
             body: SingleChildScrollView(
               child: Center(
                 child: Container(
-                  constraints: BoxConstraints(maxWidth: 800),
-                  padding: EdgeInsets.all(24),
+                  constraints: const BoxConstraints(maxWidth: 800),
+                  padding: const EdgeInsets.all(24),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
+                          SizedBox(
                             height: 100,
                             width: 300,
                             child: Padding(
@@ -136,7 +135,7 @@ class _AddUpcomingElectionPageState extends State<AddUpcomingElectionPage> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Row(
@@ -148,10 +147,10 @@ class _AddUpcomingElectionPageState extends State<AddUpcomingElectionPage> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Row(
+                      const Row(
                         children: [
                           Text(
                             "Please fill out the form",
@@ -162,7 +161,7 @@ class _AddUpcomingElectionPageState extends State<AddUpcomingElectionPage> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       DropdownButtonFormField(
@@ -173,35 +172,35 @@ class _AddUpcomingElectionPageState extends State<AddUpcomingElectionPage> {
                             if (value == null) {
                               return 'Please select election type';
                             }
+                            return null;
                           },
-                          hint: Text(
+                          hint: const Text(
                             "Select Election Type",
                           ),
                           decoration: InputDecoration(
                             fillColor: bgColor,
                             filled: true,
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
+                              borderSide: const BorderSide(color: Colors.grey),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: Colors.grey),
+                              borderSide: const BorderSide(color: Colors.grey),
                             ),
                           ),
                           items: election.map((String election) {
                             return DropdownMenuItem(
-                              child: Text(election),
                               value: election,
+                              child: Text(election),
                             );
                           }).toList(),
                           onChanged: (newValue) {
                             setState(() {
                               _selectedElection = "$newValue";
-                              print(_selectedElection);
                             });
                           }),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       DropdownButtonFormField(
                           value:
                               _selectedMonth.isNotEmpty ? _selectedMonth : null,
@@ -209,85 +208,85 @@ class _AddUpcomingElectionPageState extends State<AddUpcomingElectionPage> {
                             if (value == null) {
                               return 'Please select the month';
                             }
+                            return null;
                           },
-                          hint: Text(
+                          hint: const Text(
                             "Select Month",
                           ),
                           decoration: InputDecoration(
                             fillColor: bgColor,
                             filled: true,
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
+                              borderSide: const BorderSide(color: Colors.grey),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: Colors.grey),
+                              borderSide: const BorderSide(color: Colors.grey),
                             ),
                           ),
                           items: month.map((String election) {
                             return DropdownMenuItem(
-                              child: Text(election),
                               value: election,
+                              child: Text(election),
                             );
                           }).toList(),
                           onChanged: (newValue) {
                             setState(() {
                               _selectedMonth = "$newValue";
-                              print(_selectedMonth);
                             });
                           }),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       DropdownButtonFormField(
                           value: _selectedDay.isNotEmpty ? _selectedDay : null,
                           validator: (value) {
                             if (value == null) {
                               return 'Please select the day';
                             }
+                            return null;
                           },
-                          hint: Text(
+                          hint: const Text(
                             "Select Day",
                           ),
                           decoration: InputDecoration(
                             fillColor: bgColor,
                             filled: true,
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
+                              borderSide: const BorderSide(color: Colors.grey),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: Colors.grey),
+                              borderSide: const BorderSide(color: Colors.grey),
                             ),
                           ),
                           items: day.map((String election) {
                             return DropdownMenuItem(
-                              child: Text(election),
                               value: election,
+                              child: Text(election),
                             );
                           }).toList(),
                           onChanged: (newValue) {
                             setState(() {
                               _selectedDay = "$newValue";
-                              print(_selectedDay);
                             });
                           }),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      Text(
+                      const Text(
                         "Starting Date",
                         style: TextStyle(
                           color: Color(0xFFA4A6B3),
                           fontWeight: FontWeight.normal,
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       SfDateRangePicker(
                         onSelectionChanged: _onSelectionChanged,
                         selectionMode: DateRangePickerSelectionMode.single,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       TextFormField(
@@ -296,8 +295,9 @@ class _AddUpcomingElectionPageState extends State<AddUpcomingElectionPage> {
                           if (val!.isEmpty) {
                             return 'Please select the time';
                           }
+                          return null;
                         }, // edi// ting controller of this TextField
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             icon: Icon(Icons.timer), //icon of text field
                             labelText: "Enter Start Time" //label text of field
                             ),
@@ -309,31 +309,27 @@ class _AddUpcomingElectionPageState extends State<AddUpcomingElectionPage> {
                             context: context,
                           );
                           if (pickedTime != null) {
-                            print(pickedTime.format(context)); //output 10:51 PM
+                            //output 10:51 PM
                             DateTime parsedTime = DateFormat.jm()
                                 .parse(pickedTime.format(context).toString());
                             //converting to DateTime so that we can further format on different pattern.
-                            print(parsedTime); //output 1970-01-01 22:53:00.000
+                            //output 1970-01-01 22:53:00.000
                             String formattedTime =
                                 DateFormat('HH:mm:ss a').format(parsedTime);
-                            print(formattedTime); //output 14:59:00
+                            //output 14:59:00
                             //DateFormat() is from intl package, you can format the time on any pattern you need.
 
                             setState(() {
                               startTimeController.text = formattedTime; //
-                              print('controller: ' +
-                                  startTimeController
-                                      .text); // set the value of text field.
+                              // set the value of text field.
                             });
-                          } else {
-                            print("Time is not selected");
-                          }
+                          } else {}
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       InkWell(
@@ -354,7 +350,7 @@ class _AddUpcomingElectionPageState extends State<AddUpcomingElectionPage> {
                               Navigator.of(context).pop();
                             } else {
                               Get.showSnackbar(GetSnackBar(
-                                duration: Duration(seconds: 5),
+                                duration: const Duration(seconds: 5),
                                 title: 'Some error occurred',
                                 message: response,
                               ));
@@ -363,13 +359,13 @@ class _AddUpcomingElectionPageState extends State<AddUpcomingElectionPage> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color(0xFF3C19C0),
+                            color: const Color(0xFF3C19C0),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           alignment: Alignment.center,
                           width: double.maxFinite,
-                          padding: EdgeInsets.symmetric(vertical: 16),
-                          child: Text(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: const Text(
                             "Add Upcoming Election",
                             style: TextStyle(
                               color: Colors.white,
@@ -379,7 +375,7 @@ class _AddUpcomingElectionPageState extends State<AddUpcomingElectionPage> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                     ],

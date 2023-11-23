@@ -11,6 +11,8 @@ class RegistrationScreen extends StatelessWidget {
   final passwordController = TextEditingController();
   final _form = GlobalKey<FormState>();
 
+  RegistrationScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Consumer(
@@ -20,15 +22,15 @@ class RegistrationScreen extends StatelessWidget {
           child: Scaffold(
             body: Center(
               child: Container(
-                constraints: BoxConstraints(maxWidth: 800),
-                padding: EdgeInsets.all(24),
+                constraints: const BoxConstraints(maxWidth: 800),
+                padding: const EdgeInsets.all(24),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
+                        SizedBox(
                           height: 100,
                           width: 300,
                           child: Padding(
@@ -41,7 +43,7 @@ class RegistrationScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     Row(
@@ -53,10 +55,10 @@ class RegistrationScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Row(
+                    const Row(
                       children: [
                         Text(
                           "Please fill out the form",
@@ -67,7 +69,7 @@ class RegistrationScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 40,
                     ),
                     TextFormField(
@@ -84,7 +86,7 @@ class RegistrationScreen extends StatelessWidget {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20))),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     TextFormField(
@@ -104,7 +106,7 @@ class RegistrationScreen extends StatelessWidget {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20))),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     TextFormField(
@@ -124,10 +126,10 @@ class RegistrationScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     InkWell(
@@ -142,11 +144,11 @@ class RegistrationScreen extends StatelessWidget {
                                     password: passwordController.text.trim(),
                                   );
                           if (response == 'Success') {
-                            Get.to(
-                                () => MainPage(title: 'elector Admin Panel'));
+                            Get.to(() =>
+                                const MainPage(title: 'elector Admin Panel'));
                           } else {
                             Get.showSnackbar(GetSnackBar(
-                              duration: Duration(seconds: 2),
+                              duration: const Duration(seconds: 2),
                               title: 'Some error occurred',
                               message: response,
                             ));
@@ -155,13 +157,13 @@ class RegistrationScreen extends StatelessWidget {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Color(0xFF3C19C0),
+                          color: const Color(0xFF3C19C0),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         alignment: Alignment.center,
                         width: double.maxFinite,
-                        padding: EdgeInsets.symmetric(vertical: 16),
-                        child: Text(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        child: const Text(
                           "Sign Up",
                           style: TextStyle(
                             color: Colors.white,
@@ -170,13 +172,13 @@ class RegistrationScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 40,
                     ),
                     RichText(
                       text: TextSpan(
                         children: [
-                          TextSpan(
+                          const TextSpan(
                             text: "Already have an account? ",
                             style: TextStyle(color: Colors.white),
                           ),
@@ -185,7 +187,7 @@ class RegistrationScreen extends StatelessWidget {
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: Text(
+                              child: const Text(
                                 "Click Here",
                                 style: TextStyle(
                                   color: Color(0xFF3C19C0),

@@ -26,12 +26,11 @@ class ProvincialFPTP {
   });
 }
 
-class ProvincialFPTPStats{
+class ProvincialFPTPStats {
   final int index;
   final String candidateName;
   final Vote voteData;
   final String barColor;
-
 
   ProvincialFPTPStats({
     required this.candidateName,
@@ -39,7 +38,6 @@ class ProvincialFPTPStats{
     required this.index,
     required this.barColor,
   });
-
 
   factory ProvincialFPTPStats.fromSnapshot(DocumentSnapshot snap, int index) {
     return ProvincialFPTPStats(
@@ -49,7 +47,6 @@ class ProvincialFPTPStats{
       voteData: Vote.fromJson(snap['votes']),
     );
   }
-
 }
 
 class ProvincialPR {
@@ -61,7 +58,6 @@ class ProvincialPR {
   late String barColor;
   late Vote voteData;
 
-
   ProvincialPR({
     required this.id,
     required this.partyName,
@@ -72,8 +68,6 @@ class ProvincialPR {
     required this.voteData,
   });
 }
-
-
 
 class Vote {
   late int vote;
@@ -94,8 +88,8 @@ class Vote {
 
   Map<String, dynamic> toJson() {
     return {
-      'userId': this.userId,
-      'like': this.vote,
+      'userId': userId,
+      'like': vote,
     };
   }
 }

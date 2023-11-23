@@ -10,6 +10,8 @@ import 'package:get/get.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 class FederalFPTPStatsPage extends StatefulWidget {
+  const FederalFPTPStatsPage({super.key});
+
   @override
   State<FederalFPTPStatsPage> createState() => _FederalFPTPStatsPageState();
 }
@@ -29,7 +31,6 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
   }
 
   String count() {
-    print(voterTurnout);
     voterTurnout = int.parse(totalVotes!) / int.parse(totalUsers!) * 100;
     voteTurnOut = voterTurnout!.toStringAsFixed(2);
     return voteTurnOut;
@@ -44,15 +45,15 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
       body: SingleChildScrollView(
         child: Center(
           child: Container(
-            constraints: BoxConstraints(maxWidth: 1200),
-            padding: EdgeInsets.all(24),
+            constraints: const BoxConstraints(maxWidth: 1200),
+            padding: const EdgeInsets.all(24),
             child: Consumer(builder: (context, ref, child) {
               final sortedStream = ref.watch(fptpSortedProvider);
               final totalVoteStream = ref.watch(ongoingTotalVotesProvider);
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   FutureBuilder(
                     future: federalFPTPStatsController.stats.value,
                     builder: (BuildContext context,
@@ -64,7 +65,7 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
                             child: Container(
                               height: 300,
                               width: 1000,
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: CustomBarChart(
                                 federalFPTPStats: snapshot.data!,
                               ),
@@ -74,7 +75,7 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
                       } else if (snapshot.hasError) {
                         return Text('${snapshot.error}');
                       } else {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(
                             color: Colors.red,
                           ),
@@ -82,7 +83,7 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
                       }
                     },
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   FutureBuilder(
                     future: federalFPTPStatsController.stats.value,
                     builder: (BuildContext context,
@@ -94,7 +95,7 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
                             child: Container(
                               height: 300,
                               width: 600,
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: CustomPieChart(
                                 federalFPTPStats: snapshot.data!,
                               ),
@@ -104,7 +105,7 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
                       } else if (snapshot.hasError) {
                         return Text('${snapshot.error}');
                       } else {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(
                             color: Colors.red,
                           ),
@@ -112,7 +113,7 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
                       }
                     },
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   Row(
                     children: [
                       Expanded(
@@ -128,7 +129,7 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
                               return Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Total Vote Counts',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -136,10 +137,10 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
                                     data.totalVote.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -149,7 +150,7 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
                               );
                             },
                             error: (err, stack) => Text('$err'),
-                            loading: () => Center(
+                            loading: () => const Center(
                               child: CircularProgressIndicator(
                                 color: Colors.white,
                               ),
@@ -157,7 +158,7 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: Container(
                           height: 100,
@@ -174,20 +175,19 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 30),
                                   child: Column(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(
+                                      const Text(
                                         'Total Users',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      SizedBox(height: 10),
+                                      const SizedBox(height: 10),
                                       Text(
                                         count.toString(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
@@ -196,7 +196,7 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
                                   ),
                                 );
                               } else {
-                                return Center(
+                                return const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.white,
                                   ),
@@ -206,11 +206,11 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: GestureDetector(
                           onTap: () async {
-                            final vote = await count();
+                            final vote = count();
                             setState(() {
                               voteTurnOut = vote;
                             });
@@ -223,21 +223,21 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
                             ),
                             child: Padding(
                               padding:
-                              const EdgeInsets.symmetric(horizontal: 30),
+                                  const EdgeInsets.symmetric(horizontal: 30),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Voter Turnout',
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
-                                    voteTurnOut + ' %',
-                                    style: TextStyle(
+                                    '$voteTurnOut %',
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
@@ -250,10 +250,9 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 40),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 10),
+                  const SizedBox(height: 40),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                     child: Align(
                       alignment: Alignment.bottomLeft,
                       child: Text(
@@ -265,47 +264,42 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   sortedStream.when(
                     data: (data) {
                       return Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: secondaryColor,
-                          borderRadius:
-                          const BorderRadius.all(Radius.circular(10)),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: SizedBox(
                           width: double.maxFinite,
                           child: DataTable(
                             columnSpacing: 10,
-                            dataRowHeight: 80,
-                            columns: [
+                            dataRowMaxHeight: 80,
+                            columns: const [
                               DataColumn(
                                 label: Text(
                                   'Profile Picture',
-                                  style:
-                                  TextStyle(fontWeight: FontWeight.bold),
+                                  style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ),
                               DataColumn(
                                 label: Text(
                                   'Candidate Name',
-                                  style:
-                                  TextStyle(fontWeight: FontWeight.bold),
+                                  style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ),
                               DataColumn(
                                 label: Text(
                                   'Party Name',
-                                  style:
-                                  TextStyle(fontWeight: FontWeight.bold),
+                                  style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ),
                               DataColumn(
                                 label: Text(
                                   'Total Votes',
-                                  style:
-                                  TextStyle(fontWeight: FontWeight.bold),
+                                  style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ],
@@ -316,7 +310,7 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
                                   DataCell(
                                     CircleAvatar(
                                       backgroundImage:
-                                      NetworkImage(dat.imageUrl),
+                                          NetworkImage(dat.imageUrl),
                                     ),
                                   ),
                                   DataCell(
@@ -336,13 +330,13 @@ class _FederalFPTPStatsPageState extends State<FederalFPTPStatsPage> {
                       );
                     },
                     error: (err, stack) => Text('$err'),
-                    loading: () => Center(
+                    loading: () => const Center(
                       child: CircularProgressIndicator(
                         color: Colors.white,
                       ),
                     ),
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                 ],
               );
             }),
@@ -376,10 +370,10 @@ class CustomBarChart extends StatelessWidget {
     return charts.BarChart(
       series,
       animate: true,
-      animationDuration: Duration(seconds: 3),
+      animationDuration: const Duration(seconds: 3),
       behaviors: [
-        new charts.DatumLegend(
-          entryTextStyle: charts.TextStyleSpec(
+        charts.DatumLegend(
+          entryTextStyle: const charts.TextStyleSpec(
               color: charts.MaterialPalette.black, fontSize: 12),
         ),
       ],
@@ -410,10 +404,10 @@ class CustomPieChart extends StatelessWidget {
     return charts.PieChart<String>(
       series,
       animate: true,
-      animationDuration: Duration(seconds: 3),
+      animationDuration: const Duration(seconds: 3),
       behaviors: [
-        new charts.DatumLegend(
-          entryTextStyle: charts.TextStyleSpec(
+        charts.DatumLegend(
+          entryTextStyle: const charts.TextStyleSpec(
               color: charts.MaterialPalette.black, fontSize: 12),
         ),
       ],

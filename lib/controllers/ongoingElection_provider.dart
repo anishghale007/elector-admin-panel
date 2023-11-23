@@ -6,10 +6,10 @@ final ongoingProvider =
     Provider.autoDispose((ref) => OngoingElectionProvider());
 final ongoingElectionProvider =
     StreamProvider.autoDispose((ref) => OngoingElectionProvider().getData());
-final ongoingTotalVotesProvider =
-StreamProvider.autoDispose((ref) => OngoingElectionProvider().getTotalVotes());
-final ongoingProvincialTotalVotesProvider =
-StreamProvider.autoDispose((ref) => OngoingElectionProvider().getProvincialTotalVotes());
+final ongoingTotalVotesProvider = StreamProvider.autoDispose(
+    (ref) => OngoingElectionProvider().getTotalVotes());
+final ongoingProvincialTotalVotesProvider = StreamProvider.autoDispose(
+    (ref) => OngoingElectionProvider().getProvincialTotalVotes());
 
 class OngoingElectionProvider {
   CollectionReference dbOngoingElection =
@@ -85,8 +85,7 @@ class OngoingElectionProvider {
         'endTime': endTime,
       });
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
@@ -95,8 +94,7 @@ class OngoingElectionProvider {
     try {
       await dbOngoingElection.doc(postId).delete();
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
@@ -108,8 +106,7 @@ class OngoingElectionProvider {
         'canVote': canVote,
       });
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
@@ -121,8 +118,7 @@ class OngoingElectionProvider {
         'canVote': canVote,
       });
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
@@ -133,12 +129,16 @@ class OngoingElectionProvider {
   }
 
   Stream<OngoingElectionSingle> getTotalVotes() {
-    final totalVote = dbOngoingElection.where('electionType', isEqualTo: "Federal Election").snapshots();
+    final totalVote = dbOngoingElection
+        .where('electionType', isEqualTo: "Federal Election")
+        .snapshots();
     return totalVote.map((event) => ongoingElection(event));
   }
 
   Stream<OngoingElectionSingle> getProvincialTotalVotes() {
-    final totalVote = dbOngoingElection.where('electionType', isEqualTo: "Provincial Election").snapshots();
+    final totalVote = dbOngoingElection
+        .where('electionType', isEqualTo: "Provincial Election")
+        .snapshots();
     return totalVote.map((event) => ongoingElection(event));
   }
 }

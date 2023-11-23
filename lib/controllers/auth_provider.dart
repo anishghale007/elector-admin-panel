@@ -2,11 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
-final authStatusProvider = StreamProvider.autoDispose((ref) => FirebaseAuth.instance.authStateChanges());
+final authStatusProvider = StreamProvider.autoDispose(
+    (ref) => FirebaseAuth.instance.authStateChanges());
 
 final authProvider = Provider.autoDispose((ref) => AuthProvider());
-
 
 class AuthProvider {
   CollectionReference dbAdmin = FirebaseFirestore.instance.collection('admins');
@@ -26,7 +25,6 @@ class AuthProvider {
       });
       return 'Success';
     } on FirebaseAuthException catch (err) {
-      print(err);
       return '${err.message}';
     }
   }
@@ -38,7 +36,6 @@ class AuthProvider {
           .signInWithEmailAndPassword(email: email, password: password);
       return 'Success';
     } on FirebaseAuthException catch (err) {
-      print(err);
       return '${err.message}';
     }
   }

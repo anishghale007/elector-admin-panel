@@ -3,10 +3,10 @@ import 'package:elector_admin_dashboard/constants.dart';
 import 'package:elector_admin_dashboard/controllers/auth_provider.dart';
 import 'package:elector_admin_dashboard/screens/add_candidates_page.dart';
 import 'package:elector_admin_dashboard/screens/add_election_page.dart';
-import 'package:elector_admin_dashboard/screens/add_voterID_page.dart';
+import 'package:elector_admin_dashboard/screens/add_voter_id_page.dart';
 import 'package:elector_admin_dashboard/screens/candidates_page.dart';
 import 'package:elector_admin_dashboard/screens/dashboard_page.dart';
-import 'package:elector_admin_dashboard/screens/electionStats_page.dart';
+import 'package:elector_admin_dashboard/screens/election_stats_page.dart';
 import 'package:elector_admin_dashboard/screens/login_screen.dart';
 import 'package:elector_admin_dashboard/screens/users_page.dart';
 import 'package:flutter/material.dart';
@@ -67,41 +67,39 @@ class _MainPageState extends State<MainPage> {
                 ),
               ],
             ),
-            footer: Consumer(
-              builder: (context, ref, child) {
-                return InkWell(
-                  onTap: () async {
-                    await ref.read(authProvider).signOut();
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: ((context) => LoginScreen())));
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: 50,
-                    margin: EdgeInsets.symmetric(
-                      horizontal: 5,
-                      vertical: 10,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Log Out',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ],
-                    ),
+            footer: Consumer(builder: (context, ref, child) {
+              return InkWell(
+                onTap: () async {
+                  await ref.read(authProvider).signOut();
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: ((context) => LoginScreen())));
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 50,
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 5,
+                    vertical: 10,
                   ),
-                );
-              }
-            ),
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Log Out',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }),
             items: [
               SideMenuItem(
                 priority: 0,
@@ -155,7 +153,7 @@ class _MainPageState extends State<MainPage> {
               SideMenuItem(
                 priority: 6,
                 title: 'Add Voter ID',
-                icon: Icon(Icons.add),
+                icon: const Icon(Icons.add),
                 onTap: () {
                   page.jumpToPage(6);
                 },
@@ -166,13 +164,13 @@ class _MainPageState extends State<MainPage> {
             child: PageView(
               controller: page,
               children: [
-                DashboardPage(),
+                const DashboardPage(),
                 UsersPage(),
-                CandidatesPage(),
-                ElectionStatsPage(),
-                AddElectionPage(),
-                AddCandidatesPage(),
-                AddVoterIDPage(),
+                const CandidatesPage(),
+                const ElectionStatsPage(),
+                const AddElectionPage(),
+                const AddCandidatesPage(),
+                const AddVoterIDPage(),
               ],
             ),
           ),

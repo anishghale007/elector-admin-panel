@@ -5,15 +5,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class EditFPTPCandidatePage extends StatelessWidget {
+class EditFPTPCandidatePage extends StatefulWidget {
   final FederalFPTP federalFPTP;
 
-  EditFPTPCandidatePage(this.federalFPTP);
+  const EditFPTPCandidatePage(this.federalFPTP, {super.key});
 
+  @override
+  State<EditFPTPCandidatePage> createState() => _EditFPTPCandidatePageState();
+}
+
+class _EditFPTPCandidatePageState extends State<EditFPTPCandidatePage> {
   final candidateController = TextEditingController();
+
   final partyController = TextEditingController();
+
   final barColorController = TextEditingController();
+
   final candidateInfoController = TextEditingController();
+
   final _form = GlobalKey<FormState>();
 
   @override
@@ -26,15 +35,15 @@ class EditFPTPCandidatePage extends StatelessWidget {
             body: SingleChildScrollView(
               child: Center(
                 child: Container(
-                  constraints: BoxConstraints(maxWidth: 800),
-                  padding: EdgeInsets.all(24),
+                  constraints: const BoxConstraints(maxWidth: 800),
+                  padding: const EdgeInsets.all(24),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
+                          SizedBox(
                             height: 100,
                             width: 300,
                             child: Padding(
@@ -47,7 +56,7 @@ class EditFPTPCandidatePage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Row(
@@ -59,10 +68,10 @@ class EditFPTPCandidatePage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Row(
+                      const Row(
                         children: [
                           Text(
                             "Please fill out the form",
@@ -73,12 +82,12 @@ class EditFPTPCandidatePage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       TextFormField(
                         controller: candidateController
-                          ..text = federalFPTP.candidateName,
+                          ..text = widget.federalFPTP.candidateName,
                         validator: (val) {
                           if (val!.isEmpty) {
                             return 'Candidate Name is required';
@@ -91,12 +100,12 @@ class EditFPTPCandidatePage extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20))),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       TextFormField(
                         controller: partyController
-                          ..text = federalFPTP.partyName,
+                          ..text = widget.federalFPTP.partyName,
                         validator: (val) {
                           if (val!.isEmpty) {
                             return 'Party Name is required';
@@ -109,12 +118,12 @@ class EditFPTPCandidatePage extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20))),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       TextFormField(
                         controller: barColorController
-                          ..text = federalFPTP.barColor,
+                          ..text = widget.federalFPTP.barColor,
                         validator: (val) {
                           if (val!.isEmpty) {
                             return 'Bar Color is required';
@@ -130,14 +139,14 @@ class EditFPTPCandidatePage extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20))),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       SizedBox(
                         height: 200,
                         child: TextFormField(
                           controller: candidateInfoController
-                            ..text = federalFPTP.candidateInfo,
+                            ..text = widget.federalFPTP.candidateInfo,
                           expands: true,
                           maxLines: null,
                           validator: (val) {
@@ -153,7 +162,7 @@ class EditFPTPCandidatePage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(20))),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       InkWell(
@@ -170,13 +179,15 @@ class EditFPTPCandidatePage extends StatelessWidget {
                                   candidateInfo:
                                       candidateInfoController.text.toString(),
                                   barColor: barColorController.text.toString(),
-                                  postId: federalFPTP.id,
+                                  postId: widget.federalFPTP.id,
                                 );
                             if (response == 'Success') {
-                              Navigator.of(context).pop();
+                              if (mounted) {
+                                Navigator.of(context).pop();
+                              }
                             } else {
                               Get.showSnackbar(GetSnackBar(
-                                duration: Duration(seconds: 5),
+                                duration: const Duration(seconds: 5),
                                 title: 'Some error occurred',
                                 message: response,
                               ));
@@ -185,13 +196,13 @@ class EditFPTPCandidatePage extends StatelessWidget {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color(0xFF3C19C0),
+                            color: const Color(0xFF3C19C0),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           alignment: Alignment.center,
                           width: double.maxFinite,
-                          padding: EdgeInsets.symmetric(vertical: 16),
-                          child: Text(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: const Text(
                             "Confirm Changes",
                             style: TextStyle(
                               color: Colors.white,
@@ -201,7 +212,7 @@ class EditFPTPCandidatePage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                     ],

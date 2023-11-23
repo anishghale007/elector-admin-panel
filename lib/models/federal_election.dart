@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class FederalFPTP {
   late String id;
   late String candidateName;
@@ -40,15 +39,13 @@ class FederalFPTP {
       voteData: Vote.fromJson(json['votes']),
     );
   }
-
 }
 
-class FederalFPTPStats{
+class FederalFPTPStats {
   final int index;
   final String candidateName;
   final Vote voteData;
   final String barColor;
-
 
   FederalFPTPStats({
     required this.candidateName,
@@ -56,7 +53,6 @@ class FederalFPTPStats{
     required this.index,
     required this.barColor,
   });
-
 
   factory FederalFPTPStats.fromSnapshot(DocumentSnapshot snap, int index) {
     return FederalFPTPStats(
@@ -66,13 +62,11 @@ class FederalFPTPStats{
       voteData: Vote.fromJson(snap['votes']),
     );
   }
-
 }
 
 /////////////////// FEDERAL PR ////////////////////
 
 class FederalPR {
-
   late String id;
   late String partyName;
   late String partyFull;
@@ -92,7 +86,6 @@ class FederalPR {
     required this.barColor,
     required this.voteData,
   });
-
 }
 
 class FederalPRStats {
@@ -116,7 +109,6 @@ class FederalPRStats {
       voteData: Vote.fromJson(snap['votes']),
     );
   }
-
 }
 
 class Vote {
@@ -131,14 +123,15 @@ class Vote {
   factory Vote.fromJson(Map<String, dynamic> json) {
     return Vote(
       vote: json['vote'],
-      userId: ((json['userId'] ?? [])as List).map((e) => (e as String)).toList(),
+      userId:
+          ((json['userId'] ?? []) as List).map((e) => (e as String)).toList(),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'userId': this.userId,
-      'like': this.vote,
+      'userId': userId,
+      'like': vote,
     };
   }
 }

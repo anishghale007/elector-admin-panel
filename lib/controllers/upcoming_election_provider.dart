@@ -54,11 +54,11 @@ class UpcomingElectionProvider {
 
   Future<String> postUpdate(
       {required String electionType,
-        required String startDate,
-        required String startTime,
-        required String month,
-        required String day,
-        required String postId}) async {
+      required String startDate,
+      required String startTime,
+      required String month,
+      required String day,
+      required String postId}) async {
     try {
       await dbUpcomingElection.doc(postId).update({
         'electionType': electionType,
@@ -68,18 +68,16 @@ class UpcomingElectionProvider {
         'day': day,
       });
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
 
   Future<String> removeUpcomingElection({required String postId}) async {
-    try{
+    try {
       await dbUpcomingElection.doc(postId).delete();
       return 'Success';
-    } on FirebaseException catch(err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }

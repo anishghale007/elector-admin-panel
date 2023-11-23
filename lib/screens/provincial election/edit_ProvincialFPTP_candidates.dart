@@ -1,4 +1,3 @@
-import 'package:elector_admin_dashboard/controllers/federal_provider.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/bagmati_provider.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/gandaki_provider.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/karnali_provider.dart';
@@ -6,23 +5,31 @@ import 'package:elector_admin_dashboard/controllers/provincial%20controller/lumb
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/madhesh_provider.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/province1_provider.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/sudurpaschim_provider.dart';
-import 'package:elector_admin_dashboard/models/federal_election.dart';
 import 'package:elector_admin_dashboard/models/provincial_election.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class EditProvincialFPTPPage extends StatelessWidget {
+class EditProvincialFPTPPage extends StatefulWidget {
   final ProvincialFPTP provincialFPTP;
   final String province;
 
-  EditProvincialFPTPPage(this.provincialFPTP, this.province);
+  const EditProvincialFPTPPage(this.provincialFPTP, this.province, {super.key});
 
+  @override
+  State<EditProvincialFPTPPage> createState() => _EditProvincialFPTPPageState();
+}
+
+class _EditProvincialFPTPPageState extends State<EditProvincialFPTPPage> {
   final candidateController = TextEditingController();
+
   final partyController = TextEditingController();
+
   final barColorController = TextEditingController();
+
   final candidateInfoController = TextEditingController();
+
   final _form = GlobalKey<FormState>();
 
   @override
@@ -35,8 +42,8 @@ class EditProvincialFPTPPage extends StatelessWidget {
             body: SingleChildScrollView(
               child: Center(
                 child: Container(
-                  constraints: BoxConstraints(maxWidth: 800),
-                  padding: EdgeInsets.all(24),
+                  constraints: const BoxConstraints(maxWidth: 800),
+                  padding: const EdgeInsets.all(24),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -56,7 +63,7 @@ class EditProvincialFPTPPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Row(
@@ -68,10 +75,10 @@ class EditProvincialFPTPPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Row(
+                      const Row(
                         children: [
                           Text(
                             "Please fill out the form",
@@ -82,12 +89,12 @@ class EditProvincialFPTPPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       TextFormField(
                         controller: candidateController
-                          ..text = provincialFPTP.candidateName,
+                          ..text = widget.provincialFPTP.candidateName,
                         validator: (val) {
                           if (val!.isEmpty) {
                             return 'Candidate Name is required';
@@ -100,12 +107,12 @@ class EditProvincialFPTPPage extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20))),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       TextFormField(
                         controller: partyController
-                          ..text = provincialFPTP.partyName,
+                          ..text = widget.provincialFPTP.partyName,
                         validator: (val) {
                           if (val!.isEmpty) {
                             return 'Party Name is required';
@@ -118,12 +125,12 @@ class EditProvincialFPTPPage extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20))),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       TextFormField(
                         controller: barColorController
-                          ..text = provincialFPTP.barColor,
+                          ..text = widget.provincialFPTP.barColor,
                         validator: (val) {
                           if (val!.isEmpty) {
                             return 'Bar Color is required';
@@ -139,14 +146,14 @@ class EditProvincialFPTPPage extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20))),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       SizedBox(
                         height: 200,
                         child: TextFormField(
                           controller: candidateInfoController
-                            ..text = provincialFPTP.candidateInfo,
+                            ..text = widget.provincialFPTP.candidateInfo,
                           expands: true,
                           maxLines: null,
                           validator: (val) {
@@ -162,7 +169,7 @@ class EditProvincialFPTPPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(20))),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       InkWell(
@@ -170,7 +177,7 @@ class EditProvincialFPTPPage extends StatelessWidget {
                           _form.currentState!.save();
                           if (_form.currentState!.validate()) {
                             FocusScope.of(context).unfocus();
-                            if (province == "Province 1") {
+                            if (widget.province == "Province 1") {
                               final response = await ref
                                   .read(province1Provider)
                                   .updateFPTP(
@@ -181,18 +188,18 @@ class EditProvincialFPTPPage extends StatelessWidget {
                                         candidateInfoController.text.toString(),
                                     barColor:
                                         barColorController.text.toString(),
-                                    postId: provincialFPTP.id,
+                                    postId: widget.provincialFPTP.id,
                                   );
                               if (response == 'Success') {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
                               }
-                            } else if (province == "Gandaki") {
+                            } else if (widget.province == "Gandaki") {
                               final response = await ref
                                   .read(gandakiProvider)
                                   .updateFPTP(
@@ -203,18 +210,18 @@ class EditProvincialFPTPPage extends StatelessWidget {
                                         candidateInfoController.text.toString(),
                                     barColor:
                                         barColorController.text.toString(),
-                                    postId: provincialFPTP.id,
+                                    postId: widget.provincialFPTP.id,
                                   );
                               if (response == 'Success') {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
                               }
-                            } else if (province == "Lumbini") {
+                            } else if (widget.province == "Lumbini") {
                               final response = await ref
                                   .read(lumbiniProvider)
                                   .updateFPTP(
@@ -225,18 +232,18 @@ class EditProvincialFPTPPage extends StatelessWidget {
                                         candidateInfoController.text.toString(),
                                     barColor:
                                         barColorController.text.toString(),
-                                    postId: provincialFPTP.id,
+                                    postId: widget.provincialFPTP.id,
                                   );
                               if (response == 'Success') {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
                               }
-                            } else if (province == "Karnali") {
+                            } else if (widget.province == "Karnali") {
                               final response = await ref
                                   .read(karnaliProvider)
                                   .updateFPTP(
@@ -247,18 +254,20 @@ class EditProvincialFPTPPage extends StatelessWidget {
                                         candidateInfoController.text.toString(),
                                     barColor:
                                         barColorController.text.toString(),
-                                    postId: provincialFPTP.id,
+                                    postId: widget.provincialFPTP.id,
                                   );
                               if (response == 'Success') {
-                                Navigator.of(context).pop();
+                                if (mounted) {
+                                  Navigator.of(context).pop();
+                                }
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
                               }
-                            } else if (province == "Madhesh") {
+                            } else if (widget.province == "Madhesh") {
                               final response = await ref
                                   .read(madheshProvider)
                                   .updateFPTP(
@@ -269,18 +278,18 @@ class EditProvincialFPTPPage extends StatelessWidget {
                                         candidateInfoController.text.toString(),
                                     barColor:
                                         barColorController.text.toString(),
-                                    postId: provincialFPTP.id,
+                                    postId: widget.provincialFPTP.id,
                                   );
                               if (response == 'Success') {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
                               }
-                            } else if (province == "Bagmati") {
+                            } else if (widget.province == "Bagmati") {
                               final response = await ref
                                   .read(bagmatiProvider)
                                   .updateFPTP(
@@ -291,13 +300,13 @@ class EditProvincialFPTPPage extends StatelessWidget {
                                         candidateInfoController.text.toString(),
                                     barColor:
                                         barColorController.text.toString(),
-                                    postId: provincialFPTP.id,
+                                    postId: widget.provincialFPTP.id,
                                   );
                               if (response == 'Success') {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
@@ -313,13 +322,13 @@ class EditProvincialFPTPPage extends StatelessWidget {
                                         candidateInfoController.text.toString(),
                                     barColor:
                                         barColorController.text.toString(),
-                                    postId: provincialFPTP.id,
+                                    postId: widget.provincialFPTP.id,
                                   );
                               if (response == 'Success') {
                                 Navigator.of(context).pop();
                               } else {
                                 Get.showSnackbar(GetSnackBar(
-                                  duration: Duration(seconds: 5),
+                                  duration: const Duration(seconds: 5),
                                   title: 'Some error occurred',
                                   message: response,
                                 ));
@@ -329,13 +338,13 @@ class EditProvincialFPTPPage extends StatelessWidget {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color(0xFF3C19C0),
+                            color: const Color(0xFF3C19C0),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           alignment: Alignment.center,
                           width: double.maxFinite,
-                          padding: EdgeInsets.symmetric(vertical: 16),
-                          child: Text(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: const Text(
                             "Confirm Changes",
                             style: TextStyle(
                               color: Colors.white,
@@ -345,7 +354,7 @@ class EditProvincialFPTPPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                     ],

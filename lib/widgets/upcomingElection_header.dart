@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class UpcomingElectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       children: [
         SizedBox(width: 50),
         Text(
@@ -26,6 +26,5 @@ class UpcomingElectionHeader extends StatelessWidget {
         SizedBox(width: 130),
       ],
     );
-    ;
   }
 }

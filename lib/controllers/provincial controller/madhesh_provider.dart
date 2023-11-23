@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elector_admin_dashboard/models/provincial_election.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -7,7 +9,7 @@ final madheshProvider = Provider.autoDispose((ref) => MadheshProvider());
 final madheshFPTPProvider =
     StreamProvider.autoDispose((ref) => MadheshProvider().getFPTPStream());
 final madheshFptpSortedProvider = StreamProvider.autoDispose(
-        (ref) => MadheshProvider().getSortedFPTPStream());
+    (ref) => MadheshProvider().getSortedFPTPStream());
 final madheshPRProvider =
     StreamProvider.autoDispose((ref) => MadheshProvider().getPRStream());
 
@@ -15,7 +17,7 @@ class MadheshProvider {
   CollectionReference dbMadheshFPTP =
       FirebaseFirestore.instance.collection('madhesh fptp');
   CollectionReference dbMadheshPR =
-  FirebaseFirestore.instance.collection('madhesh pr');
+      FirebaseFirestore.instance.collection('madhesh pr');
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
   Future<String> addFPTPPost({
@@ -80,10 +82,10 @@ class MadheshProvider {
 
   Future<String> updateFPTP(
       {required String candidateName,
-        required String partyName,
-        required String candidateInfo,
-        required String barColor,
-        required String postId}) async {
+      required String partyName,
+      required String candidateInfo,
+      required String barColor,
+      required String postId}) async {
     try {
       await dbMadheshFPTP.doc(postId).update({
         'candidateName': candidateName,
@@ -100,8 +102,8 @@ class MadheshProvider {
 
   Future<String> removeFPTP(
       {required String postId,
-        required String imageId,
-        required String partyImageId}) async {
+      required String imageId,
+      required String partyImageId}) async {
     try {
       final ref = FirebaseStorage.instance
           .ref()
@@ -121,11 +123,11 @@ class MadheshProvider {
 
   Future<List<ProvincialFPTPStats>> getProvincialFPTPStats() {
     return _firebaseFirestore.collection('madhesh fptp').get().then(
-            (querySnapshot) => querySnapshot.docs
+        (querySnapshot) => querySnapshot.docs
             .asMap()
             .entries
             .map((entry) =>
-            ProvincialFPTPStats.fromSnapshot(entry.value, entry.key))
+                ProvincialFPTPStats.fromSnapshot(entry.value, entry.key))
             .toList());
   }
 
@@ -177,9 +179,9 @@ class MadheshProvider {
 
   Future<String> updatePR(
       {required String partyName,
-        required String partyInfo,
-        required String barColor,
-        required String postId}) async {
+      required String partyInfo,
+      required String barColor,
+      required String postId}) async {
     try {
       await dbMadheshPR.doc(postId).update({
         'partyName': partyName,
@@ -197,7 +199,7 @@ class MadheshProvider {
       {required String postId, required String imageId}) async {
     try {
       final ref =
-      FirebaseStorage.instance.ref().child('provincialPartyImage/$imageId');
+          FirebaseStorage.instance.ref().child('provincialPartyImage/$imageId');
       await ref.delete();
       await dbMadheshPR.doc(postId).delete();
       return 'Success';

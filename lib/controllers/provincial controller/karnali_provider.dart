@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elector_admin_dashboard/models/provincial_election.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -7,7 +9,7 @@ final karnaliProvider = Provider.autoDispose((ref) => KarnaliProvider());
 final karnaliFPTPProvider =
     StreamProvider.autoDispose((ref) => KarnaliProvider().getFPTPStream());
 final karnaliFptpSortedProvider = StreamProvider.autoDispose(
-        (ref) => KarnaliProvider().getSortedFPTPStream());
+    (ref) => KarnaliProvider().getSortedFPTPStream());
 final karnaliPRProvider =
     StreamProvider.autoDispose((ref) => KarnaliProvider().getPRStream());
 
@@ -15,7 +17,7 @@ class KarnaliProvider {
   CollectionReference dbKarnaliFPTP =
       FirebaseFirestore.instance.collection('karnali fptp');
   CollectionReference dbKarnaliPR =
-  FirebaseFirestore.instance.collection('karnali pr');
+      FirebaseFirestore.instance.collection('karnali pr');
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
   Future<String> addFPTPPost({
@@ -33,7 +35,7 @@ class KarnaliProvider {
         'candidateName': candidateName,
         'partyName': partyName,
         'candidateInfo': candidateInfo,
-        'barColor':  barColor,
+        'barColor': barColor,
         'imageUrl': imageUrl,
         'imageId': imageId,
         'partyUrl': partyUrl,
@@ -78,13 +80,12 @@ class KarnaliProvider {
     }).toList();
   }
 
-
   Future<String> updateFPTP(
       {required String candidateName,
-        required String partyName,
-        required String candidateInfo,
-        required String barColor,
-        required String postId}) async {
+      required String partyName,
+      required String candidateInfo,
+      required String barColor,
+      required String postId}) async {
     try {
       await dbKarnaliFPTP.doc(postId).update({
         'candidateName': candidateName,
@@ -93,16 +94,15 @@ class KarnaliProvider {
         'barColor': barColor,
       });
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
 
   Future<String> removeFPTP(
       {required String postId,
-        required String imageId,
-        required String partyImageId}) async {
+      required String imageId,
+      required String partyImageId}) async {
     try {
       final ref = FirebaseStorage.instance
           .ref()
@@ -122,11 +122,11 @@ class KarnaliProvider {
 
   Future<List<ProvincialFPTPStats>> getProvincialFPTPStats() {
     return _firebaseFirestore.collection('karnali fptp').get().then(
-            (querySnapshot) => querySnapshot.docs
+        (querySnapshot) => querySnapshot.docs
             .asMap()
             .entries
             .map((entry) =>
-            ProvincialFPTPStats.fromSnapshot(entry.value, entry.key))
+                ProvincialFPTPStats.fromSnapshot(entry.value, entry.key))
             .toList());
   }
 
@@ -178,9 +178,9 @@ class KarnaliProvider {
 
   Future<String> updatePR(
       {required String partyName,
-        required String partyInfo,
-        required String barColor,
-        required String postId}) async {
+      required String partyInfo,
+      required String barColor,
+      required String postId}) async {
     try {
       await dbKarnaliPR.doc(postId).update({
         'partyName': partyName,
@@ -198,7 +198,7 @@ class KarnaliProvider {
       {required String postId, required String imageId}) async {
     try {
       final ref =
-      FirebaseStorage.instance.ref().child('provincialPartyImage/$imageId');
+          FirebaseStorage.instance.ref().child('provincialPartyImage/$imageId');
       await ref.delete();
       await dbKarnaliPR.doc(postId).delete();
       return 'Success';

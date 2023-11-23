@@ -6,7 +6,6 @@ import 'package:elector_admin_dashboard/controllers/provincial%20controller/lumb
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/madhesh_provider.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/province1_provider.dart';
 import 'package:elector_admin_dashboard/controllers/provincial%20controller/sudurpaschim_provider.dart';
-import 'package:elector_admin_dashboard/screens/provincial%20election/edit_ProvincialFPTP_candidates.dart';
 import 'package:elector_admin_dashboard/screens/provincial%20election/edit_ProvincialPR_candidates.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,10 +13,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProvincialPRCandidates extends StatelessWidget {
-
   final String province;
-  ProvincialPRCandidates({required this.province});
-
+  const ProvincialPRCandidates({super.key, required this.province});
 
   @override
   Widget build(BuildContext context) {
@@ -34,15 +31,15 @@ class ProvincialPRCandidates extends StatelessWidget {
           body: SingleChildScrollView(
             child: Center(
               child: Container(
-                constraints: BoxConstraints(maxWidth: 1200),
-                padding: EdgeInsets.all(24),
+                constraints: const BoxConstraints(maxWidth: 1200),
+                padding: const EdgeInsets.all(24),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
+                        SizedBox(
                           height: 100,
                           width: 300,
                           child: Padding(
@@ -55,62 +52,62 @@ class ProvincialPRCandidates extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     Row(
                       children: [
                         Text(
-                          province + " PR Candidates",
+                          "$province PR Candidates",
                           style: GoogleFonts.roboto(
                               fontSize: 30, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 40,
                     ),
                     if (province == "Province 1")
                       provincial1PRStream.when(
                         data: (data) {
                           return Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: secondaryColor,
                               borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
                             child: SizedBox(
                               width: double.maxFinite,
                               child: DataTable(
                                 columnSpacing: 10,
-                                dataRowHeight: 80,
-                                columns: [
+                                dataRowMaxHeight: 80,
+                                columns: const [
                                   DataColumn(
                                     label: Text(
                                       'Party Picture',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Party Short Form Name',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Bar Color',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Actions',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ],
@@ -121,7 +118,7 @@ class ProvincialPRCandidates extends StatelessWidget {
                                       DataCell(
                                         CircleAvatar(
                                           backgroundImage:
-                                          NetworkImage(dat.imageUrl),
+                                              NetworkImage(dat.imageUrl),
                                         ),
                                       ),
                                       DataCell(
@@ -134,25 +131,26 @@ class ProvincialPRCandidates extends StatelessWidget {
                                         Row(
                                           children: [
                                             ElevatedButton(
-                                              child: Text('Edit'),
+                                              child: const Text('Edit'),
                                               onPressed: () {
-                                                Get.to(() => EditProvincialPRPage(
-                                                    dat, "Province 1"));
+                                                Get.to(() =>
+                                                    EditProvincialPRPage(
+                                                        dat, "Province 1"));
                                               },
                                             ),
-                                            SizedBox(width: 15),
+                                            const SizedBox(width: 15),
                                             ElevatedButton(
-                                              child: Text('Delete'),
                                               onPressed: () async {
                                                 await ref
                                                     .read(province1Provider)
                                                     .removePR(
-                                                  imageId: dat.imageId,
-                                                  postId: dat.id,
-                                                );
+                                                      imageId: dat.imageId,
+                                                      postId: dat.id,
+                                                    );
                                               },
                                               style: ElevatedButton.styleFrom(
                                                   backgroundColor: Colors.red),
+                                              child: const Text('Delete'),
                                             ),
                                           ],
                                         ),
@@ -165,7 +163,7 @@ class ProvincialPRCandidates extends StatelessWidget {
                           );
                         },
                         error: (err, stack) => Text('$err'),
-                        loading: () => Center(
+                        loading: () => const Center(
                           child: CircularProgressIndicator(
                             color: Colors.white,
                           ),
@@ -175,43 +173,43 @@ class ProvincialPRCandidates extends StatelessWidget {
                       bagmatiPRStream.when(
                         data: (data) {
                           return Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: secondaryColor,
                               borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
                             child: SizedBox(
                               width: double.maxFinite,
                               child: DataTable(
                                 columnSpacing: 10,
-                                dataRowHeight: 80,
-                                columns: [
+                                dataRowMaxHeight: 80,
+                                columns: const [
                                   DataColumn(
                                     label: Text(
                                       'Party Picture',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Party Short Form Name',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Bar Color',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Actions',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ],
@@ -222,7 +220,7 @@ class ProvincialPRCandidates extends StatelessWidget {
                                       DataCell(
                                         CircleAvatar(
                                           backgroundImage:
-                                          NetworkImage(dat.imageUrl),
+                                              NetworkImage(dat.imageUrl),
                                         ),
                                       ),
                                       DataCell(
@@ -235,25 +233,26 @@ class ProvincialPRCandidates extends StatelessWidget {
                                         Row(
                                           children: [
                                             ElevatedButton(
-                                              child: Text('Edit'),
+                                              child: const Text('Edit'),
                                               onPressed: () {
-                                                Get.to(() => EditProvincialPRPage(
-                                                    dat, "Bagmati"));
+                                                Get.to(() =>
+                                                    EditProvincialPRPage(
+                                                        dat, "Bagmati"));
                                               },
                                             ),
-                                            SizedBox(width: 15),
+                                            const SizedBox(width: 15),
                                             ElevatedButton(
-                                              child: Text('Delete'),
                                               onPressed: () async {
                                                 await ref
                                                     .read(bagmatiProvider)
                                                     .removePR(
-                                                  imageId: dat.imageId,
-                                                  postId: dat.id,
-                                                );
+                                                      imageId: dat.imageId,
+                                                      postId: dat.id,
+                                                    );
                                               },
                                               style: ElevatedButton.styleFrom(
                                                   backgroundColor: Colors.red),
+                                              child: const Text('Delete'),
                                             ),
                                           ],
                                         ),
@@ -266,7 +265,7 @@ class ProvincialPRCandidates extends StatelessWidget {
                           );
                         },
                         error: (err, stack) => Text('$err'),
-                        loading: () => Center(
+                        loading: () => const Center(
                           child: CircularProgressIndicator(
                             color: Colors.white,
                           ),
@@ -276,43 +275,43 @@ class ProvincialPRCandidates extends StatelessWidget {
                       madheshPRStream.when(
                         data: (data) {
                           return Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: secondaryColor,
                               borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
                             child: SizedBox(
                               width: double.maxFinite,
                               child: DataTable(
                                 columnSpacing: 10,
-                                dataRowHeight: 80,
-                                columns: [
+                                dataRowMaxHeight: 80,
+                                columns: const [
                                   DataColumn(
                                     label: Text(
                                       'Party Picture',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Party Short Form Name',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Bar Color',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Actions',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ],
@@ -323,7 +322,7 @@ class ProvincialPRCandidates extends StatelessWidget {
                                       DataCell(
                                         CircleAvatar(
                                           backgroundImage:
-                                          NetworkImage(dat.imageUrl),
+                                              NetworkImage(dat.imageUrl),
                                         ),
                                       ),
                                       DataCell(
@@ -336,25 +335,26 @@ class ProvincialPRCandidates extends StatelessWidget {
                                         Row(
                                           children: [
                                             ElevatedButton(
-                                              child: Text('Edit'),
+                                              child: const Text('Edit'),
                                               onPressed: () {
-                                                Get.to(() => EditProvincialPRPage(
-                                                    dat, "Madhesh"));
+                                                Get.to(() =>
+                                                    EditProvincialPRPage(
+                                                        dat, "Madhesh"));
                                               },
                                             ),
-                                            SizedBox(width: 15),
+                                            const SizedBox(width: 15),
                                             ElevatedButton(
-                                              child: Text('Delete'),
                                               onPressed: () async {
                                                 await ref
                                                     .read(madheshProvider)
                                                     .removePR(
-                                                  imageId: dat.imageId,
-                                                  postId: dat.id,
-                                                );
+                                                      imageId: dat.imageId,
+                                                      postId: dat.id,
+                                                    );
                                               },
                                               style: ElevatedButton.styleFrom(
                                                   backgroundColor: Colors.red),
+                                              child: const Text('Delete'),
                                             ),
                                           ],
                                         ),
@@ -367,7 +367,7 @@ class ProvincialPRCandidates extends StatelessWidget {
                           );
                         },
                         error: (err, stack) => Text('$err'),
-                        loading: () => Center(
+                        loading: () => const Center(
                           child: CircularProgressIndicator(
                             color: Colors.white,
                           ),
@@ -377,43 +377,43 @@ class ProvincialPRCandidates extends StatelessWidget {
                       gandakiPRStream.when(
                         data: (data) {
                           return Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: secondaryColor,
                               borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
                             child: SizedBox(
                               width: double.maxFinite,
                               child: DataTable(
                                 columnSpacing: 10,
-                                dataRowHeight: 80,
-                                columns: [
+                                dataRowMaxHeight: 80,
+                                columns: const [
                                   DataColumn(
                                     label: Text(
                                       'Party Picture',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Party Short Form Name',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Bar Color',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Actions',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ],
@@ -424,7 +424,7 @@ class ProvincialPRCandidates extends StatelessWidget {
                                       DataCell(
                                         CircleAvatar(
                                           backgroundImage:
-                                          NetworkImage(dat.imageUrl),
+                                              NetworkImage(dat.imageUrl),
                                         ),
                                       ),
                                       DataCell(
@@ -437,25 +437,26 @@ class ProvincialPRCandidates extends StatelessWidget {
                                         Row(
                                           children: [
                                             ElevatedButton(
-                                              child: Text('Edit'),
+                                              child: const Text('Edit'),
                                               onPressed: () {
-                                                Get.to(() => EditProvincialPRPage(
-                                                    dat, "Gandaki"));
+                                                Get.to(() =>
+                                                    EditProvincialPRPage(
+                                                        dat, "Gandaki"));
                                               },
                                             ),
-                                            SizedBox(width: 15),
+                                            const SizedBox(width: 15),
                                             ElevatedButton(
-                                              child: Text('Delete'),
                                               onPressed: () async {
                                                 await ref
                                                     .read(gandakiProvider)
                                                     .removePR(
-                                                  imageId: dat.imageId,
-                                                  postId: dat.id,
-                                                );
+                                                      imageId: dat.imageId,
+                                                      postId: dat.id,
+                                                    );
                                               },
                                               style: ElevatedButton.styleFrom(
                                                   backgroundColor: Colors.red),
+                                              child: const Text('Delete'),
                                             ),
                                           ],
                                         ),
@@ -468,7 +469,7 @@ class ProvincialPRCandidates extends StatelessWidget {
                           );
                         },
                         error: (err, stack) => Text('$err'),
-                        loading: () => Center(
+                        loading: () => const Center(
                           child: CircularProgressIndicator(
                             color: Colors.white,
                           ),
@@ -478,43 +479,43 @@ class ProvincialPRCandidates extends StatelessWidget {
                       sudurpaschimPRStream.when(
                         data: (data) {
                           return Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: secondaryColor,
                               borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
                             child: SizedBox(
                               width: double.maxFinite,
                               child: DataTable(
                                 columnSpacing: 10,
-                                dataRowHeight: 80,
-                                columns: [
+                                dataRowMaxHeight: 80,
+                                columns: const [
                                   DataColumn(
                                     label: Text(
                                       'Party Picture',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Party Short Form Name',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Bar Color',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Actions',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ],
@@ -525,7 +526,7 @@ class ProvincialPRCandidates extends StatelessWidget {
                                       DataCell(
                                         CircleAvatar(
                                           backgroundImage:
-                                          NetworkImage(dat.imageUrl),
+                                              NetworkImage(dat.imageUrl),
                                         ),
                                       ),
                                       DataCell(
@@ -538,25 +539,26 @@ class ProvincialPRCandidates extends StatelessWidget {
                                         Row(
                                           children: [
                                             ElevatedButton(
-                                              child: Text('Edit'),
+                                              child: const Text('Edit'),
                                               onPressed: () {
-                                                Get.to(() => EditProvincialPRPage(
-                                                    dat, "Sudurpaschim"));
+                                                Get.to(() =>
+                                                    EditProvincialPRPage(
+                                                        dat, "Sudurpaschim"));
                                               },
                                             ),
-                                            SizedBox(width: 15),
+                                            const SizedBox(width: 15),
                                             ElevatedButton(
-                                              child: Text('Delete'),
                                               onPressed: () async {
                                                 await ref
                                                     .read(sudurpaschimProvider)
                                                     .removePR(
-                                                  imageId: dat.imageId,
-                                                  postId: dat.id,
-                                                );
+                                                      imageId: dat.imageId,
+                                                      postId: dat.id,
+                                                    );
                                               },
                                               style: ElevatedButton.styleFrom(
                                                   backgroundColor: Colors.red),
+                                              child: const Text('Delete'),
                                             ),
                                           ],
                                         ),
@@ -569,7 +571,7 @@ class ProvincialPRCandidates extends StatelessWidget {
                           );
                         },
                         error: (err, stack) => Text('$err'),
-                        loading: () => Center(
+                        loading: () => const Center(
                           child: CircularProgressIndicator(
                             color: Colors.white,
                           ),
@@ -579,43 +581,43 @@ class ProvincialPRCandidates extends StatelessWidget {
                       lumbiniPRStream.when(
                         data: (data) {
                           return Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: secondaryColor,
                               borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
                             child: SizedBox(
                               width: double.maxFinite,
                               child: DataTable(
                                 columnSpacing: 10,
-                                dataRowHeight: 80,
-                                columns: [
+                                dataRowMaxHeight: 80,
+                                columns: const [
                                   DataColumn(
                                     label: Text(
                                       'Party Picture',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Party Short Form Name',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Bar Color',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Actions',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ],
@@ -626,7 +628,7 @@ class ProvincialPRCandidates extends StatelessWidget {
                                       DataCell(
                                         CircleAvatar(
                                           backgroundImage:
-                                          NetworkImage(dat.imageUrl),
+                                              NetworkImage(dat.imageUrl),
                                         ),
                                       ),
                                       DataCell(
@@ -639,25 +641,26 @@ class ProvincialPRCandidates extends StatelessWidget {
                                         Row(
                                           children: [
                                             ElevatedButton(
-                                              child: Text('Edit'),
+                                              child: const Text('Edit'),
                                               onPressed: () {
-                                                Get.to(() => EditProvincialPRPage(
-                                                    dat, "Lumbini"));
+                                                Get.to(() =>
+                                                    EditProvincialPRPage(
+                                                        dat, "Lumbini"));
                                               },
                                             ),
-                                            SizedBox(width: 15),
+                                            const SizedBox(width: 15),
                                             ElevatedButton(
-                                              child: Text('Delete'),
                                               onPressed: () async {
                                                 await ref
                                                     .read(lumbiniProvider)
                                                     .removePR(
-                                                  imageId: dat.imageId,
-                                                  postId: dat.id,
-                                                );
+                                                      imageId: dat.imageId,
+                                                      postId: dat.id,
+                                                    );
                                               },
                                               style: ElevatedButton.styleFrom(
                                                   backgroundColor: Colors.red),
+                                              child: const Text('Delete'),
                                             ),
                                           ],
                                         ),
@@ -670,7 +673,7 @@ class ProvincialPRCandidates extends StatelessWidget {
                           );
                         },
                         error: (err, stack) => Text('$err'),
-                        loading: () => Center(
+                        loading: () => const Center(
                           child: CircularProgressIndicator(
                             color: Colors.white,
                           ),
@@ -680,43 +683,43 @@ class ProvincialPRCandidates extends StatelessWidget {
                       karnaliPRStream.when(
                         data: (data) {
                           return Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: secondaryColor,
                               borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
                             child: SizedBox(
                               width: double.maxFinite,
                               child: DataTable(
                                 columnSpacing: 10,
-                                dataRowHeight: 80,
-                                columns: [
+                                dataRowMaxHeight: 80,
+                                columns: const [
                                   DataColumn(
                                     label: Text(
                                       'Party Picture',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Party Short Form Name',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Bar Color',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Actions',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ],
@@ -727,7 +730,7 @@ class ProvincialPRCandidates extends StatelessWidget {
                                       DataCell(
                                         CircleAvatar(
                                           backgroundImage:
-                                          NetworkImage(dat.imageUrl),
+                                              NetworkImage(dat.imageUrl),
                                         ),
                                       ),
                                       DataCell(
@@ -740,25 +743,26 @@ class ProvincialPRCandidates extends StatelessWidget {
                                         Row(
                                           children: [
                                             ElevatedButton(
-                                              child: Text('Edit'),
+                                              child: const Text('Edit'),
                                               onPressed: () {
-                                                Get.to(() => EditProvincialPRPage(
-                                                    dat, "Karnali"));
+                                                Get.to(() =>
+                                                    EditProvincialPRPage(
+                                                        dat, "Karnali"));
                                               },
                                             ),
-                                            SizedBox(width: 15),
+                                            const SizedBox(width: 15),
                                             ElevatedButton(
-                                              child: Text('Delete'),
                                               onPressed: () async {
                                                 await ref
                                                     .read(karnaliProvider)
                                                     .removePR(
-                                                  imageId: dat.imageId,
-                                                  postId: dat.id,
-                                                );
+                                                      imageId: dat.imageId,
+                                                      postId: dat.id,
+                                                    );
                                               },
                                               style: ElevatedButton.styleFrom(
                                                   backgroundColor: Colors.red),
+                                              child: const Text('Delete'),
                                             ),
                                           ],
                                         ),
@@ -771,13 +775,13 @@ class ProvincialPRCandidates extends StatelessWidget {
                           );
                         },
                         error: (err, stack) => Text('$err'),
-                        loading: () => Center(
+                        loading: () => const Center(
                           child: CircularProgressIndicator(
                             color: Colors.white,
                           ),
                         ),
                       ),
-                    SizedBox(
+                    const SizedBox(
                       height: 40,
                     ),
                   ],

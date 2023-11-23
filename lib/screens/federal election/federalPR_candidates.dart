@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elector_admin_dashboard/constants.dart';
 import 'package:elector_admin_dashboard/controllers/federal_provider.dart';
-import 'package:elector_admin_dashboard/screens/federal%20election/edit_FPTPCandidate_page.dart';
 import 'package:elector_admin_dashboard/screens/federal%20election/edit_PRCandidate_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +8,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FederalPRCandidates extends StatelessWidget {
+  const FederalPRCandidates({super.key});
+
   Future<int> countFederalPRDocuments() async {
     QuerySnapshot myDoc =
         await FirebaseFirestore.instance.collection('federal pr').get();
@@ -25,15 +26,15 @@ class FederalPRCandidates extends StatelessWidget {
           body: SingleChildScrollView(
             child: Center(
               child: Container(
-                constraints: BoxConstraints(maxWidth: 1200),
-                padding: EdgeInsets.all(24),
+                constraints: const BoxConstraints(maxWidth: 1200),
+                padding: const EdgeInsets.all(24),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
+                        SizedBox(
                           height: 100,
                           width: 300,
                           child: Padding(
@@ -46,7 +47,7 @@ class FederalPRCandidates extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     Row(
@@ -58,7 +59,7 @@ class FederalPRCandidates extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     FutureBuilder<int>(
@@ -69,8 +70,8 @@ class FederalPRCandidates extends StatelessWidget {
                           return Row(
                             children: [
                               Text(
-                                "Total Parties: " + count.toString(),
-                                style: TextStyle(
+                                "Total Parties: $count",
+                                style: const TextStyle(
                                   color: Color(0xFFA4A6B3),
                                   fontWeight: FontWeight.normal,
                                 ),
@@ -78,7 +79,7 @@ class FederalPRCandidates extends StatelessWidget {
                             ],
                           );
                         } else {
-                          return Center(
+                          return const Center(
                             child: CircularProgressIndicator(
                               color: Colors.white,
                             ),
@@ -86,23 +87,22 @@ class FederalPRCandidates extends StatelessWidget {
                         }
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 40,
                     ),
                     federalPRStream.when(
                       data: (data) {
                         return Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: secondaryColor,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10)),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           child: SizedBox(
                             width: double.maxFinite,
                             child: DataTable(
                               columnSpacing: 10,
                               dataRowHeight: 80,
-                              columns: [
+                              columns: const [
                                 DataColumn(
                                   label: Text(
                                     'Party Picture',
@@ -114,7 +114,7 @@ class FederalPRCandidates extends StatelessWidget {
                                   label: Text(
                                     'Party Full Name',
                                     style:
-                                    TextStyle(fontWeight: FontWeight.bold),
+                                        TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 DataColumn(
@@ -162,14 +162,14 @@ class FederalPRCandidates extends StatelessWidget {
                                       Row(
                                         children: [
                                           ElevatedButton(
-                                            child: Text('Edit'),
+                                            child: const Text('Edit'),
                                             onPressed: () {
-                                              Get.to(() => EditPRCandidatePage(dat));
+                                              Get.to(() =>
+                                                  EditPRCandidatePage(dat));
                                             },
                                           ),
-                                          SizedBox(width: 15),
+                                          const SizedBox(width: 15),
                                           ElevatedButton(
-                                            child: Text('Delete'),
                                             onPressed: () async {
                                               await ref
                                                   .read(federalProvider)
@@ -180,6 +180,7 @@ class FederalPRCandidates extends StatelessWidget {
                                             },
                                             style: ElevatedButton.styleFrom(
                                                 backgroundColor: Colors.red),
+                                            child: const Text('Delete'),
                                           ),
                                         ],
                                       ),
@@ -192,13 +193,13 @@ class FederalPRCandidates extends StatelessWidget {
                         );
                       },
                       error: (err, stack) => Text('$err'),
-                      loading: () => Center(
+                      loading: () => const Center(
                         child: CircularProgressIndicator(
                           color: Colors.white,
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 40,
                     ),
                   ],

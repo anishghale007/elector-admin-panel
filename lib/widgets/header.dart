@@ -1,8 +1,8 @@
 import 'package:elector_admin_dashboard/constants.dart';
-import 'package:elector_admin_dashboard/controllers/menu_controller.dart';
+import 'package:elector_admin_dashboard/controllers/menu_controller.dart'
+    as menu;
 import 'package:elector_admin_dashboard/responsiveness.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class Header extends StatelessWidget {
@@ -14,24 +14,23 @@ class Header extends StatelessWidget {
       children: [
         if (!Responsive.isDesktop(context))
           IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: context.read<MenuController>().controlMenu,
+            icon: const Icon(Icons.menu),
+            onPressed: context.read<menu.MenuController>().controlMenu,
           ),
         if (!Responsive.isMobile(context))
           Text(
             "Dashboard",
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
         if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
         // Expanded(child: SearchField()),
-        ProfileCard(),
+        const ProfileCard(),
         InkWell(
-          onTap: () {
-          },
+          onTap: () {},
           child: Container(
-            margin: EdgeInsets.only(left: defaultPadding),
-            padding: EdgeInsets.symmetric(
+            margin: const EdgeInsets.only(left: defaultPadding),
+            padding: const EdgeInsets.symmetric(
               horizontal: defaultPadding,
               vertical: defaultPadding,
             ),
@@ -42,7 +41,7 @@ class Header extends StatelessWidget {
               ),
               border: Border.all(color: Colors.white10),
             ),
-            child: Row(
+            child: const Row(
               children: [
                 Text(
                   'Log Out',
@@ -65,8 +64,8 @@ class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: defaultPadding),
-      padding: EdgeInsets.symmetric(
+      margin: const EdgeInsets.only(left: defaultPadding),
+      padding: const EdgeInsets.symmetric(
         horizontal: defaultPadding,
         vertical: defaultPadding / 2,
       ),
@@ -84,9 +83,8 @@ class ProfileCard extends StatelessWidget {
             height: 38,
           ),
           if (!Responsive.isMobile(context))
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: defaultPadding / 2),
               child: Text("Lisa Manoban"),
             ),
         ],

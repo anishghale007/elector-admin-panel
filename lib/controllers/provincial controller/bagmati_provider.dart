@@ -7,7 +7,7 @@ final bagmatiProvider = Provider.autoDispose((ref) => BagmatiProvider());
 final bagmatiFPTPProvider =
     StreamProvider.autoDispose((ref) => BagmatiProvider().getFPTPStream());
 final bagmatiFptpSortedProvider = StreamProvider.autoDispose(
-        (ref) => BagmatiProvider().getSortedFPTPStream());
+    (ref) => BagmatiProvider().getSortedFPTPStream());
 final bagmatiPRProvider =
     StreamProvider.autoDispose((ref) => BagmatiProvider().getPRStream());
 
@@ -30,7 +30,7 @@ class BagmatiProvider {
       final imageId = DateTime.now().toString();
       final partyImageId = DateTime.now().toString();
       isDuplicateFPTPBarColor(barColor);
-      if (await  isDuplicateFPTPBarColor(barColor)) {
+      if (await isDuplicateFPTPBarColor(barColor)) {
         return 'Barcolor is already taken';
       } else {
         await dbBagmatiFPTP.add({
@@ -97,8 +97,7 @@ class BagmatiProvider {
         'barColor': barColor,
       });
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
@@ -118,8 +117,7 @@ class BagmatiProvider {
       await ref1.delete();
       await dbBagmatiFPTP.doc(postId).delete();
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
@@ -134,11 +132,11 @@ class BagmatiProvider {
 
   Future<List<ProvincialFPTPStats>> getProvincialFPTPStats() {
     return _firebaseFirestore.collection('bagmati fptp').get().then(
-            (querySnapshot) => querySnapshot.docs
+        (querySnapshot) => querySnapshot.docs
             .asMap()
             .entries
             .map((entry) =>
-            ProvincialFPTPStats.fromSnapshot(entry.value, entry.key))
+                ProvincialFPTPStats.fromSnapshot(entry.value, entry.key))
             .toList());
   }
 
@@ -152,7 +150,7 @@ class BagmatiProvider {
   }) async {
     try {
       final imageId = DateTime.now().toString();
-      if (await  isDuplicateFPTPBarColor(barColor)) {
+      if (await isDuplicateFPTPBarColor(barColor)) {
         return 'Barcolor is already taken';
       } else {
         await dbBagmatiPR.add({
@@ -204,8 +202,7 @@ class BagmatiProvider {
         'barColor': barColor,
       });
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
@@ -218,8 +215,7 @@ class BagmatiProvider {
       await ref.delete();
       await dbBagmatiPR.doc(postId).delete();
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }

@@ -5,7 +5,8 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onPress;
   final Color color;
 
-  CustomButton({
+  const CustomButton({
+    super.key,
     required this.text,
     required this.onPress,
     required this.color,
@@ -16,7 +17,7 @@ class CustomButton extends StatelessWidget {
     return Container(
       width: 250,
       height: 60,
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: 5,
         vertical: 10,
       ),
@@ -27,15 +28,15 @@ class CustomButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
           ),
         ),
+        onPressed: onPress,
         child: Text(
           text,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
           ),
         ),
-        onPressed: onPress,
       ),
     );
   }

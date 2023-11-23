@@ -7,7 +7,7 @@ final gandakiProvider = Provider.autoDispose((ref) => GandakiProvider());
 final gandakiFPTPProvider =
     StreamProvider.autoDispose((ref) => GandakiProvider().getFPTPStream());
 final gandakiFptpSortedProvider = StreamProvider.autoDispose(
-        (ref) => GandakiProvider().getSortedFPTPStream());
+    (ref) => GandakiProvider().getSortedFPTPStream());
 final gandakiPRProvider =
     StreamProvider.autoDispose((ref) => GandakiProvider().getPRStream());
 
@@ -15,7 +15,7 @@ class GandakiProvider {
   CollectionReference dbGandakiFPTP =
       FirebaseFirestore.instance.collection('gandaki fptp');
   CollectionReference dbGandakiPR =
-  FirebaseFirestore.instance.collection('gandaki pr');
+      FirebaseFirestore.instance.collection('gandaki pr');
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
   Future<String> addFPTPPost({
@@ -80,10 +80,10 @@ class GandakiProvider {
 
   Future<String> updateFPTP(
       {required String candidateName,
-        required String partyName,
-        required String candidateInfo,
-        required String barColor,
-        required String postId}) async {
+      required String partyName,
+      required String candidateInfo,
+      required String barColor,
+      required String postId}) async {
     try {
       await dbGandakiFPTP.doc(postId).update({
         'candidateName': candidateName,
@@ -92,16 +92,15 @@ class GandakiProvider {
         'barColor': barColor,
       });
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
 
   Future<String> removeFPTP(
       {required String postId,
-        required String imageId,
-        required String partyImageId}) async {
+      required String imageId,
+      required String partyImageId}) async {
     try {
       final ref = FirebaseStorage.instance
           .ref()
@@ -113,19 +112,18 @@ class GandakiProvider {
       await ref1.delete();
       await dbGandakiFPTP.doc(postId).delete();
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
 
   Future<List<ProvincialFPTPStats>> getProvincialFPTPStats() {
     return _firebaseFirestore.collection('gandaki fptp').get().then(
-            (querySnapshot) => querySnapshot.docs
+        (querySnapshot) => querySnapshot.docs
             .asMap()
             .entries
             .map((entry) =>
-            ProvincialFPTPStats.fromSnapshot(entry.value, entry.key))
+                ProvincialFPTPStats.fromSnapshot(entry.value, entry.key))
             .toList());
   }
 
@@ -176,9 +174,9 @@ class GandakiProvider {
 
   Future<String> updatePR(
       {required String partyName,
-        required String partyInfo,
-        required String barColor,
-        required String postId}) async {
+      required String partyInfo,
+      required String barColor,
+      required String postId}) async {
     try {
       await dbGandakiPR.doc(postId).update({
         'partyName': partyName,
@@ -186,8 +184,7 @@ class GandakiProvider {
         'barColor': barColor,
       });
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
@@ -196,12 +193,11 @@ class GandakiProvider {
       {required String postId, required String imageId}) async {
     try {
       final ref =
-      FirebaseStorage.instance.ref().child('provincialPartyImage/$imageId');
+          FirebaseStorage.instance.ref().child('provincialPartyImage/$imageId');
       await ref.delete();
       await dbGandakiPR.doc(postId).delete();
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }

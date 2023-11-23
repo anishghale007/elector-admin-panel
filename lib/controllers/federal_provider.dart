@@ -6,13 +6,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final federalProvider = Provider.autoDispose((ref) => FederalProvider());
 final fptpProvider =
     StreamProvider.autoDispose((ref) => FederalProvider().getFPTPStream());
-final fptpSortedProvider =
-StreamProvider.autoDispose((ref) => FederalProvider().getSortedFPTPStream());
+final fptpSortedProvider = StreamProvider.autoDispose(
+    (ref) => FederalProvider().getSortedFPTPStream());
 final prProvider =
-StreamProvider.autoDispose((ref) => FederalProvider().getPRStream());
+    StreamProvider.autoDispose((ref) => FederalProvider().getPRStream());
 final prSortedProvider =
-StreamProvider.autoDispose((ref) => FederalProvider().getSortedPRStream());
-
+    StreamProvider.autoDispose((ref) => FederalProvider().getSortedPRStream());
 
 class FederalProvider {
   CollectionReference dbFederalFPTP =
@@ -34,7 +33,7 @@ class FederalProvider {
       final imageId = DateTime.now().toString();
       final partyImageId = DateTime.now().toString();
       isDuplicateFPTPBarColor(barColor);
-      if (await  isDuplicateFPTPBarColor(barColor)) {
+      if (await isDuplicateFPTPBarColor(barColor)) {
         return 'Barcolor is already taken';
       } else {
         await dbFederalFPTP.add({
@@ -68,7 +67,6 @@ class FederalProvider {
         .snapshots()
         .map((event) => getFPTPData(event));
   }
-
 
   List<FederalFPTP> getFPTPData(QuerySnapshot querySnapshot) {
     return querySnapshot.docs.map((e) {
@@ -112,8 +110,7 @@ class FederalProvider {
         'barColor': barColor,
       });
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
@@ -133,8 +130,7 @@ class FederalProvider {
       await ref1.delete();
       await dbFederalFPTP.doc(postId).delete();
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
@@ -158,7 +154,7 @@ class FederalProvider {
   }) async {
     try {
       final imageId = DateTime.now().toString();
-      if (await  isDuplicateFPTPBarColor(barColor)) {
+      if (await isDuplicateFPTPBarColor(barColor)) {
         return 'Barcolor is already taken';
       } else {
         await dbFederalPR.add({
@@ -191,7 +187,6 @@ class FederalProvider {
         .map((event) => getPRData(event));
   }
 
-
   List<FederalPR> getPRData(QuerySnapshot querySnapshot) {
     return querySnapshot.docs.map((e) {
       final json = e.data() as Map<String, dynamic>;
@@ -210,7 +205,7 @@ class FederalProvider {
 
   Future<String> updatePR(
       {required String partyName,
-        required String partyFull,
+      required String partyFull,
       required String partyInfo,
       required String barColor,
       required String postId}) async {
@@ -222,8 +217,7 @@ class FederalProvider {
         'barColor': barColor,
       });
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
@@ -236,15 +230,14 @@ class FederalProvider {
       await ref.delete();
       await dbFederalFPTP.doc(postId).delete();
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
 
   Future<List<FederalPRStats>> getFederalPRtats() {
     return _firebaseFirestore.collection('federal pr').get().then(
-            (querySnapshot) => querySnapshot.docs
+        (querySnapshot) => querySnapshot.docs
             .asMap()
             .entries
             .map((entry) => FederalPRStats.fromSnapshot(entry.value, entry.key))

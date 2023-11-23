@@ -8,7 +8,7 @@ final sudurpaschimProvider =
 final sudurpaschimFPTPProvider =
     StreamProvider.autoDispose((ref) => SudurpaschimProvider().getFPTPStream());
 final sudurpaschimFptpSortedProvider = StreamProvider.autoDispose(
-        (ref) => SudurpaschimProvider().getSortedFPTPStream());
+    (ref) => SudurpaschimProvider().getSortedFPTPStream());
 final sudurpaschimPRProvider =
     StreamProvider.autoDispose((ref) => SudurpaschimProvider().getPRStream());
 
@@ -16,7 +16,7 @@ class SudurpaschimProvider {
   CollectionReference dbSudurpaschimFPTP =
       FirebaseFirestore.instance.collection('sudurpaschim fptp');
   CollectionReference dbSudurpaschimPR =
-  FirebaseFirestore.instance.collection('sudurpaschim pr');
+      FirebaseFirestore.instance.collection('sudurpaschim pr');
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
   Future<String> addFPTPPost({
@@ -79,13 +79,12 @@ class SudurpaschimProvider {
     }).toList();
   }
 
-
   Future<String> updateFPTP(
       {required String candidateName,
-        required String partyName,
-        required String candidateInfo,
-        required String barColor,
-        required String postId}) async {
+      required String partyName,
+      required String candidateInfo,
+      required String barColor,
+      required String postId}) async {
     try {
       await dbSudurpaschimFPTP.doc(postId).update({
         'candidateName': candidateName,
@@ -94,16 +93,15 @@ class SudurpaschimProvider {
         'barColor': barColor,
       });
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
 
   Future<String> removeFPTP(
       {required String postId,
-        required String imageId,
-        required String partyImageId}) async {
+      required String imageId,
+      required String partyImageId}) async {
     try {
       final ref = FirebaseStorage.instance
           .ref()
@@ -115,19 +113,18 @@ class SudurpaschimProvider {
       await ref1.delete();
       await dbSudurpaschimFPTP.doc(postId).delete();
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
 
   Future<List<ProvincialFPTPStats>> getProvincialFPTPStats() {
     return _firebaseFirestore.collection('province 1 fptp').get().then(
-            (querySnapshot) => querySnapshot.docs
+        (querySnapshot) => querySnapshot.docs
             .asMap()
             .entries
             .map((entry) =>
-            ProvincialFPTPStats.fromSnapshot(entry.value, entry.key))
+                ProvincialFPTPStats.fromSnapshot(entry.value, entry.key))
             .toList());
   }
 
@@ -177,12 +174,11 @@ class SudurpaschimProvider {
     }).toList();
   }
 
-
   Future<String> updatePR(
       {required String partyName,
-        required String partyInfo,
-        required String barColor,
-        required String postId}) async {
+      required String partyInfo,
+      required String barColor,
+      required String postId}) async {
     try {
       await dbSudurpaschimPR.doc(postId).update({
         'partyName': partyName,
@@ -190,8 +186,7 @@ class SudurpaschimProvider {
         'barColor': barColor,
       });
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }
@@ -200,12 +195,11 @@ class SudurpaschimProvider {
       {required String postId, required String imageId}) async {
     try {
       final ref =
-      FirebaseStorage.instance.ref().child('provincialPartyImage/$imageId');
+          FirebaseStorage.instance.ref().child('provincialPartyImage/$imageId');
       await ref.delete();
       await dbSudurpaschimPR.doc(postId).delete();
       return 'Success';
-    } on FirebaseException catch (err) {
-      print(err);
+    } on FirebaseException {
       return '';
     }
   }

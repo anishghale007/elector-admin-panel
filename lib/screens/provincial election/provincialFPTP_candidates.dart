@@ -13,10 +13,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProvincialFPTPCandidates extends StatelessWidget {
-
   final String province;
   ProvincialFPTPCandidates({required this.province});
-
 
   @override
   Widget build(BuildContext context) {
@@ -33,15 +31,15 @@ class ProvincialFPTPCandidates extends StatelessWidget {
           body: SingleChildScrollView(
             child: Center(
               child: Container(
-                constraints: BoxConstraints(maxWidth: 1200),
-                padding: EdgeInsets.all(24),
+                constraints: const BoxConstraints(maxWidth: 1200),
+                padding: const EdgeInsets.all(24),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
+                        SizedBox(
                           height: 100,
                           width: 300,
                           child: Padding(
@@ -54,7 +52,7 @@ class ProvincialFPTPCandidates extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     Row(
@@ -66,174 +64,57 @@ class ProvincialFPTPCandidates extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 40,
                     ),
                     if (province == "Province 1")
-                    province1FPTPStream.when(
-                      data: (data) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            color: secondaryColor,
-                            borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
-                          ),
-                          child: SizedBox(
-                            width: double.maxFinite,
-                            child: DataTable(
-                              columnSpacing: 10,
-                              dataRowHeight: 80,
-                              columns: [
-                                DataColumn(
-                                  label: Text(
-                                    'Profile Picture',
-                                    style:
-                                    TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                DataColumn(
-                                  label: Text(
-                                    'Candidate Name',
-                                    style:
-                                    TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                DataColumn(
-                                  label: Text(
-                                    'Party Name',
-                                    style:
-                                    TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                DataColumn(
-                                  label: Text(
-                                    'Bar Color',
-                                    style:
-                                    TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                DataColumn(
-                                  label: Text(
-                                    'Actions',
-                                    style:
-                                    TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ],
-                              rows: List.generate(data.length, (index) {
-                                final dat = data[index];
-                                return DataRow(
-                                  cells: [
-                                    DataCell(
-                                      CircleAvatar(
-                                        backgroundImage:
-                                        NetworkImage(dat.imageUrl),
-                                      ),
-                                    ),
-                                    DataCell(
-                                      Text(dat.candidateName),
-                                      onTap: () {
-                                        print(dat.candidateName);
-                                      },
-                                    ),
-                                    DataCell(
-                                      Text(dat.partyName),
-                                    ),
-                                    DataCell(
-                                      Text(dat.barColor),
-                                    ),
-                                    DataCell(
-                                      Row(
-                                        children: [
-                                          ElevatedButton(
-                                            child: Text('Edit'),
-                                            onPressed: () {
-                                              Get.to(() =>
-                                                  EditProvincialFPTPPage(
-                                                      dat, "Province 1"));
-                                            },
-                                          ),
-                                          SizedBox(width: 15),
-                                          ElevatedButton(
-                                            child: Text('Delete'),
-                                            onPressed: () async {
-                                              await ref
-                                                  .read(province1Provider)
-                                                  .removeFPTP(
-                                                postId: dat.id,
-                                                imageId: dat.imageId,
-                                                partyImageId:
-                                                dat.partyImageId,
-                                              );
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.red),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              }),
-                            ),
-                          ),
-                        );
-                      },
-                      error: (err, stack) => Text('$err'),
-                      loading: () => Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    if (province == "Bagmati")
-                      bagmatiFPTPStream.when(
+                      province1FPTPStream.when(
                         data: (data) {
                           return Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: secondaryColor,
                               borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
                             child: SizedBox(
                               width: double.maxFinite,
                               child: DataTable(
                                 columnSpacing: 10,
-                                dataRowHeight: 80,
-                                columns: [
+                                dataRowMaxHeight: 80,
+                                columns: const [
                                   DataColumn(
                                     label: Text(
                                       'Profile Picture',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Candidate Name',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Party Name',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Bar Color',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   DataColumn(
                                     label: Text(
                                       'Actions',
-                                      style:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ],
@@ -244,14 +125,12 @@ class ProvincialFPTPCandidates extends StatelessWidget {
                                       DataCell(
                                         CircleAvatar(
                                           backgroundImage:
-                                          NetworkImage(dat.imageUrl),
+                                              NetworkImage(dat.imageUrl),
                                         ),
                                       ),
                                       DataCell(
                                         Text(dat.candidateName),
-                                        onTap: () {
-                                          print(dat.candidateName);
-                                        },
+                                        onTap: () {},
                                       ),
                                       DataCell(
                                         Text(dat.partyName),
@@ -263,28 +142,28 @@ class ProvincialFPTPCandidates extends StatelessWidget {
                                         Row(
                                           children: [
                                             ElevatedButton(
-                                              child: Text('Edit'),
+                                              child: const Text('Edit'),
                                               onPressed: () {
                                                 Get.to(() =>
                                                     EditProvincialFPTPPage(
-                                                        dat, "Bagmati"));
+                                                        dat, "Province 1"));
                                               },
                                             ),
-                                            SizedBox(width: 15),
+                                            const SizedBox(width: 15),
                                             ElevatedButton(
-                                              child: Text('Delete'),
                                               onPressed: () async {
                                                 await ref
-                                                    .read(bagmatiProvider)
+                                                    .read(province1Provider)
                                                     .removeFPTP(
-                                                  postId: dat.id,
-                                                  imageId: dat.imageId,
-                                                  partyImageId:
-                                                  dat.partyImageId,
-                                                );
+                                                      postId: dat.id,
+                                                      imageId: dat.imageId,
+                                                      partyImageId:
+                                                          dat.partyImageId,
+                                                    );
                                               },
                                               style: ElevatedButton.styleFrom(
                                                   backgroundColor: Colors.red),
+                                              child: const Text('Delete'),
                                             ),
                                           ],
                                         ),
@@ -297,598 +176,703 @@ class ProvincialFPTPCandidates extends StatelessWidget {
                           );
                         },
                         error: (err, stack) => Text('$err'),
-                        loading: () => Center(
+                        loading: () => const Center(
                           child: CircularProgressIndicator(
                             color: Colors.white,
                           ),
                         ),
                       ),
-                      if (province == "Madhesh")
-                        madheshFPTPStream.when(
-                          data: (data) {
-                            return Container(
-                              decoration: BoxDecoration(
-                                color: secondaryColor,
-                                borderRadius:
-                                const BorderRadius.all(Radius.circular(10)),
-                              ),
-                              child: SizedBox(
-                                width: double.maxFinite,
-                                child: DataTable(
-                                  columnSpacing: 10,
-                                  dataRowHeight: 80,
-                                  columns: [
-                                    DataColumn(
-                                      label: Text(
-                                        'Profile Picture',
-                                        style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    DataColumn(
-                                      label: Text(
-                                        'Candidate Name',
-                                        style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    DataColumn(
-                                      label: Text(
-                                        'Party Name',
-                                        style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    DataColumn(
-                                      label: Text(
-                                        'Bar Color',
-                                        style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    DataColumn(
-                                      label: Text(
-                                        'Actions',
-                                        style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ],
-                                  rows: List.generate(data.length, (index) {
-                                    final dat = data[index];
-                                    return DataRow(
-                                      cells: [
-                                        DataCell(
-                                          CircleAvatar(
-                                            backgroundImage:
-                                            NetworkImage(dat.imageUrl),
-                                          ),
-                                        ),
-                                        DataCell(
-                                          Text(dat.candidateName),
-                                          onTap: () {
-                                            print(dat.candidateName);
-                                          },
-                                        ),
-                                        DataCell(
-                                          Text(dat.partyName),
-                                        ),
-                                        DataCell(
-                                          Text(dat.barColor),
-                                        ),
-                                        DataCell(
-                                          Row(
-                                            children: [
-                                              ElevatedButton(
-                                                child: Text('Edit'),
-                                                onPressed: () {
-                                                  Get.to(() =>
-                                                      EditProvincialFPTPPage(
-                                                          dat, "Madhesh"));
-                                                },
-                                              ),
-                                              SizedBox(width: 15),
-                                              ElevatedButton(
-                                                child: Text('Delete'),
-                                                onPressed: () async {
-                                                  await ref
-                                                      .read(madheshProvider)
-                                                      .removeFPTP(
-                                                    postId: dat.id,
-                                                    imageId: dat.imageId,
-                                                    partyImageId:
-                                                    dat.partyImageId,
-                                                  );
-                                                },
-                                                style: ElevatedButton.styleFrom(
-                                                    backgroundColor: Colors.red),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  }),
-                                ),
-                              ),
-                            );
-                          },
-                          error: (err, stack) => Text('$err'),
-                          loading: () => Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
+                    if (province == "Bagmati")
+                      bagmatiFPTPStream.when(
+                        data: (data) {
+                          return Container(
+                            decoration: const BoxDecoration(
+                              color: secondaryColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
-                          ),
-                        ),
-                        if (province == "Gandaki")
-                          gandakiFPTPStream.when(
-                            data: (data) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                  color: secondaryColor,
-                                  borderRadius:
-                                  const BorderRadius.all(Radius.circular(10)),
-                                ),
-                                child: SizedBox(
-                                  width: double.maxFinite,
-                                  child: DataTable(
-                                    columnSpacing: 10,
-                                    dataRowHeight: 80,
-                                    columns: [
-                                      DataColumn(
-                                        label: Text(
-                                          'Profile Picture',
-                                          style:
-                                          TextStyle(fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      DataColumn(
-                                        label: Text(
-                                          'Candidate Name',
-                                          style:
-                                          TextStyle(fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      DataColumn(
-                                        label: Text(
-                                          'Party Name',
-                                          style:
-                                          TextStyle(fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      DataColumn(
-                                        label: Text(
-                                          'Bar Color',
-                                          style:
-                                          TextStyle(fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      DataColumn(
-                                        label: Text(
-                                          'Actions',
-                                          style:
-                                          TextStyle(fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ],
-                                    rows: List.generate(data.length, (index) {
-                                      final dat = data[index];
-                                      return DataRow(
-                                        cells: [
-                                          DataCell(
-                                            CircleAvatar(
-                                              backgroundImage:
+                            child: SizedBox(
+                              width: double.maxFinite,
+                              child: DataTable(
+                                columnSpacing: 10,
+                                dataRowMaxHeight: 80,
+                                columns: const [
+                                  DataColumn(
+                                    label: Text(
+                                      'Profile Picture',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Candidate Name',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Party Name',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Bar Color',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Actions',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                                rows: List.generate(data.length, (index) {
+                                  final dat = data[index];
+                                  return DataRow(
+                                    cells: [
+                                      DataCell(
+                                        CircleAvatar(
+                                          backgroundImage:
                                               NetworkImage(dat.imageUrl),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        Text(dat.candidateName),
+                                        onTap: () {},
+                                      ),
+                                      DataCell(
+                                        Text(dat.partyName),
+                                      ),
+                                      DataCell(
+                                        Text(dat.barColor),
+                                      ),
+                                      DataCell(
+                                        Row(
+                                          children: [
+                                            ElevatedButton(
+                                              child: const Text('Edit'),
+                                              onPressed: () {
+                                                Get.to(() =>
+                                                    EditProvincialFPTPPage(
+                                                        dat, "Bagmati"));
+                                              },
                                             ),
-                                          ),
-                                          DataCell(
-                                            Text(dat.candidateName),
-                                            onTap: () {
-                                              print(dat.candidateName);
-                                            },
-                                          ),
-                                          DataCell(
-                                            Text(dat.partyName),
-                                          ),
-                                          DataCell(
-                                            Text(dat.barColor),
-                                          ),
-                                          DataCell(
-                                            Row(
-                                              children: [
-                                                ElevatedButton(
-                                                  child: Text('Edit'),
-                                                  onPressed: () {
-                                                    Get.to(() =>
-                                                        EditProvincialFPTPPage(
-                                                            dat, "Gandaki"));
-                                                  },
-                                                ),
-                                                SizedBox(width: 15),
-                                                ElevatedButton(
-                                                  child: Text('Delete'),
-                                                  onPressed: () async {
-                                                    await ref
-                                                        .read(gandakiProvider)
-                                                        .removeFPTP(
+                                            const SizedBox(width: 15),
+                                            ElevatedButton(
+                                              onPressed: () async {
+                                                await ref
+                                                    .read(bagmatiProvider)
+                                                    .removeFPTP(
                                                       postId: dat.id,
                                                       imageId: dat.imageId,
                                                       partyImageId:
-                                                      dat.partyImageId,
+                                                          dat.partyImageId,
                                                     );
-                                                  },
-                                                  style: ElevatedButton.styleFrom(
-                                                      backgroundColor: Colors.red),
-                                                ),
-                                              ],
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                  backgroundColor: Colors.red),
+                                              child: const Text('Delete'),
                                             ),
-                                          ),
-                                        ],
-                                      );
-                                    }),
-                                  ),
-                                ),
-                              );
-                            },
-                            error: (err, stack) => Text('$err'),
-                            loading: () => Center(
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                }),
                               ),
                             ),
+                          );
+                        },
+                        error: (err, stack) => Text('$err'),
+                        loading: () => const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
                           ),
-                          if (province == "Sudurpashchim")
-                            sudurpaschimFPTPStream.when(
-                              data: (data) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    color: secondaryColor,
-                                    borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
+                        ),
+                      ),
+                    if (province == "Madhesh")
+                      madheshFPTPStream.when(
+                        data: (data) {
+                          return Container(
+                            decoration: const BoxDecoration(
+                              color: secondaryColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            child: SizedBox(
+                              width: double.maxFinite,
+                              child: DataTable(
+                                columnSpacing: 10,
+                                dataRowMaxHeight: 80,
+                                columns: const [
+                                  DataColumn(
+                                    label: Text(
+                                      'Profile Picture',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
-                                  child: SizedBox(
-                                    width: double.maxFinite,
-                                    child: DataTable(
-                                      columnSpacing: 10,
-                                      dataRowHeight: 80,
-                                      columns: [
-                                        DataColumn(
-                                          label: Text(
-                                            'Profile Picture',
-                                            style:
-                                            TextStyle(fontWeight: FontWeight.bold),
-                                          ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Candidate Name',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Party Name',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Bar Color',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Actions',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                                rows: List.generate(data.length, (index) {
+                                  final dat = data[index];
+                                  return DataRow(
+                                    cells: [
+                                      DataCell(
+                                        CircleAvatar(
+                                          backgroundImage:
+                                              NetworkImage(dat.imageUrl),
                                         ),
-                                        DataColumn(
-                                          label: Text(
-                                            'Candidate Name',
-                                            style:
-                                            TextStyle(fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        DataColumn(
-                                          label: Text(
-                                            'Party Name',
-                                            style:
-                                            TextStyle(fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        DataColumn(
-                                          label: Text(
-                                            'Bar Color',
-                                            style:
-                                            TextStyle(fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        DataColumn(
-                                          label: Text(
-                                            'Actions',
-                                            style:
-                                            TextStyle(fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ],
-                                      rows: List.generate(data.length, (index) {
-                                        final dat = data[index];
-                                        return DataRow(
-                                          cells: [
-                                            DataCell(
-                                              CircleAvatar(
-                                                backgroundImage:
-                                                NetworkImage(dat.imageUrl),
-                                              ),
-                                            ),
-                                            DataCell(
-                                              Text(dat.candidateName),
-                                              onTap: () {
-                                                print(dat.candidateName);
+                                      ),
+                                      DataCell(
+                                        Text(dat.candidateName),
+                                        onTap: () {},
+                                      ),
+                                      DataCell(
+                                        Text(dat.partyName),
+                                      ),
+                                      DataCell(
+                                        Text(dat.barColor),
+                                      ),
+                                      DataCell(
+                                        Row(
+                                          children: [
+                                            ElevatedButton(
+                                              child: const Text('Edit'),
+                                              onPressed: () {
+                                                Get.to(() =>
+                                                    EditProvincialFPTPPage(
+                                                        dat, "Madhesh"));
                                               },
                                             ),
-                                            DataCell(
-                                              Text(dat.partyName),
-                                            ),
-                                            DataCell(
-                                              Text(dat.barColor),
-                                            ),
-                                            DataCell(
-                                              Row(
-                                                children: [
-                                                  ElevatedButton(
-                                                    child: Text('Edit'),
-                                                    onPressed: () {
-                                                      Get.to(() =>
-                                                          EditProvincialFPTPPage(
-                                                              dat, "Sudurpaschim"));
-                                                    },
-                                                  ),
-                                                  SizedBox(width: 15),
-                                                  ElevatedButton(
-                                                    child: Text('Delete'),
-                                                    onPressed: () async {
-                                                      await ref
-                                                          .read(sudurpaschimProvider)
-                                                          .removeFPTP(
-                                                        postId: dat.id,
-                                                        imageId: dat.imageId,
-                                                        partyImageId:
-                                                        dat.partyImageId,
-                                                      );
-                                                    },
-                                                    style: ElevatedButton.styleFrom(
-                                                        backgroundColor: Colors.red),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      }),
-                                    ),
-                                  ),
-                                );
-                              },
-                              error: (err, stack) => Text('$err'),
-                              loading: () => Center(
-                                child: CircularProgressIndicator(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            if (province == "Lumbini")
-                              lumbiniFPTPStream.when(
-                                data: (data) {
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                      color: secondaryColor,
-                                      borderRadius:
-                                      const BorderRadius.all(Radius.circular(10)),
-                                    ),
-                                    child: SizedBox(
-                                      width: double.maxFinite,
-                                      child: DataTable(
-                                        columnSpacing: 10,
-                                        dataRowHeight: 80,
-                                        columns: [
-                                          DataColumn(
-                                            label: Text(
-                                              'Profile Picture',
-                                              style:
-                                              TextStyle(fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          DataColumn(
-                                            label: Text(
-                                              'Candidate Name',
-                                              style:
-                                              TextStyle(fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          DataColumn(
-                                            label: Text(
-                                              'Party Name',
-                                              style:
-                                              TextStyle(fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          DataColumn(
-                                            label: Text(
-                                              'Bar Color',
-                                              style:
-                                              TextStyle(fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          DataColumn(
-                                            label: Text(
-                                              'Actions',
-                                              style:
-                                              TextStyle(fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ],
-                                        rows: List.generate(data.length, (index) {
-                                          final dat = data[index];
-                                          return DataRow(
-                                            cells: [
-                                              DataCell(
-                                                CircleAvatar(
-                                                  backgroundImage:
-                                                  NetworkImage(dat.imageUrl),
-                                                ),
-                                              ),
-                                              DataCell(
-                                                Text(dat.candidateName),
-                                                onTap: () {
-                                                  print(dat.candidateName);
-                                                },
-                                              ),
-                                              DataCell(
-                                                Text(dat.partyName),
-                                              ),
-                                              DataCell(
-                                                Text(dat.barColor),
-                                              ),
-                                              DataCell(
-                                                Row(
-                                                  children: [
-                                                    ElevatedButton(
-                                                      child: Text('Edit'),
-                                                      onPressed: () {
-                                                        Get.to(() =>
-                                                            EditProvincialFPTPPage(
-                                                                dat, "Lumbini"));
-                                                      },
-                                                    ),
-                                                    SizedBox(width: 15),
-                                                    ElevatedButton(
-                                                      child: Text('Delete'),
-                                                      onPressed: () async {
-                                                        await ref
-                                                            .read(lumbiniProvider)
-                                                            .removeFPTP(
-                                                          postId: dat.id,
-                                                          imageId: dat.imageId,
-                                                          partyImageId:
+                                            const SizedBox(width: 15),
+                                            ElevatedButton(
+                                              onPressed: () async {
+                                                await ref
+                                                    .read(madheshProvider)
+                                                    .removeFPTP(
+                                                      postId: dat.id,
+                                                      imageId: dat.imageId,
+                                                      partyImageId:
                                                           dat.partyImageId,
-                                                        );
-                                                      },
-                                                      style: ElevatedButton.styleFrom(
-                                                          backgroundColor: Colors.red),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          );
-                                        }),
-                                      ),
-                                    ),
-                                  );
-                                },
-                                error: (err, stack) => Text('$err'),
-                                loading: () => Center(
-                                  child: CircularProgressIndicator(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              if (province == "Karnali")
-                                karnaliFPTPStream.when(
-                                  data: (data) {
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        color: secondaryColor,
-                                        borderRadius:
-                                        const BorderRadius.all(Radius.circular(10)),
-                                      ),
-                                      child: SizedBox(
-                                        width: double.maxFinite,
-                                        child: DataTable(
-                                          columnSpacing: 10,
-                                          dataRowHeight: 80,
-                                          columns: [
-                                            DataColumn(
-                                              label: Text(
-                                                'Profile Picture',
-                                                style:
-                                                TextStyle(fontWeight: FontWeight.bold),
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: Text(
-                                                'Candidate Name',
-                                                style:
-                                                TextStyle(fontWeight: FontWeight.bold),
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: Text(
-                                                'Party Name',
-                                                style:
-                                                TextStyle(fontWeight: FontWeight.bold),
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: Text(
-                                                'Bar Color',
-                                                style:
-                                                TextStyle(fontWeight: FontWeight.bold),
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: Text(
-                                                'Actions',
-                                                style:
-                                                TextStyle(fontWeight: FontWeight.bold),
-                                              ),
+                                                    );
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                  backgroundColor: Colors.red),
+                                              child: const Text('Delete'),
                                             ),
                                           ],
-                                          rows: List.generate(data.length, (index) {
-                                            final dat = data[index];
-                                            return DataRow(
-                                              cells: [
-                                                DataCell(
-                                                  CircleAvatar(
-                                                    backgroundImage:
-                                                    NetworkImage(dat.imageUrl),
-                                                  ),
-                                                ),
-                                                DataCell(
-                                                  Text(dat.candidateName),
-                                                  onTap: () {
-                                                    print(dat.candidateName);
-                                                  },
-                                                ),
-                                                DataCell(
-                                                  Text(dat.partyName),
-                                                ),
-                                                DataCell(
-                                                  Text(dat.barColor),
-                                                ),
-                                                DataCell(
-                                                  Row(
-                                                    children: [
-                                                      ElevatedButton(
-                                                        child: Text('Edit'),
-                                                        onPressed: () {
-                                                          Get.to(() =>
-                                                              EditProvincialFPTPPage(
-                                                                  dat, "Karnali"));
-                                                        },
-                                                      ),
-                                                      SizedBox(width: 15),
-                                                      ElevatedButton(
-                                                        child: Text('Delete'),
-                                                        onPressed: () async {
-                                                          await ref
-                                                              .read(karnaliProvider)
-                                                              .removeFPTP(
-                                                            postId: dat.id,
-                                                            imageId: dat.imageId,
-                                                            partyImageId:
-                                                            dat.partyImageId,
-                                                          );
-                                                        },
-                                                        style: ElevatedButton.styleFrom(
-                                                            backgroundColor: Colors.red),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            );
-                                          }),
                                         ),
                                       ),
-                                    );
-                                  },
-                                  error: (err, stack) => Text('$err'),
-                                  loading: () => Center(
-                                    child: CircularProgressIndicator(
-                                      color: Colors.white,
+                                    ],
+                                  );
+                                }),
+                              ),
+                            ),
+                          );
+                        },
+                        error: (err, stack) => Text('$err'),
+                        loading: () => const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    if (province == "Gandaki")
+                      gandakiFPTPStream.when(
+                        data: (data) {
+                          return Container(
+                            decoration: const BoxDecoration(
+                              color: secondaryColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            child: SizedBox(
+                              width: double.maxFinite,
+                              child: DataTable(
+                                columnSpacing: 10,
+                                dataRowMaxHeight: 80,
+                                columns: const [
+                                  DataColumn(
+                                    label: Text(
+                                      'Profile Picture',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                ),
-                    SizedBox(
+                                  DataColumn(
+                                    label: Text(
+                                      'Candidate Name',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Party Name',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Bar Color',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Actions',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                                rows: List.generate(data.length, (index) {
+                                  final dat = data[index];
+                                  return DataRow(
+                                    cells: [
+                                      DataCell(
+                                        CircleAvatar(
+                                          backgroundImage:
+                                              NetworkImage(dat.imageUrl),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        Text(dat.candidateName),
+                                        onTap: () {},
+                                      ),
+                                      DataCell(
+                                        Text(dat.partyName),
+                                      ),
+                                      DataCell(
+                                        Text(dat.barColor),
+                                      ),
+                                      DataCell(
+                                        Row(
+                                          children: [
+                                            ElevatedButton(
+                                              child: const Text('Edit'),
+                                              onPressed: () {
+                                                Get.to(() =>
+                                                    EditProvincialFPTPPage(
+                                                        dat, "Gandaki"));
+                                              },
+                                            ),
+                                            const SizedBox(width: 15),
+                                            ElevatedButton(
+                                              onPressed: () async {
+                                                await ref
+                                                    .read(gandakiProvider)
+                                                    .removeFPTP(
+                                                      postId: dat.id,
+                                                      imageId: dat.imageId,
+                                                      partyImageId:
+                                                          dat.partyImageId,
+                                                    );
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                  backgroundColor: Colors.red),
+                                              child: const Text('Delete'),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                }),
+                              ),
+                            ),
+                          );
+                        },
+                        error: (err, stack) => Text('$err'),
+                        loading: () => const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    if (province == "Sudurpashchim")
+                      sudurpaschimFPTPStream.when(
+                        data: (data) {
+                          return Container(
+                            decoration: const BoxDecoration(
+                              color: secondaryColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            child: SizedBox(
+                              width: double.maxFinite,
+                              child: DataTable(
+                                columnSpacing: 10,
+                                dataRowMaxHeight: 80,
+                                columns: const [
+                                  DataColumn(
+                                    label: Text(
+                                      'Profile Picture',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Candidate Name',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Party Name',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Bar Color',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Actions',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                                rows: List.generate(data.length, (index) {
+                                  final dat = data[index];
+                                  return DataRow(
+                                    cells: [
+                                      DataCell(
+                                        CircleAvatar(
+                                          backgroundImage:
+                                              NetworkImage(dat.imageUrl),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        Text(dat.candidateName),
+                                        onTap: () {},
+                                      ),
+                                      DataCell(
+                                        Text(dat.partyName),
+                                      ),
+                                      DataCell(
+                                        Text(dat.barColor),
+                                      ),
+                                      DataCell(
+                                        Row(
+                                          children: [
+                                            ElevatedButton(
+                                              child: const Text('Edit'),
+                                              onPressed: () {
+                                                Get.to(() =>
+                                                    EditProvincialFPTPPage(
+                                                        dat, "Sudurpaschim"));
+                                              },
+                                            ),
+                                            const SizedBox(width: 15),
+                                            ElevatedButton(
+                                              onPressed: () async {
+                                                await ref
+                                                    .read(sudurpaschimProvider)
+                                                    .removeFPTP(
+                                                      postId: dat.id,
+                                                      imageId: dat.imageId,
+                                                      partyImageId:
+                                                          dat.partyImageId,
+                                                    );
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                  backgroundColor: Colors.red),
+                                              child: const Text('Delete'),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                }),
+                              ),
+                            ),
+                          );
+                        },
+                        error: (err, stack) => Text('$err'),
+                        loading: () => const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    if (province == "Lumbini")
+                      lumbiniFPTPStream.when(
+                        data: (data) {
+                          return Container(
+                            decoration: const BoxDecoration(
+                              color: secondaryColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            child: SizedBox(
+                              width: double.maxFinite,
+                              child: DataTable(
+                                columnSpacing: 10,
+                                dataRowMaxHeight: 80,
+                                columns: const [
+                                  DataColumn(
+                                    label: Text(
+                                      'Profile Picture',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Candidate Name',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Party Name',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Bar Color',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Actions',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                                rows: List.generate(data.length, (index) {
+                                  final dat = data[index];
+                                  return DataRow(
+                                    cells: [
+                                      DataCell(
+                                        CircleAvatar(
+                                          backgroundImage:
+                                              NetworkImage(dat.imageUrl),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        Text(dat.candidateName),
+                                        onTap: () {},
+                                      ),
+                                      DataCell(
+                                        Text(dat.partyName),
+                                      ),
+                                      DataCell(
+                                        Text(dat.barColor),
+                                      ),
+                                      DataCell(
+                                        Row(
+                                          children: [
+                                            ElevatedButton(
+                                              child: const Text('Edit'),
+                                              onPressed: () {
+                                                Get.to(() =>
+                                                    EditProvincialFPTPPage(
+                                                        dat, "Lumbini"));
+                                              },
+                                            ),
+                                            const SizedBox(width: 15),
+                                            ElevatedButton(
+                                              onPressed: () async {
+                                                await ref
+                                                    .read(lumbiniProvider)
+                                                    .removeFPTP(
+                                                      postId: dat.id,
+                                                      imageId: dat.imageId,
+                                                      partyImageId:
+                                                          dat.partyImageId,
+                                                    );
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                  backgroundColor: Colors.red),
+                                              child: const Text('Delete'),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                }),
+                              ),
+                            ),
+                          );
+                        },
+                        error: (err, stack) => Text('$err'),
+                        loading: () => const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    if (province == "Karnali")
+                      karnaliFPTPStream.when(
+                        data: (data) {
+                          return Container(
+                            decoration: const BoxDecoration(
+                              color: secondaryColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            child: SizedBox(
+                              width: double.maxFinite,
+                              child: DataTable(
+                                columnSpacing: 10,
+                                dataRowMaxHeight: 80,
+                                columns: const [
+                                  DataColumn(
+                                    label: Text(
+                                      'Profile Picture',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Candidate Name',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Party Name',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Bar Color',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Actions',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                                rows: List.generate(data.length, (index) {
+                                  final dat = data[index];
+                                  return DataRow(
+                                    cells: [
+                                      DataCell(
+                                        CircleAvatar(
+                                          backgroundImage:
+                                              NetworkImage(dat.imageUrl),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        Text(dat.candidateName),
+                                        onTap: () {},
+                                      ),
+                                      DataCell(
+                                        Text(dat.partyName),
+                                      ),
+                                      DataCell(
+                                        Text(dat.barColor),
+                                      ),
+                                      DataCell(
+                                        Row(
+                                          children: [
+                                            ElevatedButton(
+                                              child: const Text('Edit'),
+                                              onPressed: () {
+                                                Get.to(() =>
+                                                    EditProvincialFPTPPage(
+                                                        dat, "Karnali"));
+                                              },
+                                            ),
+                                            const SizedBox(width: 15),
+                                            ElevatedButton(
+                                              onPressed: () async {
+                                                await ref
+                                                    .read(karnaliProvider)
+                                                    .removeFPTP(
+                                                      postId: dat.id,
+                                                      imageId: dat.imageId,
+                                                      partyImageId:
+                                                          dat.partyImageId,
+                                                    );
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                  backgroundColor: Colors.red),
+                                              child: const Text('Delete'),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                }),
+                              ),
+                            ),
+                          );
+                        },
+                        error: (err, stack) => Text('$err'),
+                        loading: () => const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    const SizedBox(
                       height: 40,
                     ),
                   ],

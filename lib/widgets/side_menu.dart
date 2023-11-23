@@ -13,7 +13,7 @@ class SideMenu extends StatelessWidget {
           ),
           DrawerListTile(
             title: "Dashboard",
-            icon: Icon(
+            icon: const Icon(
               Icons.dashboard,
               color: Colors.white54,
               size: 16,
@@ -22,7 +22,7 @@ class SideMenu extends StatelessWidget {
           ),
           DrawerListTile(
             title: "Transaction",
-            icon: Icon(
+            icon: const Icon(
               Icons.dashboard,
               color: Colors.white54,
               size: 16,
@@ -31,7 +31,7 @@ class SideMenu extends StatelessWidget {
           ),
           DrawerListTile(
             title: "Task",
-            icon: Icon(
+            icon: const Icon(
               Icons.dashboard,
               color: Colors.white54,
               size: 16,
@@ -40,7 +40,7 @@ class SideMenu extends StatelessWidget {
           ),
           DrawerListTile(
             title: "Documents",
-            icon: Icon(
+            icon: const Icon(
               Icons.dashboard,
               color: Colors.white54,
               size: 16,
@@ -49,7 +49,7 @@ class SideMenu extends StatelessWidget {
           ),
           DrawerListTile(
             title: "Store",
-            icon: Icon(
+            icon: const Icon(
               Icons.dashboard,
               color: Colors.white54,
               size: 16,
@@ -58,7 +58,7 @@ class SideMenu extends StatelessWidget {
           ),
           DrawerListTile(
             title: "Notification",
-            icon: Icon(
+            icon: const Icon(
               Icons.dashboard,
               color: Colors.white54,
               size: 16,
@@ -67,7 +67,7 @@ class SideMenu extends StatelessWidget {
           ),
           DrawerListTile(
             title: "Profile",
-            icon: Icon(
+            icon: const Icon(
               Icons.dashboard,
               color: Colors.white54,
               size: 16,
@@ -76,7 +76,7 @@ class SideMenu extends StatelessWidget {
           ),
           DrawerListTile(
             title: "Settings",
-            icon: Icon(
+            icon: const Icon(
               Icons.dashboard,
               color: Colors.white54,
               size: 16,
@@ -110,7 +110,7 @@ class DrawerListTile extends StatelessWidget {
       leading: icon,
       title: Text(
         title,
-        style: TextStyle(color: Colors.white54),
+        style: const TextStyle(color: Colors.white54),
       ),
     );
   }
