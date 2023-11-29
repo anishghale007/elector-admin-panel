@@ -22,7 +22,16 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  PageController page = PageController();
+  SideMenuController sideMenuController = SideMenuController();
+  PageController pageController = PageController();
+
+  @override
+  void initState() {
+    sideMenuController.addListener((index) {
+      pageController.jumpToPage(index);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +47,7 @@ class _MainPageState extends State<MainPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SideMenu(
-            controller: page,
+            controller: sideMenuController,
             style: SideMenuStyle(
               showTooltip: false,
               displayMode: SideMenuDisplayMode.open,
@@ -71,8 +80,10 @@ class _MainPageState extends State<MainPage> {
               return InkWell(
                 onTap: () async {
                   await ref.read(authProvider).signOut();
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: ((context) => LoginScreen())));
+                  if (mounted) {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: ((context) => LoginScreen())));
+                  }
                 },
                 child: Container(
                   width: double.infinity,
@@ -104,73 +115,59 @@ class _MainPageState extends State<MainPage> {
               SideMenuItem(
                 priority: 0,
                 title: 'Dashboard',
-                onTap: () {
-                  page.jumpToPage(0);
-                },
+                onTap: (index, _) => sideMenuController.changePage(index),
                 icon: const Icon(Icons.home),
                 tooltipContent: "This is a tooltip for Dashboard item",
               ),
               SideMenuItem(
                 priority: 1,
                 title: 'Users',
-                onTap: () {
-                  page.jumpToPage(1);
-                },
+                onTap: (index, _) => sideMenuController.changePage(index),
                 icon: const Icon(Icons.account_circle),
               ),
               SideMenuItem(
                 priority: 2,
                 title: 'Candidates',
-                onTap: () {
-                  page.jumpToPage(2);
-                },
+                onTap: (index, _) => sideMenuController.changePage(index),
                 icon: const Icon(Icons.supervisor_account),
               ),
               SideMenuItem(
                 priority: 3,
                 title: 'Election Stats',
-                onTap: () {
-                  page.jumpToPage(3);
-                },
+                onTap: (index, _) => sideMenuController.changePage(index),
                 icon: const Icon(Icons.stacked_bar_chart),
               ),
               SideMenuItem(
                 priority: 4,
                 title: 'Add Election',
-                onTap: () {
-                  page.jumpToPage(4);
-                },
+                onTap: (index, _) => sideMenuController.changePage(index),
                 icon: const Icon(Icons.ballot),
               ),
               SideMenuItem(
                 priority: 5,
                 title: 'Add Candidates',
-                onTap: () {
-                  page.jumpToPage(5);
-                },
+                onTap: (index, _) => sideMenuController.changePage(index),
                 icon: const Icon(Icons.account_balance),
               ),
               SideMenuItem(
                 priority: 6,
                 title: 'Add Voter ID',
                 icon: const Icon(Icons.add),
-                onTap: () {
-                  page.jumpToPage(6);
-                },
+                onTap: (index, _) => sideMenuController.changePage(index),
               ),
             ],
           ),
           Expanded(
             child: PageView(
-              controller: page,
-              children: [
-                const DashboardPage(),
+              controller: pageController,
+              children: const [
+                DashboardPage(),
                 UsersPage(),
-                const CandidatesPage(),
-                const ElectionStatsPage(),
-                const AddElectionPage(),
-                const AddCandidatesPage(),
-                const AddVoterIDPage(),
+                CandidatesPage(),
+                ElectionStatsPage(),
+                AddElectionPage(),
+                AddCandidatesPage(),
+                AddVoterIDPage(),
               ],
             ),
           ),

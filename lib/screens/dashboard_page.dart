@@ -308,7 +308,9 @@ class _DashboardPageState extends State<DashboardPage> {
                                   columns: const [
                                     DataColumn(
                                       label: Text(
-                                        'Party Picture',
+                                        'Party',
+                                        overflow: TextOverflow.ellipsis,
+                                        softWrap: true,
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -322,7 +324,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                     ),
                                     DataColumn(
                                       label: Text(
-                                        'Party Short Form Name',
+                                        'Short Form Name',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
